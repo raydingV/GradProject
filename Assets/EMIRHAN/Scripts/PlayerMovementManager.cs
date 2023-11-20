@@ -8,6 +8,7 @@ public class PlayerMovementManager : MonoBehaviour
     [Header("Referances")]
     private CharacterController characterController;
     private Vector3 playerVelocity;
+    private PlayerManager playerManager;
 
 
     private bool groundedPlayer;
@@ -28,16 +29,19 @@ public class PlayerMovementManager : MonoBehaviour
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
+        playerManager = gameObject.GetComponent<PlayerManager>();
     }
 
     void Update()
     {
         groundedPlayer = characterController.isGrounded;
 
-        movePlayer();
-        rotatePlayer();
-        jumpPlayer();
-        dashPlayer();
+        if(playerManager.InputEnable == true)
+        {
+            movePlayer();
+            jumpPlayer();
+            dashPlayer();
+        }
     }
 
     IEnumerator DashMovement(Vector3 playerDirection)
@@ -66,20 +70,6 @@ public class PlayerMovementManager : MonoBehaviour
         characterController.Move(controlPlayer * Time.deltaTime * playerSpeed);
 
         characterController.Move(playerVelocity * Time.deltaTime);
-    }
-
-    void rotatePlayer()
-    {
-        Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
-
-        if (groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
     }
 
     void jumpPlayer()
