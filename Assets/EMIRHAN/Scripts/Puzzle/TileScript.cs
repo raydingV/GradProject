@@ -23,11 +23,20 @@ public class TileScript : MonoBehaviour
         
     }
 
-    private void OnCollisionStay(Collision collision)
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if(collision.collider.CompareTag("Player"))
+    //    {
+    //        Touching(collision.collider.gameObject);
+    //    }
+    //}
+
+
+    private void OnTriggerStay(Collider other)
     {
-        if(collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            Touching(collision.collider.gameObject);
+            Touching(other.gameObject);
         }
     }
 
