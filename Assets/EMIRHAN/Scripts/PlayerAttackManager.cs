@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class PlayerAttackManager : MonoBehaviour
 {
     MagicAttack valuesOfMagic;
 
-    [Header("ObjectVariable")]
+    [Header("Component")]
     [SerializeField] GameObject MagicObject;
     GameObject newMagicObject;
 
     [Header("MechanicVariable")]
     float HoldValue;
+
+    [Header("VfxMaterial")]
+    public GameObject HoldEffect;
+    GameObject effectObject;
 
     void Start()
     {
@@ -31,7 +36,9 @@ public class PlayerAttackManager : MonoBehaviour
         {
             HoldValue -= Time.deltaTime;
 
-            Debug.Log(HoldValue);
+            effectObject = GameObject.Instantiate(HoldEffect);
+            effectObject.transform.position = gameObject.transform.position;
+            //Debug.Log(HoldValue);
         }   
 
     }
@@ -46,16 +53,16 @@ public class PlayerAttackManager : MonoBehaviour
 
     void ValueOfMagic()
     {
-        if (HoldValue < 3f)
+        if (HoldValue < 0f)
         {
-            valuesOfMagic.Speed = 40f;
+            valuesOfMagic.Speed = 80f;
         }
         else
         {
             valuesOfMagic.Speed = 5f;
         }
 
-        HoldValue = 5f;
+        HoldValue = 1f;
 
     }
 
@@ -71,6 +78,6 @@ public class PlayerAttackManager : MonoBehaviour
 
         newMagicObject.transform.position = gameObject.transform.position;
 
-        Debug.Log("Created with " + valuesOfMagic.Speed + " Speed");
+        //Debug.Log("Created with " + valuesOfMagic.Speed + " Speed");
     }
 }

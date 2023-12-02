@@ -5,17 +5,15 @@ using UnityEngine;
 public class TileScript : MonoBehaviour
 {
     [SerializeField] private bool Touchable = true;
+    private bool Clicked = false;
 
     [SerializeField] private GameObject gameManagerObject;
     private GameManager gameManager;
 
     void Start()
     {
-        if(Touchable == false)
-        {
-            gameManagerObject = GameObject.Find("GameManager");
-            gameManager = gameManagerObject.GetComponent<GameManager>();
-        }
+        gameManagerObject = GameObject.Find("GameManager");
+        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     void Update()
@@ -42,11 +40,19 @@ public class TileScript : MonoBehaviour
 
     void Touching(GameObject PlayerObject)
     {
-        if(Touchable == false)
+        if(Touchable == false && Clicked == true)
         {
             Debug.Log("You Dýed");
             Debug.Log(PlayerObject.name);
             gameManager.GetPlayerCheckPoint();
+            Clicked = false;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        Clicked = true;
+        gameManager.DefineTile(gameObject);
+        Debug.Log(gameObject.name);
     }
 }
