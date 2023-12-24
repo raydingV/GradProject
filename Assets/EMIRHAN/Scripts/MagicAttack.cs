@@ -12,6 +12,8 @@ public class MagicAttack : MonoBehaviour
 
     Rigidbody rb;
 
+    float Timer = 6;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -19,7 +21,19 @@ public class MagicAttack : MonoBehaviour
 
     void Update()
     {
+        Timer -= Time.deltaTime;
+
+        if(Timer <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void FixedUpdate()
+    {
         rb.AddForce(transform.forward * Speed);
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 2, gameObject.transform.position.z);
     }
 
     private void OnTriggerStay(Collider other)
@@ -29,7 +43,7 @@ public class MagicAttack : MonoBehaviour
             BoomObject = GameObject.Instantiate(BoomEffect);
             BoomObject.transform.position = gameObject.transform.position;
             BoomObject.transform.Rotate(-90, 0, 0);
-            BoomObject.transform.localScale = new Vector3(5, 5, 5);
+            BoomObject.transform.localScale = new Vector3(2, 2, 2);
 
             Destroy(gameObject);
         }

@@ -7,6 +7,9 @@ TagManager:
   - PuzzleTile
   - FxTemporaire
   - Boss
+  - Magic
+  - Plane
+  - Rain
   layers:
   - Default
   - TransparentFX

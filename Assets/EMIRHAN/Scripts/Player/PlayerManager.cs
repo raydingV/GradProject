@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
     public bool InputEnable = true;
 
     public GameObject clickedObject;
+
+    [SerializeField] Slider playerHealthSlider;
+    public float playerHealth = 100;
 
     [Header("Components")]
     PlayerMovementManager _playerMovementManager;
@@ -29,6 +33,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         PlayerInput();
+        playerHealthSlider.value = playerHealth;
     }
 
     private void FixedUpdate()

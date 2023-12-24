@@ -43,6 +43,8 @@ public class PlayerMovementManager : MonoBehaviour
         transformPlayer();
         dashPlayer();
         Gravity();
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1.23f , gameObject.transform.position.z);
     }
 
     IEnumerator DashMovement(Vector3 playerDirection)
@@ -62,12 +64,22 @@ public class PlayerMovementManager : MonoBehaviour
         DashObject.transform.position = gameObject.transform.position;
     }
 
+    Vector3 VectorFixInput(Vector3 InputPlayer)
+    {
+       Vector3 correctedMoveDirection = Camera.main.transform.TransformDirection(controlPlayer);
+
+        correctedMoveDirection.y = 0;
+
+        return correctedMoveDirection;
+    }
+
     void transformPlayer()
     {
         controlPlayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        characterController.Move(controlPlayer * Time.deltaTime * playerSpeed);
 
-        characterController.Move(playerVelocity * Time.deltaTime);
+        characterController.Move(VectorFixInput(controlPlayer) * Time.deltaTime * playerSpeed);
+
+        //characterController.Move(playerVelocity * Time.deltaTime);
     }
 
     void jumpPlayer()

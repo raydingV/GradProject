@@ -59,7 +59,7 @@ public class PlayerAttackManager : MonoBehaviour
         }
         else
         {
-            valuesOfMagic.Speed = 5f;
+            valuesOfMagic.Speed = 40f;
         }
 
         HoldValue = 1f;
