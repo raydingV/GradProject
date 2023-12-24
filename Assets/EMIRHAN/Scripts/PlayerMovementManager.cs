@@ -8,7 +8,6 @@ public class PlayerMovementManager : MonoBehaviour
     [Header("Referances")]
     private CharacterController characterController;
     private Vector3 playerVelocity;
-    private PlayerManager playerManager;
 
 
     private bool groundedPlayer;
@@ -25,29 +24,31 @@ public class PlayerMovementManager : MonoBehaviour
     [Header("Dash")]
     public float dashForce;
     public float dashDistance;
+    float dashTime;
+    float elapsedTime;
+
+    public GameObject DashEffect;
+    GameObject DashObject;
 
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
-        playerManager = gameObject.GetComponent<PlayerManager>();
     }
 
     void Update()
     {
         groundedPlayer = characterController.isGrounded;
 
-        if(playerManager.InputEnable == true)
-        {
-            movePlayer();
-            jumpPlayer();
-            dashPlayer();
-        }
+        jumpPlayer();
+        transformPlayer();
+        dashPlayer();
+        Gravity();
     }
 
     IEnumerator DashMovement(Vector3 playerDirection)
     {
-        float dashTime = dashDistance / dashForce;
-        float elapsedTime = 0f;
+        dashTime = dashDistance / dashForce;
+        elapsedTime = 0f;
 
         while (elapsedTime < dashTime)
         {
@@ -56,16 +57,13 @@ public class PlayerMovementManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        DashObject = GameObject.Instantiate(DashEffect);
+        DashObject.transform.position = gameObject.transform.position;
     }
 
-    void movePlayer()
+    void transformPlayer()
     {
-
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
-
         controlPlayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         characterController.Move(controlPlayer * Time.deltaTime * playerSpeed);
 
@@ -74,20 +72,30 @@ public class PlayerMovementManager : MonoBehaviour
 
     void jumpPlayer()
     {
-        if (Input.GetButtonDown("Jump") && groundedPlayer!)
+        if (Input.GetKeyDown(KeyCode.Space) && groundedPlayer == true)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+            playerVelocity.y = 0f;
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight);
+        }
     }
 
     void dashPlayer()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            DashObject = GameObject.Instantiate(DashEffect);
+            DashObject.transform.position = gameObject.transform.position;
             StartCoroutine(DashMovement(controlPlayer));
             Debug.Log("Pressed");
+        }
+    }
+
+    void Gravity()
+    {
+        if (groundedPlayer == false)
+        {
+            playerVelocity.y += gravityValue * Time.fixedDeltaTime;
         }
     }
 }

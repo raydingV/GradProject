@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PuzzleTile
+  - FxTemporaire
+  - Boss
   layers:
   - Default
   - TransparentFX
