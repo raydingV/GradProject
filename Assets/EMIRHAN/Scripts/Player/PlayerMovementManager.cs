@@ -54,7 +54,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         while (elapsedTime < dashTime)
         {
-            characterController.Move(playerDirection * dashForce * Time.deltaTime);
+            characterController.Move(VectorFixInput(playerDirection) * dashForce * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -66,7 +66,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     Vector3 VectorFixInput(Vector3 InputPlayer)
     {
-       Vector3 correctedMoveDirection = Camera.main.transform.TransformDirection(controlPlayer);
+       Vector3 correctedMoveDirection = Camera.main.transform.TransformDirection(InputPlayer);
 
         correctedMoveDirection.y = 0;
 

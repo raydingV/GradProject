@@ -7,26 +7,34 @@ using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
-
+    [Header("Components")]
     [SerializeField] Slider slider;
-    float Health = 100;
-
-    float Damage;
-
-    [SerializeField] NavMeshAgent agent;
-
+    [SerializeField] public NavMeshAgent agent;
     [SerializeField] GameObject player;
-    [SerializeField] GameObject rainObject;
+
+    [Header("Data")]
+    [SerializeField] BossData BossData;
+    [SerializeField] SkillsData SkillObjects;
+
+    [Header("Variables")]
+    [HideInInspector] public float Health;
+    [HideInInspector] public float Damage;
+
+    [HideInInspector] public bool InCombat = false;
 
     Vector3 locat;
+    Vector3 Target;
 
-    bool InCombat = false;
+    int skillTime;
+
+    List<IEnumerator> allSkills = new List<IEnumerator>();
 
     void Start()
     {
+        BossDataTake();
+        SkillDataTake();
+        slider.maxValue = Health;
         StartCoroutine(Skills());
-        agent.acceleration = 40;
-        agent.speed = 40;
     }
 
     void Update()
@@ -45,6 +53,16 @@ public class BossManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (SkillObjects.UpToBoss == true)
+        {
+            MoveUp();
+        }
+
+        if (SkillObjects.DownToBoss == true)
+        {
+            MoveDown();
+        }
+
         rotationBoss();
     }
 
@@ -64,25 +82,35 @@ public class BossManager : MonoBehaviour
 
         InCombat = true;
 
-        int SkillChoose = 1;
+        int SkillChoose = Random.Range(1, 3);
 
         switch(SkillChoose)
         {
             case 1:
                 agent.SetDestination(gameObject.transform.position);
                 Debug.Log("Case 1");
-                StartCoroutine(RainSkill());
-                yield return new WaitForSeconds(8);
+                StartCoroutine(allSkills[0]);
+                yield return new WaitForSeconds(skillTime);
                 InCombat = false;
                 break;
             case 2:
+                agent.SetDestination(gameObject.transform.position);
+                Debug.Log("Case 2");
+                StartCoroutine(allSkills[1]);
+                yield return new WaitForSeconds(skillTime);
+                InCombat = false;
                 break;
             case 3:
+                agent.SetDestination(gameObject.transform.position);
+                Debug.Log("Case 3");
+                StartCoroutine(allSkills[2]);
+                yield return new WaitForSeconds(skillTime);
+                InCombat = false;
                 break;
         }
-        agent.SetDestination(player.transform.position);
-        agent.speed = 80;
 
+        allSkills.Clear();
+        SkillDataTake();
         StartCoroutine(Skills());
     }
 
@@ -106,14 +134,43 @@ public class BossManager : MonoBehaviour
         gameObject.transform.LookAt(Rotation);
     }
 
-    IEnumerator RainSkill()
+    void SkillDataTake()
     {
-        while(InCombat)
+        SkillObjects._BossManager = this;
+
+        if (BossData.RainOfAbundance == true)
         {
-            Vector3 rainTransform = new Vector3(player.transform.position.x + Random.Range(-6, 6), 30, player.transform.position.z + Random.Range(-6, 6));
-            GameObject.Instantiate(rainObject, rainTransform, Quaternion.Euler(0, 0, 0));
-            Health += 0.4f;
-            yield return new WaitForSeconds(0.1f);
+            allSkills.Add(SkillObjects.RainOfAbundanceSkill(player));
+        }
+
+        if(BossData.JumpHigh == true)
+        {
+            allSkills.Add(SkillObjects.JumpHighSkill(player));
+        }
+    }
+
+    private void BossDataTake()
+    {
+        Health = BossData.Health;
+        Damage = BossData.Damage;
+        skillTime = BossData.SkillTime;
+        agent.acceleration = BossData.Speed;
+        agent.speed = BossData.Acceleration;
+    }
+
+    private void MoveUp()
+    {
+        Target = new Vector3(player.transform.position.x, transform.position.y + 70f, player.transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
+
+    }
+
+    private void MoveDown()
+    {
+        if(transform.position.y >= 4)
+        {
+            Target = new Vector3(player.transform.position.x, transform.position.y - 70f, player.transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
         }
     }
 }
