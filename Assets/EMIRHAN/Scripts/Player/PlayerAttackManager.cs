@@ -19,6 +19,8 @@ public class PlayerAttackManager : MonoBehaviour
     public GameObject HoldEffect;
     GameObject effectObject;
 
+    bool oneInstantiate = false;
+
     void Start()
     {
         HoldValue = 3f;
@@ -36,11 +38,15 @@ public class PlayerAttackManager : MonoBehaviour
         {
             HoldValue -= Time.deltaTime;
 
-            effectObject = GameObject.Instantiate(HoldEffect);
+            if(oneInstantiate == false)
+            {
+                effectObject = GameObject.Instantiate(HoldEffect);
+                oneInstantiate = true;
+            }
+
             effectObject.transform.position = gameObject.transform.position;
             //Debug.Log(HoldValue);
-        }   
-
+        }
     }
 
     void ReleaseMouse()
@@ -48,6 +54,8 @@ public class PlayerAttackManager : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             InitializeMagic();
+            Destroy(effectObject);
+            oneInstantiate = false;
         } 
     }
 

@@ -15,7 +15,10 @@ MonoBehaviour:
   rainObject: {fileID: 6632497367772476475, guid: c681ea3db9793a54188ca993d8558d59, type: 3}
   JumpImpact: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   DownImpact: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  DownImpactText: {fileID: 5339739117810204693, guid: 26e1cb216e3635e4a820f58a1118d6b9, type: 3}
   AppearShadow: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
+  DashImpact: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
+  DashCenterImpact: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+  DashStart: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   _BossManager: {fileID: 0}
-  UpToBoss: 0
-  DownToBoss: 0
+  _gameManager: {fileID: 0}

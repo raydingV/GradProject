@@ -11,6 +11,11 @@ public class BossManager : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] public NavMeshAgent agent;
     [SerializeField] GameObject player;
+    [SerializeField] public CharacterController characterController;
+    [SerializeField] public BoxCollider Box;
+
+    [Header("Scripts")]
+    [SerializeField] GameManager _gameManager;
 
     [Header("Data")]
     [SerializeField] BossData BossData;
@@ -26,11 +31,13 @@ public class BossManager : MonoBehaviour
     Vector3 Target;
 
     int skillTime;
+    int lastRandomValue = 0;
 
     List<IEnumerator> allSkills = new List<IEnumerator>();
 
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         BossDataTake();
         SkillDataTake();
         slider.maxValue = Health;
@@ -53,17 +60,25 @@ public class BossManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (SkillObjects.UpToBoss == true)
+        if (_gameManager.UpToBoss == true)
         {
             MoveUp();
         }
 
-        if (SkillObjects.DownToBoss == true)
+        if (_gameManager.DownToBoss == true)
         {
             MoveDown();
         }
 
-        rotationBoss();
+        if(_gameManager.DashBoss == true)
+        {
+            MoveDash();
+        }
+        else
+        {
+            rotationBoss();
+        }
+
     }
 
 
@@ -81,27 +96,26 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(6,10));
 
         InCombat = true;
+        
 
-        int SkillChoose = Random.Range(1, 3);
-
-        switch(SkillChoose)
+        switch(GetRandomSkillValue())
         {
             case 1:
-                agent.SetDestination(gameObject.transform.position);
+                agent.ResetPath();
                 Debug.Log("Case 1");
                 StartCoroutine(allSkills[0]);
                 yield return new WaitForSeconds(skillTime);
                 InCombat = false;
                 break;
             case 2:
-                agent.SetDestination(gameObject.transform.position);
+                agent.ResetPath();
                 Debug.Log("Case 2");
                 StartCoroutine(allSkills[1]);
                 yield return new WaitForSeconds(skillTime);
                 InCombat = false;
                 break;
             case 3:
-                agent.SetDestination(gameObject.transform.position);
+                agent.ResetPath();
                 Debug.Log("Case 3");
                 StartCoroutine(allSkills[2]);
                 yield return new WaitForSeconds(skillTime);
@@ -126,6 +140,21 @@ public class BossManager : MonoBehaviour
         return randomResult;
     }
 
+    int GetRandomSkillValue()
+    {
+        int randomResult = 1;
+
+        do
+        {
+            randomResult = Random.Range(1, 4);
+        } while (randomResult == lastRandomValue);
+
+        lastRandomValue = randomResult;
+
+        return randomResult;
+
+    }
+
     void rotationBoss()
     {
         Vector3 Rotation = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
@@ -145,7 +174,12 @@ public class BossManager : MonoBehaviour
 
         if(BossData.JumpHigh == true)
         {
-            allSkills.Add(SkillObjects.JumpHighSkill(player));
+            allSkills.Add(SkillObjects.JumpHighSkill());
+        }
+
+        if(BossData.HungerDash == true)
+        {
+            allSkills.Add(SkillObjects.HungerDashing(player));
         }
     }
 
@@ -162,7 +196,6 @@ public class BossManager : MonoBehaviour
     {
         Target = new Vector3(player.transform.position.x, transform.position.y + 70f, player.transform.position.z);
         transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
-
     }
 
     private void MoveDown()
@@ -172,5 +205,10 @@ public class BossManager : MonoBehaviour
             Target = new Vector3(player.transform.position.x, transform.position.y - 70f, player.transform.position.z);
             transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
         }
+    }
+
+    private void MoveDash()
+    {
+        transform.Translate(transform.forward * 80f * Time.deltaTime, Space.World);
     }
 }

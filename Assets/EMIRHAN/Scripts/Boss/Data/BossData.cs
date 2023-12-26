@@ -29,5 +29,6 @@ public class BossData : ScriptableObject
     public int SkillTime;
     public bool RainOfAbundance;
     public bool JumpHigh;
+    public bool HungerDash;
 }
 

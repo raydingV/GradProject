@@ -20,6 +20,12 @@ public class PlayerManager : MonoBehaviour
     PlayerAttackManager _playerAttackManager;
     CharacterController _characterController;
     Rigidbody _characterRigidbody;
+    GameManager _gameManager;
+
+    [SerializeField] GameObject DashStartObject;
+    GameObject VFXSkull;
+
+    [HideInInspector] public Vector3 DashStartTransform;
 
     void Start()
     {
@@ -28,12 +34,21 @@ public class PlayerManager : MonoBehaviour
         _playerAttackManager = gameObject.GetComponent<PlayerAttackManager>();
         _characterController = gameObject.GetComponent<CharacterController>();
         _characterRigidbody = gameObject.GetComponent<Rigidbody>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        DashStartTransform = new Vector3(transform.position.x, 4.5f, transform.position.z);
     }
 
     void Update()
     {
         PlayerInput();
         playerHealthSlider.value = playerHealth;
+        SkullVFX();
+
+        if(VFXSkull != null)
+        {
+            VFXSkull.transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
+        }
     }
 
     private void FixedUpdate()
@@ -81,6 +96,31 @@ public class PlayerManager : MonoBehaviour
             _playerMovementManager.enabled = true;
             _playerAttackManager.enabled = true;
             _characterRigidbody.useGravity = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Boss" && _gameManager.DashDamage == true)
+        {
+            playerHealth -= 1;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Boss" && _gameManager.DownDamage == true)
+        {
+            playerHealth -= 10;
+        }
+    }
+
+    private void SkullVFX()
+    {
+        if(_gameManager.DashStart == true)
+        {
+            VFXSkull = Instantiate(DashStartObject, DashStartTransform, Quaternion.Euler(0, 0, 0));
+            _gameManager.DashStart = false;
         }
     }
 }

@@ -27,6 +27,10 @@ public class MagicAttack : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        rb.AddForce(transform.forward * Speed);
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 2, gameObject.transform.position.z);
     }
 
     void FixedUpdate()
