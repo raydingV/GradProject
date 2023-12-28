@@ -7,7 +7,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b0bcba2539f974bbf6cd4eb57183fa, type: 3}
   m_Name: Skills
@@ -18,7 +18,13 @@ MonoBehaviour:
   DownImpactText: {fileID: 5339739117810204693, guid: 26e1cb216e3635e4a820f58a1118d6b9, type: 3}
   AppearShadow: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
   DashImpact: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
-  DashCenterImpact: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
-  DashStart: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
+  DashCenterImpact: {fileID: 195466, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
+  RainOfAbundanceSound: []
+  JumpHighSound:
+  - {fileID: 8300000, guid: 96bbf34d7aee725449bb8a5f1a46bfbb, type: 3}
+  - {fileID: 8300000, guid: 92d3259b6a9732e4ba3fb95331b2c95d, type: 3}
+  HungerDashSound:
+  - {fileID: 8300000, guid: ce4eab13c40dd5c46983f3e002a4f869, type: 3}
+  - {fileID: 8300000, guid: 9fb2085538d1bfe41abcb2b5c317517f, type: 3}
   _BossManager: {fileID: 0}
   _gameManager: {fileID: 0}

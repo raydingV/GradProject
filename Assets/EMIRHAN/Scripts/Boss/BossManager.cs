@@ -10,7 +10,7 @@ public class BossManager : MonoBehaviour
     [Header("Components")]
     [SerializeField] Slider slider;
     [SerializeField] public NavMeshAgent agent;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerManager player;
     [SerializeField] public CharacterController characterController;
     [SerializeField] public BoxCollider Box;
 
@@ -47,7 +47,11 @@ public class BossManager : MonoBehaviour
     void Update()
     {
         slider.value = Health;
-        locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+
+        if (player != null)
+        {
+            locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+        }
     }
 
     private void FixedUpdate()
@@ -56,27 +60,30 @@ public class BossManager : MonoBehaviour
         {
             agent.SetDestination(locat);
         }
-    }
 
-    private void LateUpdate()
-    {
-        if (_gameManager.UpToBoss == true)
+        if (_gameManager.UpToBoss == true && player != null)
         {
             MoveUp();
         }
 
-        if (_gameManager.DownToBoss == true)
+        if (_gameManager.DownToBoss == true && player != null)
         {
             MoveDown();
         }
+    }
 
-        if(_gameManager.DashBoss == true)
+    private void LateUpdate()
+    {
+        if(_gameManager.DashBoss == true && player != null)
         {
             MoveDash();
         }
         else
         {
-            rotationBoss();
+            if (player != null)
+            {
+                rotationBoss();
+            }
         }
 
     }
@@ -86,7 +93,7 @@ public class BossManager : MonoBehaviour
     {
         if(other.tag == "Magic")
         {
-            Health -= 10;
+            Health -= (other.transform.localScale.x * 50);
             Debug.Log("HÝT!");
         }
     }
@@ -169,7 +176,7 @@ public class BossManager : MonoBehaviour
 
         if (BossData.RainOfAbundance == true)
         {
-            allSkills.Add(SkillObjects.RainOfAbundanceSkill(player));
+            allSkills.Add(SkillObjects.RainOfAbundanceSkill(player.gameObject));
         }
 
         if(BossData.JumpHigh == true)
@@ -179,7 +186,7 @@ public class BossManager : MonoBehaviour
 
         if(BossData.HungerDash == true)
         {
-            allSkills.Add(SkillObjects.HungerDashing(player));
+            allSkills.Add(SkillObjects.HungerDashing(player.gameObject));
         }
     }
 
@@ -209,6 +216,6 @@ public class BossManager : MonoBehaviour
 
     private void MoveDash()
     {
-        transform.Translate(transform.forward * 80f * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * 100f * Time.deltaTime, Space.World);
     }
 }

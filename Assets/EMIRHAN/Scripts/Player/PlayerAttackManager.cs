@@ -14,10 +14,14 @@ public class PlayerAttackManager : MonoBehaviour
 
     [Header("MechanicVariable")]
     float HoldValue;
+    [SerializeField] float Speed;
 
     [Header("VfxMaterial")]
-    public GameObject HoldEffect;
-    GameObject effectObject;
+    public ParticleSystem HoldEffect;
+    public ParticleSystem HoldEffectChild;
+    ParticleSystem effectObject;
+    ParticleSystem effectObjectChild;
+    [SerializeField] Transform magicAttackTransform;
 
     bool oneInstantiate = false;
 
@@ -26,7 +30,7 @@ public class PlayerAttackManager : MonoBehaviour
         HoldValue = 3f;
     }
 
-    void Update()
+    void LateUpdate()
     {
         HoldMouse();
         ReleaseMouse();
@@ -40,11 +44,22 @@ public class PlayerAttackManager : MonoBehaviour
 
             if(oneInstantiate == false)
             {
-                effectObject = GameObject.Instantiate(HoldEffect);
+                effectObject = Instantiate(HoldEffect);
+                effectObjectChild = Instantiate(HoldEffectChild);
+                effectObjectChild.loop = true;
+                effectObject.loop = true;
                 oneInstantiate = true;
+                InitializeMagic();
+            }
+
+            if(newMagicObject != null)
+            {
+                FollowPlayer();
+                BiggerScale();
             }
 
             effectObject.transform.position = gameObject.transform.position;
+            effectObjectChild.transform.position = gameObject.transform.position;
             //Debug.Log(HoldValue);
         }
     }
@@ -53,8 +68,10 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            InitializeMagic();
-            Destroy(effectObject);
+            valuesOfMagic.StartFunc = true;
+            effectObject.loop = false;
+            effectObjectChild.loop = false;
+            valuesOfMagic.tag = "Magic";
             oneInstantiate = false;
         } 
     }
@@ -63,15 +80,14 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if (HoldValue < 0f)
         {
-            valuesOfMagic.Speed = 80f;
+            valuesOfMagic.Speed = Speed;
         }
         else
         {
-            valuesOfMagic.Speed = 40f;
+            valuesOfMagic.Speed = Speed;
         }
 
         HoldValue = 1f;
-
     }
 
     void InitializeMagic()
@@ -82,10 +98,23 @@ public class PlayerAttackManager : MonoBehaviour
 
         ValueOfMagic();
 
-        newMagicObject.transform.rotation = gameObject.transform.rotation;
-
-        newMagicObject.transform.position = gameObject.transform.position;
+        FollowPlayer();
 
         //Debug.Log("Created with " + valuesOfMagic.Speed + " Speed");
+    }
+
+    void FollowPlayer()
+    {
+        newMagicObject.transform.rotation = gameObject.transform.rotation;
+
+        newMagicObject.transform.position = new Vector3(magicAttackTransform.position.x, newMagicObject.transform.position.y, magicAttackTransform.transform.position.z);
+    }
+
+    void BiggerScale()
+    {
+        if(newMagicObject.transform.localScale.x <= 1f)
+        {
+            newMagicObject.transform.localScale = new Vector3(newMagicObject.transform.localScale.x + Time.deltaTime / 4, newMagicObject.transform.localScale.y + Time.deltaTime / 4, newMagicObject.transform.localScale.z + Time.deltaTime / 4);
+        }
     }
 }

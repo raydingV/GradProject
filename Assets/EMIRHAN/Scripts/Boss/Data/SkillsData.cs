@@ -16,6 +16,11 @@ public class SkillsData : ScriptableObject
     [SerializeField] GameObject DashImpact;
     [SerializeField] GameObject DashCenterImpact;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] RainOfAbundanceSound;
+    [SerializeField] AudioClip[] JumpHighSound;
+    [SerializeField] AudioClip[] HungerDashSound;
+
     [HideInInspector] public BossManager _BossManager;
     [HideInInspector] public GameManager _gameManager;
 
@@ -35,6 +40,7 @@ public class SkillsData : ScriptableObject
         JumpImpact.transform.localScale = new Vector3(6, 6, 6);
         Vector3 JumpTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
         GameObject.Instantiate(JumpImpact, JumpTransform, Quaternion.Euler(0, 0, 0));
+        _gameManager.audioSource.PlayOneShot(JumpHighSound[0]);
 
         AppearShadow.transform.localScale = new Vector3(3, 3, 3);
         GameObject shadow = GameObject.Instantiate(AppearShadow, _BossManager.transform.position, Quaternion.Euler(-90, 0, 0));
@@ -70,10 +76,12 @@ public class SkillsData : ScriptableObject
                 _BossManager.agent.enabled = true;
                 break;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
 
         Destroy(shadow);
+
+        _gameManager.audioSource.PlayOneShot(JumpHighSound[1]);
 
         DownImpact.transform.localScale = new Vector3(3, 3, 3);
         DownImpactText.transform.localScale = new Vector3(3, 3, 3);
@@ -91,6 +99,7 @@ public class SkillsData : ScriptableObject
      public IEnumerator HungerDashing(GameObject player)
     {
         float timer = 4f;
+        _gameManager.audioSource.PlayOneShot(HungerDashSound[0]);
 
         _gameManager.DashStart = true;
 
@@ -115,11 +124,13 @@ public class SkillsData : ScriptableObject
             yield return new WaitForSeconds(0.1f);
         }
 
+        _gameManager.audioSource.PlayOneShot(HungerDashSound[1]);
+
         _gameManager.DashBoss = false;
         _BossManager.Box.isTrigger = false;
         DashCenterImpact.transform.localScale = new Vector3(5, 5, 5);
         Vector3 DashCenterTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
-        GameObject.Instantiate(DashCenterImpact, DashCenterTransform, Quaternion.Euler(0,0,0));
+        GameObject.Instantiate(DashCenterImpact, DashCenterTransform, Quaternion.Euler(-90,0,0));
 
         yield return new WaitForSeconds(0.4f);
         _gameManager.DashDamage = false;

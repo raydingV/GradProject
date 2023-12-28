@@ -9,10 +9,20 @@ public class PlayerManager : MonoBehaviour
 {
     public bool InputEnable = true;
 
+    public bool playerDeath = false;
+
+    [SerializeField] GameObject DashStartObject;
+    GameObject VFXSkull;
+
+    [SerializeField] private GameObject bloodVFX;
+    [SerializeField] private GameObject deathVFX;
+    [SerializeField] private AudioClip deathSFX;
+
     public GameObject clickedObject;
 
     [SerializeField] Slider playerHealthSlider;
     public float playerHealth = 100;
+    float playerLastHealth;
 
     [Header("Components")]
     PlayerMovementManager _playerMovementManager;
@@ -20,10 +30,9 @@ public class PlayerManager : MonoBehaviour
     PlayerAttackManager _playerAttackManager;
     CharacterController _characterController;
     Rigidbody _characterRigidbody;
-    GameManager _gameManager;
+    public GameManager _gameManager;
 
-    [SerializeField] GameObject DashStartObject;
-    GameObject VFXSkull;
+ 
 
     [HideInInspector] public Vector3 DashStartTransform;
 
@@ -37,6 +46,8 @@ public class PlayerManager : MonoBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         DashStartTransform = new Vector3(transform.position.x, 4.5f, transform.position.z);
+
+        playerLastHealth = playerHealth;
     }
 
     void Update()
@@ -49,6 +60,13 @@ public class PlayerManager : MonoBehaviour
         {
             VFXSkull.transform.position = new Vector3(transform.position.x, 4.5f, transform.position.z);
         }
+
+        if(bloodVFX != null)
+        {
+            DamageVFX();
+        }
+
+        Death();
     }
 
     private void FixedUpdate()
@@ -103,7 +121,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(other.tag == "Boss" && _gameManager.DashDamage == true)
         {
-            playerHealth -= 1;
+            playerHealth -= 10;
         }
     }
 
@@ -122,5 +140,34 @@ public class PlayerManager : MonoBehaviour
             VFXSkull = Instantiate(DashStartObject, DashStartTransform, Quaternion.Euler(0, 0, 0));
             _gameManager.DashStart = false;
         }
+    }
+
+    private void DamageVFX()
+    {
+        if(playerHealth < playerLastHealth)
+        {
+            GameObject.Instantiate(bloodVFX, transform.position, Quaternion.identity);
+            playerLastHealth = playerHealth;
+        }
+    }
+
+    private void Death()
+    {
+        if(playerHealth <= 0 && playerDeath == false)
+        {
+            playerDeath = true;
+            _gameManager.audioSource.PlayOneShot(deathSFX);
+            GameObject.Instantiate(deathVFX, transform.position, Quaternion.identity);
+            DisablePlayer();
+        }
+    }
+
+    private void DisablePlayer()
+    {
+        _playerMovementManager.enabled = false;
+        _playerAttackManager.enabled = false;
+        _playerRotation.enabled = false;
+
+        gameObject.transform.localScale = new Vector3(0f, 0f, 0f);
     }
 }

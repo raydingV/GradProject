@@ -11,6 +11,10 @@ public class RainAttack : MonoBehaviour
 
     [SerializeField] PlayerManager playerManager;
 
+    [SerializeField] AudioClip HitSound;
+
+    [SerializeField] AudioSource audioSource;
+
     public bool needDestroy = false;
 
     private void FixedUpdate()
@@ -24,6 +28,8 @@ public class RainAttack : MonoBehaviour
 
         if(other.tag == "Plane")
         {
+            audioSource = other.gameObject.gameObject.GetComponent<AudioSource>();
+            audioSource.PlayOneShot(HitSound);
             GameObject.Instantiate(Explosion, gameObject.transform.position, Quaternion.Euler(0,0,0));
             Destroy(gameObject);
             needDestroy = true;
@@ -32,6 +38,7 @@ public class RainAttack : MonoBehaviour
         if(other.tag == "Player")
         {
             playerManager = other.gameObject.GetComponent<PlayerManager>();
+            playerManager._gameManager.audioSource.PlayOneShot(HitSound);
             GameObject.Instantiate(Explosion, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             playerManager.playerHealth -= 6;
             needDestroy = true;

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CameraFollower : MonoBehaviour
 {
-
-    [SerializeField] private GameObject player;
+    [SerializeField] private PlayerManager player;
 
     private void LateUpdate()
     {
-        FollowPlayer();
+        if(player.playerDeath == false)
+        {
+            FollowPlayer();
+        }
     }
 
     void FollowPlayer()
