@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: Touchable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3020989885581043971, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842223766662587434, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7049382765232144110, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
       propertyPath: m_Name
       value: TileGroup

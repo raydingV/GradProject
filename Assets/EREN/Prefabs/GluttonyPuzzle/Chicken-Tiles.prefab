@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: Touchable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 885795770037586329, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1540912779999486963, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
       propertyPath: Touchable
       value: 1
@@ -95,6 +99,18 @@ PrefabInstance:
     - target: {fileID: 2493320445287328428, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
       propertyPath: Touchable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020989885581043971, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301671229746118854, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842223766662587434, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7049382765232144110, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
       propertyPath: m_Name
