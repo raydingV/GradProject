@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject DashStartObject;
     GameObject VFXSkull;
 
-    [SerializeField] private GameObject bloodVFX;
+    [SerializeField] private GameObject[] bloodVFX;
     [SerializeField] private GameObject deathVFX;
     [SerializeField] private AudioClip deathSFX;
 
@@ -146,7 +146,8 @@ public class PlayerManager : MonoBehaviour
     {
         if(playerHealth < playerLastHealth)
         {
-            GameObject.Instantiate(bloodVFX, transform.position, Quaternion.identity);
+            GameObject.Instantiate(bloodVFX[0], transform.position, Quaternion.identity);
+            GameObject.Instantiate(bloodVFX[1], transform.position, Quaternion.identity);
             playerLastHealth = playerHealth;
         }
     }
