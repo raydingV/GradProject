@@ -7,32 +7,51 @@ using UnityEngine.UI;
 
 public class BossManager : MonoBehaviour
 {
-
+    [Header("Components")]
     [SerializeField] Slider slider;
-    float Health = 100;
+    [SerializeField] public NavMeshAgent agent;
+    [SerializeField] PlayerManager player;
+    [SerializeField] public CharacterController characterController;
+    [SerializeField] public BoxCollider Box;
 
-    float Damage;
+    [Header("Scripts")]
+    [SerializeField] GameManager _gameManager;
 
-    [SerializeField] NavMeshAgent agent;
+    [Header("Data")]
+    [SerializeField] BossData BossData;
+    [SerializeField] SkillsData SkillObjects;
 
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject rainObject;
+    [Header("Variables")]
+    [HideInInspector] public float Health;
+    [HideInInspector] public float Damage;
+
+    [HideInInspector] public bool InCombat = false;
 
     Vector3 locat;
+    Vector3 Target;
 
-    bool InCombat = false;
+    int skillTime;
+    int lastRandomValue = 0;
+
+    List<IEnumerator> allSkills = new List<IEnumerator>();
 
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        BossDataTake();
+        SkillDataTake();
+        slider.maxValue = Health;
         StartCoroutine(Skills());
-        agent.acceleration = 40;
-        agent.speed = 40;
     }
 
     void Update()
     {
         slider.value = Health;
-        locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+
+        if (player != null)
+        {
+            locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+        }
     }
 
     private void FixedUpdate()
@@ -41,11 +60,32 @@ public class BossManager : MonoBehaviour
         {
             agent.SetDestination(locat);
         }
+
+        if (_gameManager.UpToBoss == true && player != null)
+        {
+            MoveUp();
+        }
+
+        if (_gameManager.DownToBoss == true && player != null)
+        {
+            MoveDown();
+        }
     }
 
     private void LateUpdate()
     {
-        rotationBoss();
+        if(_gameManager.DashBoss == true && player != null)
+        {
+            MoveDash();
+        }
+        else
+        {
+            if (player != null)
+            {
+                rotationBoss();
+            }
+        }
+
     }
 
 
@@ -53,7 +93,7 @@ public class BossManager : MonoBehaviour
     {
         if(other.tag == "Magic")
         {
-            Health -= 10;
+            Health -= (other.transform.localScale.x * 50);
             Debug.Log("HÝT!");
         }
     }
@@ -63,26 +103,35 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(6,10));
 
         InCombat = true;
+        
 
-        int SkillChoose = 1;
-
-        switch(SkillChoose)
+        switch(GetRandomSkillValue())
         {
             case 1:
-                agent.SetDestination(gameObject.transform.position);
+                agent.ResetPath();
                 Debug.Log("Case 1");
-                StartCoroutine(RainSkill());
-                yield return new WaitForSeconds(8);
+                StartCoroutine(allSkills[0]);
+                yield return new WaitForSeconds(skillTime);
                 InCombat = false;
                 break;
             case 2:
+                agent.ResetPath();
+                Debug.Log("Case 2");
+                StartCoroutine(allSkills[1]);
+                yield return new WaitForSeconds(skillTime);
+                InCombat = false;
                 break;
             case 3:
+                agent.ResetPath();
+                Debug.Log("Case 3");
+                StartCoroutine(allSkills[2]);
+                yield return new WaitForSeconds(skillTime);
+                InCombat = false;
                 break;
         }
-        agent.SetDestination(player.transform.position);
-        agent.speed = 80;
 
+        allSkills.Clear();
+        SkillDataTake();
         StartCoroutine(Skills());
     }
 
@@ -98,6 +147,21 @@ public class BossManager : MonoBehaviour
         return randomResult;
     }
 
+    int GetRandomSkillValue()
+    {
+        int randomResult = 1;
+
+        do
+        {
+            randomResult = Random.Range(1, 4);
+        } while (randomResult == lastRandomValue);
+
+        lastRandomValue = randomResult;
+
+        return randomResult;
+
+    }
+
     void rotationBoss()
     {
         Vector3 Rotation = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
@@ -106,14 +170,52 @@ public class BossManager : MonoBehaviour
         gameObject.transform.LookAt(Rotation);
     }
 
-    IEnumerator RainSkill()
+    void SkillDataTake()
     {
-        while(InCombat)
+        SkillObjects._BossManager = this;
+
+        if (BossData.RainOfAbundance == true)
         {
-            Vector3 rainTransform = new Vector3(player.transform.position.x + Random.Range(-6, 6), 30, player.transform.position.z + Random.Range(-6, 6));
-            GameObject.Instantiate(rainObject, rainTransform, Quaternion.Euler(0, 0, 0));
-            Health += 0.4f;
-            yield return new WaitForSeconds(0.1f);
+            allSkills.Add(SkillObjects.RainOfAbundanceSkill(player.gameObject));
         }
+
+        if(BossData.JumpHigh == true)
+        {
+            allSkills.Add(SkillObjects.JumpHighSkill());
+        }
+
+        if(BossData.HungerDash == true)
+        {
+            allSkills.Add(SkillObjects.HungerDashing(player.gameObject));
+        }
+    }
+
+    private void BossDataTake()
+    {
+        Health = BossData.Health;
+        Damage = BossData.Damage;
+        skillTime = BossData.SkillTime;
+        agent.acceleration = BossData.Speed;
+        agent.speed = BossData.Acceleration;
+    }
+
+    private void MoveUp()
+    {
+        Target = new Vector3(player.transform.position.x, transform.position.y + 70f, player.transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
+    }
+
+    private void MoveDown()
+    {
+        if(transform.position.y >= 4)
+        {
+            Target = new Vector3(player.transform.position.x, transform.position.y - 70f, player.transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, Target, 3f * Time.deltaTime);
+        }
+    }
+
+    private void MoveDash()
+    {
+        transform.Translate(transform.forward * 100f * Time.deltaTime, Space.World);
     }
 }

@@ -6,45 +6,86 @@ public class MagicAttack : MonoBehaviour
 {
     [Header("Values")]
     public float Speed = 20f;
+    float Timer = 6;
+    float scaleSize = 1f;
+    float scalePosition = 1f;
 
-    public GameObject BoomEffect;
+    [Header("Scripts")]
+    GameManager _gameManager;
+
+    [Header("Objects")]
+    [SerializeField] private GameObject BoomEffect;
+    [SerializeField] private GameObject AttackObject;
     GameObject BoomObject;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip fireSound;
+    [SerializeField] private AudioClip triggerSound;
 
     Rigidbody rb;
 
-    float Timer = 6;
+    bool InýtializeFire = false;
+    public bool StartFunc = false;
 
-    void Start()
+
+    private void Awake()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
+        
     }
 
     void Update()
     {
-        Timer -= Time.deltaTime;
+        Fire();
 
-        if(Timer <= 0)
-        {
-            Destroy(gameObject);
-        }
+        ObjectDestroy();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        rb.AddForce(transform.forward * Speed);
+        if(StartFunc == true)
+        {
+            rb.AddForce(transform.forward * Speed);
+        }
 
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 2, gameObject.transform.position.z);
+        scalePosition = (gameObject.transform.localScale.x * 3);
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, scalePosition, gameObject.transform.position.z);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Boss")
+        if(other.tag == "Boss" && StartFunc == true)
         {
             BoomObject = GameObject.Instantiate(BoomEffect);
             BoomObject.transform.position = gameObject.transform.position;
-            BoomObject.transform.Rotate(-90, 0, 0);
-            BoomObject.transform.localScale = new Vector3(2, 2, 2);
+            _gameManager.audioSource.PlayOneShot(triggerSound);
+            scaleSize = (gameObject.transform.localScale.x * 10/2);
+            BoomObject.transform.localScale = new Vector3(scaleSize, scaleSize, scaleSize);
 
+            Destroy(gameObject);
+        }
+    }
+
+    void Fire()
+    {
+        if (StartFunc == true && InýtializeFire == false)
+        {
+            _gameManager.audioSource.PlayOneShot(fireSound);
+            AttackObject.SetActive(true);
+            InýtializeFire = true;
+        }
+    }
+
+    void ObjectDestroy()
+    {
+        if (StartFunc == true)
+        {
+            Timer -= Time.deltaTime;
+        }
+
+        if (Timer <= 0)
+        {
             Destroy(gameObject);
         }
     }

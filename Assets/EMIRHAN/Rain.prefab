@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Explosion: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  Target: {fileID: 0}
   DownSpeed: 30
   playerManager: {fileID: 0}
+  HitSound: {fileID: 8300000, guid: aa59d7cc47b780a4e86f9e57d594f9ea, type: 3}
+  needDestroy: 0
 --- !u!54 &7411075608904107438
 Rigidbody:
   m_ObjectHideFlags: 0

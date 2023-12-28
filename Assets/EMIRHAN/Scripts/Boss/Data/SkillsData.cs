@@ -1,0 +1,138 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+[CreateAssetMenu(fileName = "Skills", menuName = "AllSkills")]
+public class SkillsData : ScriptableObject
+{
+    [Header("VFX Objects")]
+    [SerializeField] GameObject rainObject;
+    [SerializeField] GameObject JumpImpact;
+    [SerializeField] GameObject DownImpact;
+    [SerializeField] GameObject DownImpactText;
+    [SerializeField] GameObject AppearShadow;
+    [SerializeField] GameObject DashImpact;
+    [SerializeField] GameObject DashCenterImpact;
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip[] RainOfAbundanceSound;
+    [SerializeField] AudioClip[] JumpHighSound;
+    [SerializeField] AudioClip[] HungerDashSound;
+
+    [HideInInspector] public BossManager _BossManager;
+    [HideInInspector] public GameManager _gameManager;
+
+    public IEnumerator RainOfAbundanceSkill(GameObject player)
+    {
+        while (_BossManager.InCombat)
+        {
+            Vector3 rainTransform = new Vector3(player.transform.position.x + Random.Range(-6, 6), 30, player.transform.position.z + Random.Range(-6, 6));
+            GameObject.Instantiate(rainObject, rainTransform, Quaternion.Euler(0, 0, 0));
+            _BossManager.Health += 0.4f;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public IEnumerator JumpHighSkill()
+    {
+        JumpImpact.transform.localScale = new Vector3(6, 6, 6);
+        Vector3 JumpTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
+        GameObject.Instantiate(JumpImpact, JumpTransform, Quaternion.Euler(0, 0, 0));
+        _gameManager.audioSource.PlayOneShot(JumpHighSound[0]);
+
+        AppearShadow.transform.localScale = new Vector3(3, 3, 3);
+        GameObject shadow = GameObject.Instantiate(AppearShadow, _BossManager.transform.position, Quaternion.Euler(-90, 0, 0));
+
+        while (true)
+        {
+           
+            if (_BossManager.gameObject.transform.position.y <= 500)
+            {
+                _BossManager.agent.enabled = false;
+                _gameManager.UpToBoss = true;
+            }
+            else
+            {
+                _gameManager.UpToBoss = false;
+                break;
+            }
+            yield return new WaitForSeconds(0.1f);
+        }
+
+
+        while (true)
+        {
+            _gameManager.DownDamage = true;
+            if (_BossManager.gameObject.transform.position.y >= 4)
+            {
+                _BossManager.agent.enabled = false;
+                _gameManager.DownToBoss = true;
+            }
+            else
+            {
+                _gameManager.DownToBoss = false;
+                _BossManager.agent.enabled = true;
+                break;
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        Destroy(shadow);
+
+        _gameManager.audioSource.PlayOneShot(JumpHighSound[1]);
+
+        DownImpact.transform.localScale = new Vector3(3, 3, 3);
+        DownImpactText.transform.localScale = new Vector3(3, 3, 3);
+
+        Vector3 DownTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
+        Vector3 DownTextTransform = new Vector3(_BossManager.transform.position.x + 4, 8, _BossManager.transform.position.z + 4);
+
+        GameObject.Instantiate(DownImpact, DownTransform, Quaternion.Euler(0, 0, 0));
+        GameObject.Instantiate(DownImpactText, DownTextTransform, Quaternion.Euler(0, 0, 0));
+
+        yield return new WaitForSeconds(1f);
+        _gameManager.DownDamage = false;
+    }
+
+     public IEnumerator HungerDashing(GameObject player)
+    {
+        float timer = 4f;
+        _gameManager.audioSource.PlayOneShot(HungerDashSound[0]);
+
+        _gameManager.DashStart = true;
+
+        yield return new WaitForSeconds(2f);
+
+        while(true)
+        {
+            DashImpact.transform.localScale = new Vector3(4, 4, 4);
+            Vector3 DashTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
+            GameObject.Instantiate(DashImpact, DashTransform, Quaternion.Euler(0, 0, 0));
+
+            timer -= 1f;
+            _gameManager.DashDamage = true;
+            _gameManager.DashBoss = true;
+            _BossManager.Box.isTrigger = true;
+
+            if(timer < 0f)
+            {
+                break;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        _gameManager.audioSource.PlayOneShot(HungerDashSound[1]);
+
+        _gameManager.DashBoss = false;
+        _BossManager.Box.isTrigger = false;
+        DashCenterImpact.transform.localScale = new Vector3(5, 5, 5);
+        Vector3 DashCenterTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
+        GameObject.Instantiate(DashCenterImpact, DashCenterTransform, Quaternion.Euler(-90,0,0));
+
+        yield return new WaitForSeconds(0.4f);
+        _gameManager.DashDamage = false;
+    }
+}

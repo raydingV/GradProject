@@ -200,6 +200,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1934560266086716677, guid: 5ebd3057b0ce7b44c895d1fbf82820df, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934560266086716677, guid: 5ebd3057b0ce7b44c895d1fbf82820df, type: 3}
+      propertyPath: m_Size.z
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1934560266086716678, guid: 5ebd3057b0ce7b44c895d1fbf82820df, type: 3}
       propertyPath: m_Name
       value: Rain

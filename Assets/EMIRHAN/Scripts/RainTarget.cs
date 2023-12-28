@@ -5,10 +5,6 @@ using UnityEngine;
 public class RainTarget : MonoBehaviour
 {
     [SerializeField] RainAttack rain;
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

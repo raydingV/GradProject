@@ -9,12 +9,15 @@ public class PlayerMovementManager : MonoBehaviour
     private CharacterController characterController;
     private Vector3 playerVelocity;
 
+    PlayerManager playerManager;
 
     private bool groundedPlayer;
     private float playerAngle;
     public float angleSpeed;
 
     private Vector3 controlPlayer;
+
+    [SerializeField] AudioClip DashSound;
 
    [Header("Walk")]
     public float playerSpeed = 2.0f;
@@ -32,6 +35,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         characterController = gameObject.GetComponent<CharacterController>();
     }
 
@@ -54,7 +58,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         while (elapsedTime < dashTime)
         {
-            characterController.Move(playerDirection * dashForce * Time.deltaTime);
+            characterController.Move(VectorFixInput(playerDirection) * dashForce * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -66,7 +70,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     Vector3 VectorFixInput(Vector3 InputPlayer)
     {
-       Vector3 correctedMoveDirection = Camera.main.transform.TransformDirection(controlPlayer);
+       Vector3 correctedMoveDirection = Camera.main.transform.TransformDirection(InputPlayer);
 
         correctedMoveDirection.y = 0;
 
@@ -96,6 +100,7 @@ public class PlayerMovementManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            playerManager._gameManager.audioSource.PlayOneShot(DashSound);
             DashObject = GameObject.Instantiate(DashEffect);
             DashObject.transform.position = gameObject.transform.position;
             StartCoroutine(DashMovement(controlPlayer));
