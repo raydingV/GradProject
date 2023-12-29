@@ -7,7 +7,7 @@ public class FollowBoss : MonoBehaviour
     BossManager boss;
     void Start()
     {
-        boss = GameObject.Find("Boss").GetComponent<BossManager>();
+        boss = GameObject.FindWithTag("Boss").GetComponent<BossManager>();
     }
 
     void FixedUpdate()

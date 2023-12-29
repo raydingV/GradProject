@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Animator animator;
+
+    [SerializeField] PlayerMovementManager playerMovementManager;
+    [SerializeField] PlayerAttackManager playerAttackManager;
+
+    float inputValue;
+
     void Start()
     {
-        
+        playerAttackManager = GetComponent<PlayerAttackManager>();
+        playerMovementManager = GetComponent<PlayerMovementManager>();
+        animator = GetComponent<Animator>();    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        Running();
+        Dashing();
+        Attacking();
+    }
+
+    void Running()
+    {
+        inputValue = (Mathf.Abs(playerMovementManager.controlPlayer.x) + Mathf.Abs(playerMovementManager.controlPlayer.z));
+        animator.SetFloat("Speed", inputValue);
+    }
+
+    void Dashing()
+    {
+        animator.SetBool("Dash", playerMovementManager.InDashing);
+    }
+
+    void Attacking()
+    {
+        animator.SetBool("RunFire", playerAttackManager.InAttack);
     }
 }

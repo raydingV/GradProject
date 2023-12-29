@@ -95,7 +95,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator GetCheckPoint()
     {
-        transform.position = new Vector3(-4.53000021f, 1.37800002f, 2.08999991f);
+        transform.position = new Vector3(-4.53000021f, 0f, 2.08999991f);
         yield return new WaitForSeconds(0.01f);
     }
 

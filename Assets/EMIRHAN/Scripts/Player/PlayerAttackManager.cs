@@ -23,6 +23,7 @@ public class PlayerAttackManager : MonoBehaviour
     [SerializeField] Transform magicAttackTransform;
 
     bool oneInstantiate = false;
+    public bool InAttack = false;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class PlayerAttackManager : MonoBehaviour
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 HoldValue -= Time.deltaTime;
+                InAttack = true;
 
                 if (oneInstantiate == false)
                 {
@@ -73,6 +75,7 @@ public class PlayerAttackManager : MonoBehaviour
                 effectObject.loop = false;
                 valuesOfMagic.tag = "Magic";
                 oneInstantiate = false;
+                InAttack = false;
             }
         } 
     }

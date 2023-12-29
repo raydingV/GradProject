@@ -16,6 +16,7 @@ public class BossManager : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] GameManager _gameManager;
+    [SerializeField] BossAnimation _bossAnimation;
 
     [Header("Data")]
     [SerializeField] BossData BossData;
@@ -56,7 +57,7 @@ public class BossManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(InCombat == false)
+        if(InCombat == false && Health > 0)
         {
             agent.SetDestination(locat);
         }
@@ -70,6 +71,10 @@ public class BossManager : MonoBehaviour
         {
             MoveDown();
         }
+
+        float speedBoss = Mathf.Abs(agent.velocity.x) + Mathf.Abs(agent.velocity.z);
+        _bossAnimation.floatParameter("Speed", speedBoss);
+        _bossAnimation.floatParameter("Health", Health);
     }
 
     private void LateUpdate()
@@ -80,7 +85,7 @@ public class BossManager : MonoBehaviour
         }
         else
         {
-            if (player != null)
+            if (player != null && Health > 0)
             {
                 rotationBoss();
             }

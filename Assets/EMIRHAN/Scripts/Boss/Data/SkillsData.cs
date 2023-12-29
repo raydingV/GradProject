@@ -23,20 +23,25 @@ public class SkillsData : ScriptableObject
 
     [HideInInspector] public BossManager _BossManager;
     [HideInInspector] public GameManager _gameManager;
+    [HideInInspector] public BossAnimation _bossAnimation;
 
     public IEnumerator RainOfAbundanceSkill(GameObject player)
     {
-        while (_BossManager.InCombat)
+        while (_BossManager.InCombat && _BossManager.Health > 0)
         {
+            _bossAnimation.boolParameter("RainOfAbundance", true);
             Vector3 rainTransform = new Vector3(player.transform.position.x + Random.Range(-6, 6), 30, player.transform.position.z + Random.Range(-6, 6));
             GameObject.Instantiate(rainObject, rainTransform, Quaternion.Euler(0, 0, 0));
             _BossManager.Health += 0.4f;
             yield return new WaitForSeconds(0.1f);
         }
+        _bossAnimation.boolParameter("RainOfAbundance", false);
     }
 
     public IEnumerator JumpHighSkill()
     {
+        _bossAnimation.boolParameter("JumpImpact", true);
+        yield return new WaitForSeconds(1f);
         JumpImpact.transform.localScale = new Vector3(6, 6, 6);
         Vector3 JumpTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
         GameObject.Instantiate(JumpImpact, JumpTransform, Quaternion.Euler(0, 0, 0));
@@ -61,7 +66,7 @@ public class SkillsData : ScriptableObject
             yield return new WaitForSeconds(0.1f);
         }
 
-
+        _bossAnimation.boolParameter("JumpImpact", false);
         while (true)
         {
             _gameManager.DownDamage = true;
@@ -73,13 +78,13 @@ public class SkillsData : ScriptableObject
             }
             else
             {
+                _bossAnimation.boolParameter("DownImpact", true);
                 _gameManager.DownToBoss = false;
                 _BossManager.agent.enabled = true;
                 break;
             }
             yield return new WaitForSeconds(0.01f);
         }
-
         Destroy(shadow);
 
         _gameManager.audioSource.PlayOneShot(JumpHighSound[1]);
@@ -94,6 +99,7 @@ public class SkillsData : ScriptableObject
         GameObject.Instantiate(DownImpactText, DownTextTransform, Quaternion.Euler(0, 0, 0));
 
         yield return new WaitForSeconds(1f);
+        _bossAnimation.boolParameter("DownImpact", false);
         _gameManager.DownDamage = false;
         _BossManager.Box.isTrigger = false;
     }
@@ -118,7 +124,7 @@ public class SkillsData : ScriptableObject
             _gameManager.DashBoss = true;
             _BossManager.Box.isTrigger = true;
 
-            if(timer < 0f)
+            if(timer < 0f || _BossManager.Health <= 0)
             {
                 break;
             }

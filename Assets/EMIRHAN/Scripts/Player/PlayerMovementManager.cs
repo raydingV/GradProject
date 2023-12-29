@@ -1,3 +1,4 @@
+using Autodesk.Fbx;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,8 +15,9 @@ public class PlayerMovementManager : MonoBehaviour
     private bool groundedPlayer;
     private float playerAngle;
     public float angleSpeed;
+    public float yPosition = 0;
 
-    private Vector3 controlPlayer;
+    public Vector3 controlPlayer;
 
     [SerializeField] AudioClip DashSound;
 
@@ -33,6 +35,8 @@ public class PlayerMovementManager : MonoBehaviour
     public GameObject DashEffect;
     GameObject DashObject;
 
+    public bool InDashing = false;
+
     void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -48,7 +52,7 @@ public class PlayerMovementManager : MonoBehaviour
         dashPlayer();
         Gravity();
 
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, 1.23f , gameObject.transform.position.z);
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, yPosition, gameObject.transform.position.z);
     }
 
     IEnumerator DashMovement(Vector3 playerDirection)
@@ -58,6 +62,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         while (elapsedTime < dashTime)
         {
+            InDashing = true;
             characterController.Move(VectorFixInput(playerDirection) * dashForce * Time.deltaTime);
 
             elapsedTime += Time.deltaTime;
@@ -66,6 +71,7 @@ public class PlayerMovementManager : MonoBehaviour
 
         DashObject = GameObject.Instantiate(DashEffect);
         DashObject.transform.position = gameObject.transform.position;
+        InDashing = false;
     }
 
     Vector3 VectorFixInput(Vector3 InputPlayer)

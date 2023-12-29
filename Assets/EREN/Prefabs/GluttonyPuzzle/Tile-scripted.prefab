@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1292072915413632304}
   - component: {fileID: 4532439375754580948}
   m_Layer: 0
-  m_Name: Tile-Scripted
+  m_Name: Tile-scripted
   m_TagString: PuzzleTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 0, z: 10}
-  m_Center: {x: 0, y: 1.110223e-16, z: 0}
+  m_Size: {x: 10, y: 6.25358, z: 10}
+  m_Center: {x: 0, y: -3.076789, z: 0}
 --- !u!54 &4532439375754580948
 Rigidbody:
   m_ObjectHideFlags: 0

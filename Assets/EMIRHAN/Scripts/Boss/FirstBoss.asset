@@ -23,7 +23,7 @@ MonoBehaviour:
   FireWeak: 0
   IceWeak: 0
   WindWeak: 0
-  SkillTime: 6
+  SkillTime: 7
   RainOfAbundance: 1
   JumpHigh: 1
   HungerDash: 1
