@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.VFX;
 
 public class PlayerAttackManager : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerAttackManager : MonoBehaviour
     MagicAttack valuesOfMagic;
 
     [Header("Component")]
-    [SerializeField] GameObject MagicObject;
+    [SerializeField] public GameObject MagicObject;
     GameObject newMagicObject;
 
     [Header("MechanicVariable")]
@@ -18,9 +19,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     [Header("VfxMaterial")]
     public ParticleSystem HoldEffect;
-    public ParticleSystem HoldEffectChild;
     ParticleSystem effectObject;
-    ParticleSystem effectObjectChild;
     [SerializeField] Transform magicAttackTransform;
 
     bool oneInstantiate = false;
@@ -40,27 +39,27 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            HoldValue -= Time.deltaTime;
-
-            if(oneInstantiate == false)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                effectObject = Instantiate(HoldEffect);
-                effectObjectChild = Instantiate(HoldEffectChild);
-                effectObjectChild.loop = true;
-                effectObject.loop = true;
-                oneInstantiate = true;
-                InitializeMagic();
-            }
+                HoldValue -= Time.deltaTime;
 
-            if(newMagicObject != null)
-            {
-                FollowPlayer();
-                BiggerScale();
-            }
+                if (oneInstantiate == false)
+                {
+                    effectObject = Instantiate(HoldEffect);
+                    effectObject.loop = true;
+                    oneInstantiate = true;
+                    InitializeMagic();
+                }
 
-            effectObject.transform.position = gameObject.transform.position;
-            effectObjectChild.transform.position = gameObject.transform.position;
-            //Debug.Log(HoldValue);
+                if (newMagicObject != null)
+                {
+                    FollowPlayer();
+                    BiggerScale();
+                }
+
+                effectObject.transform.position = gameObject.transform.position;
+                //Debug.Log(HoldValue);   
+            }
         }
     }
 
@@ -68,11 +67,13 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            valuesOfMagic.StartFunc = true;
-            effectObject.loop = false;
-            effectObjectChild.loop = false;
-            valuesOfMagic.tag = "Magic";
-            oneInstantiate = false;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                valuesOfMagic.StartFunc = true;
+                effectObject.loop = false;
+                valuesOfMagic.tag = "Magic";
+                oneInstantiate = false;
+            }
         } 
     }
 
