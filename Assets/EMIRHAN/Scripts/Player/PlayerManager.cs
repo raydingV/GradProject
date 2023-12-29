@@ -123,14 +123,19 @@ public class PlayerManager : MonoBehaviour
         {
             playerHealth -= 10;
         }
+
+        if (other.tag == "Boss" && _gameManager.DownDamage == true)
+        {
+            playerHealth -= 10;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Boss" && _gameManager.DownDamage == true)
-        {
-            playerHealth -= 10;
-        }
+        //if (collision.collider.tag == "Boss" && _gameManager.DownDamage == true)
+        //{
+        //    playerHealth -= 10;
+        //}
     }
 
     private void SkullVFX()

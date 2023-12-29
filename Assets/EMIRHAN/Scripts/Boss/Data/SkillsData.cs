@@ -65,6 +65,7 @@ public class SkillsData : ScriptableObject
         while (true)
         {
             _gameManager.DownDamage = true;
+            _BossManager.Box.isTrigger = true;
             if (_BossManager.gameObject.transform.position.y >= 4)
             {
                 _BossManager.agent.enabled = false;
@@ -94,6 +95,7 @@ public class SkillsData : ScriptableObject
 
         yield return new WaitForSeconds(1f);
         _gameManager.DownDamage = false;
+        _BossManager.Box.isTrigger = false;
     }
 
      public IEnumerator HungerDashing(GameObject player)
