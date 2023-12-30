@@ -1991,6 +1991,7 @@ MonoBehaviour:
   characterController: {fileID: 0}
   Box: {fileID: 1378803643}
   _gameManager: {fileID: 0}
+  _bossAnimation: {fileID: 0}
   BossData: {fileID: 11400000, guid: b45b6062dc67c5d4fad196aa77c08cfb, type: 2}
   SkillObjects: {fileID: 11400000, guid: eb32d4f25b0740b429020c9d2c5feb40, type: 2}
   Health: 0
@@ -2362,6 +2363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleSpeed: 500
+  yPosition: 0
   controlPlayer: {x: 0, y: 0, z: 0}
   DashSound: {fileID: 8300000, guid: 8cd77d8e525a27946b8126846b32757b, type: 3}
   playerSpeed: 12

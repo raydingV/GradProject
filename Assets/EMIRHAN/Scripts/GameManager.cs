@@ -31,14 +31,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(DownDamage == true)
+        if (_bossManager != null)
         {
-            BossHitBox();
+            if (DownDamage == true)
+            {
+                BossHitBox();
+            }
+            else
+            {
+                BossHitBoxRegular();
+            }
         }
-        else
-        {
-            BossHitBoxRegular();
-        }
+
 
         if(playerIsDead() && GameOver == false)
         {

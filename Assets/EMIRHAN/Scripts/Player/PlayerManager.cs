@@ -53,7 +53,11 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         PlayerInput();
-        playerHealthSlider.value = playerHealth;
+        if(playerHealthSlider != null)
+        {
+            playerHealthSlider.value = playerHealth;
+        }
+
         SkullVFX();
 
         if(VFXSkull != null)

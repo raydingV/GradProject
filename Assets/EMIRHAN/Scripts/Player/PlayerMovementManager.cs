@@ -89,6 +89,9 @@ public class PlayerMovementManager : MonoBehaviour
 
         characterController.Move(VectorFixInput(controlPlayer) * Time.deltaTime * playerSpeed);
 
+        //Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 10 * Time.deltaTime);
+
         //characterController.Move(playerVelocity * Time.deltaTime);
     }
 
