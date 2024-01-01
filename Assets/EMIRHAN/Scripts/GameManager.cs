@@ -54,11 +54,13 @@ public class GameManager : MonoBehaviour
 
     public void DefineTile(GameObject _gameObject)
     {
-        float kaka = Vector3.Distance(_playerManager.transform.position, _gameObject.transform.position);
-        Debug.Log(kaka);
-        if (Vector3.Distance(_playerManager.transform.position,_gameObject.transform.position) < 4.3f)
+        float dist = Vector3.Distance(_playerManager.transform.position, _gameObject.transform.position);
+        Debug.Log(dist);
+
+        if (Vector3.Distance(_playerManager.transform.position,_gameObject.transform.position) < 5.2f && _playerManager.tileInput == true)
         {
             _playerManager.clickedObject = _gameObject;
+            _playerManager.tileInput = false;
             MoveToTýle();
         }
     }

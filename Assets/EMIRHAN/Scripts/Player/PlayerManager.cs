@@ -11,6 +11,8 @@ public class PlayerManager : MonoBehaviour
 
     public bool playerDeath = false;
 
+    public bool tileInput = true;
+
     [SerializeField] GameObject DashStartObject;
     GameObject VFXSkull;
 
@@ -93,15 +95,19 @@ public class PlayerManager : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, clickedObject.transform.position, 5f * Time.deltaTime);
 
-        if(Vector3.Distance(clickedObject.transform.position, transform.position) < 0.5f)
+
+        if(Vector3.Distance(clickedObject.transform.position, transform.position) < 0.9f)
         {
+            tileInput = true;
             clickedObject = null;
+            Debug.Log("TRUE");
         }    
     }
 
     private IEnumerator GetCheckPoint()
     {
         transform.position = new Vector3(1.50999999f, 0, -31.6000004f);
+        tileInput = true;
         yield return new WaitForSeconds(0.01f);
     }
 
