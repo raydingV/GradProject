@@ -10,8 +10,7 @@ public class PlayerRotation : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         rotatePlayer();
     }
@@ -29,4 +28,5 @@ public class PlayerRotation : MonoBehaviour
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
     }
+
 }

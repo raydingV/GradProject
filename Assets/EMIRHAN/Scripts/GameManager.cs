@@ -49,13 +49,14 @@ public class GameManager : MonoBehaviour
             GameOver = true;
             StartCoroutine(loadNewScene());
         }
+
     }
 
     public void DefineTile(GameObject _gameObject)
     {
         float kaka = Vector3.Distance(_playerManager.transform.position, _gameObject.transform.position);
         Debug.Log(kaka);
-        if (Vector3.Distance(_playerManager.transform.position,_gameObject.transform.position) < 4f)
+        if (Vector3.Distance(_playerManager.transform.position,_gameObject.transform.position) < 4.3f)
         {
             _playerManager.clickedObject = _gameObject;
             MoveToTýle();

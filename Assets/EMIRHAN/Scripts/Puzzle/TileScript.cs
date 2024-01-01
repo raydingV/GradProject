@@ -16,11 +16,6 @@ public class TileScript : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
-    void Update()
-    {
-        
-    }
-
     //private void OnCollisionStay(Collision collision)
     //{
     //    if(collision.collider.CompareTag("Player"))

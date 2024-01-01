@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject clickedObject;
 
+    [SerializeField] public GameObject holdObject;
+
     [SerializeField] Slider playerHealthSlider;
     public float playerHealth = 100;
     float playerLastHealth;
@@ -99,7 +101,7 @@ public class PlayerManager : MonoBehaviour
 
     private IEnumerator GetCheckPoint()
     {
-        transform.position = new Vector3(-4.53000021f, 0f, 2.08999991f);
+        transform.position = new Vector3(1.50999999f, 0, -31.6000004f);
         yield return new WaitForSeconds(0.01f);
     }
 

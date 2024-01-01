@@ -12,8 +12,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     PlayerManager playerManager;
 
-    private bool groundedPlayer;
-    private float playerAngle;
+    private bool groundedPlayer = false;
     public float angleSpeed;
     public float yPosition = 0;
 
@@ -35,24 +34,36 @@ public class PlayerMovementManager : MonoBehaviour
     public GameObject DashEffect;
     GameObject DashObject;
 
-    public bool InDashing = false;
+    [SerializeField] public bool InDashing = false;
+    [SerializeField] bool GravityEnable = false;
+    [SerializeField] bool DashEnable = true;
 
     void Start()
     {
         playerManager = GetComponent<PlayerManager>();
         characterController = gameObject.GetComponent<CharacterController>();
+
+        playerVelocity.y = gameObject.transform.position.y;
     }
 
     void Update()
     {
-        groundedPlayer = characterController.isGrounded;
-
-        jumpPlayer();
         transformPlayer();
-        dashPlayer();
-        Gravity();
 
-        gameObject.transform.position = new Vector3(gameObject.transform.position.x, yPosition, gameObject.transform.position.z);
+        if(DashEnable == true)
+        {
+            dashPlayer();
+        }
+
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x, playerVelocity.y, gameObject.transform.position.z);
+    }
+
+    private void FixedUpdate()
+    {
+        if (GravityEnable == true)
+        {
+            Gravity();
+        }
     }
 
     IEnumerator DashMovement(Vector3 playerDirection)
@@ -122,6 +133,22 @@ public class PlayerMovementManager : MonoBehaviour
         if (groundedPlayer == false)
         {
             playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.collider.tag == "Plane")
+        {
+            groundedPlayer = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Plane")
+        {
+            groundedPlayer = false;
         }
     }
 }

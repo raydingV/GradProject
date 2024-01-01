@@ -11,6 +11,8 @@ TagManager:
   - Plane
   - Rain
   - Button
+  - HoldObject
+  - ReleaseObject
   layers:
   - Default
   - TransparentFX

@@ -4,50 +4,59 @@ using UnityEngine;
 
 public class HoldDragObject : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField] public int ObjectTag;
+    [SerializeField] PlayerManager player;
+    [SerializeField] EnteranceLevelManager levelManager;
 
-    bool CanHold = false;
-    bool Holding = false;
+    Rigidbody rb;
 
-    void Start()
+    private void Start()
     {
-        
+        levelManager = GameObject.Find("LevelManager").GetComponent<EnteranceLevelManager>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        DistanceCalculate();
         HoldObject();
         RelaseObject();
     }
 
-    void DistanceCalculate()
-    {
-        if(Vector3.Distance(gameObject.transform.position, player.transform.position) < 2f && Holding == false)
-        {
-            CanHold = true;
-        }
-        else
-        {
-            CanHold = false;
-        }
-    }
-
     void HoldObject()
     {
-        if(Input.GetKeyDown(KeyCode.E) && CanHold == true)
+        if (Input.GetKeyDown(KeyCode.E) && player != null && levelManager.puzzleDone == false)
         {
+            transform.position = player.holdObject.transform.position;
+            gameObject.tag = "Untagged";
+            //rb.constraints = RigidbodyConstraints.FreezeAll;
             gameObject.transform.parent = player.transform;
-            Holding = true;
         }
     }
 
     void RelaseObject()
     {
-        if (Input.GetKeyDown(KeyCode.G) && Holding == true)
+        if (Input.GetKeyDown(KeyCode.G) && player != null)
         {
+            gameObject.tag = "HoldObject";
+            rb.freezeRotation = false;
+            //rb.constraints = RigidbodyConstraints.None;
             gameObject.transform.parent = null;
-            Holding = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            player = other.GetComponent<PlayerManager>();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            player = null;
         }
     }
 }

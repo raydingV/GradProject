@@ -14,6 +14,7 @@ public class PlayerAttackManager : MonoBehaviour
     GameObject newMagicObject;
 
     [Header("MechanicVariable")]
+    [SerializeField] bool CanFire = true;
     float HoldValue;
     [SerializeField] float Speed;
 
@@ -38,7 +39,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     void HoldMouse()
     {
-        if(Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0) && CanFire == true)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -67,7 +68,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     void ReleaseMouse()
     {
-        if(Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(0) && CanFire == true)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
