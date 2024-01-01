@@ -96,6 +96,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 8610099626837281607, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610099627075431654, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610099628153699384, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
 --- !u!4 &282375162258405951 stripped

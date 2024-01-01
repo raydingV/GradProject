@@ -104,6 +104,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 8610099626837281607, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610099627075431654, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610099628153699384, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610099628165158380, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
+      propertyPath: Touchable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9206282038292186911, guid: 14bc8e0bcc31f174bb577289d54b17f7, type: 3}
       propertyPath: Touchable
       value: 1
@@ -170,6 +186,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4f308b7d471bb2142bef66b652829273, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0c0e4f74d078b054485a77d9086a8154, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6dca34bf2b653cf45aadf03a126ae8bc, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0c0e4f74d078b054485a77d9086a8154, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7748067fb11277b49aedba8e3c079afc, type: 2}
     - target: {fileID: 919132149155446097, guid: 0c0e4f74d078b054485a77d9086a8154, type: 3}
       propertyPath: m_Name
       value: TileMid-Bottle
