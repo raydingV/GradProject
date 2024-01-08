@@ -159,6 +159,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3542560728129188253, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542560729446827746, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7049382765232144110, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
       propertyPath: m_Name
       value: Money-Tiles (1)
@@ -220,6 +228,14 @@ PrefabInstance:
     - target: {fileID: 40283509628366334, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542560729200369987, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542560729446827746, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
+      propertyPath: FirstTouch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7049382765232144110, guid: da864052f67fd9947938ea6f53f221ce, type: 3}
       propertyPath: m_Name
@@ -406,6 +422,10 @@ PrefabInstance:
     - target: {fileID: 40283509628366334, guid: ac15255346e439644aa676f6c4f79ce5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836820068042747578, guid: ac15255346e439644aa676f6c4f79ce5, type: 3}
+      propertyPath: FinalTouch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7049382765232144110, guid: ac15255346e439644aa676f6c4f79ce5, type: 3}
       propertyPath: m_Name
@@ -721,6 +741,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bottle-Tiles (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8368948283894890794, guid: f3bcc122040aac14486affb4d731a7c7, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368948284210439819, guid: f3bcc122040aac14486affb4d731a7c7, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3bcc122040aac14486affb4d731a7c7, type: 3}
 --- !u!4 &6689500569460535724 stripped
@@ -907,6 +935,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grape-Tiles (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8365745183215041319, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365745183436201094, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
 --- !u!4 &7890313219417196839 stripped
@@ -968,6 +1004,14 @@ PrefabInstance:
     - target: {fileID: 7049382765232144110, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
       propertyPath: m_Name
       value: Grape-Tiles (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365745183436201094, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365745184283601913, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
+      propertyPath: FirstTouch
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72801c7bb113ae2429a91687bc9df26c, type: 3}
