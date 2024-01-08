@@ -93,7 +93,6 @@ public class BossManager : MonoBehaviour
 
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Magic")

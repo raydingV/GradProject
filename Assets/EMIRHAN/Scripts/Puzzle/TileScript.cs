@@ -5,16 +5,19 @@ using UnityEngine;
 public class TileScript : MonoBehaviour
 {
     [SerializeField] private bool Touchable = true;
+    [SerializeField] private bool FirstTouch = false;
+    [SerializeField] private bool FinalTouch = false;
     private bool Clicked = false;
 
-    [SerializeField] private GameObject gameManagerObject;
-    private GameManager gameManager;
+    [SerializeField] private GameObject puzzleManagerObject;
+    private GluttonyPuzzleManager puzzleManager;
 
     void Start()
     {
-        gameManagerObject = GameObject.Find("GameManager");
-        gameManager = gameManagerObject.GetComponent<GameManager>();
+        puzzleManagerObject = GameObject.Find("PuzzleManager");
+        puzzleManager = puzzleManagerObject.GetComponent<GluttonyPuzzleManager>();
     }
+
 
     //private void OnCollisionStay(Collision collision)
     //{
@@ -24,22 +27,36 @@ public class TileScript : MonoBehaviour
     //    }
     //}
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            puzzleManager.InPuzzle = false;
+        }
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Touching(other.gameObject);
+            puzzleManager.InPuzzle = true;
         }
     }
 
     void Touching(GameObject PlayerObject)
     {
-        if(Touchable == false && Clicked == true)
+        if(Touchable == false && Clicked == true && puzzleManager._playerManager.tileInput == true)
         {
             Debug.Log("You Dýed");
             Debug.Log(PlayerObject.name);
-            gameManager.GetPlayerCheckPoint();
+            puzzleManager.GetPlayerCheckPoint();
+            Clicked = false;
+        }
+
+        if (FinalTouch == true && puzzleManager._playerManager.tileInput == true)
+        {
+            puzzleManager.GetPlayerFinishPoint();
             Clicked = false;
         }
     }
@@ -47,7 +64,7 @@ public class TileScript : MonoBehaviour
     private void OnMouseDown()
     {
         Clicked = true;
-        gameManager.DefineTile(gameObject);
+        puzzleManager.DefineTile(gameObject, FirstTouch);
         Debug.Log(gameObject.name);
     }
 }

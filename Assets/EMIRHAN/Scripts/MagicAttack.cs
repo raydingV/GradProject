@@ -45,15 +45,20 @@ public class MagicAttack : MonoBehaviour
         ObjectDestroy();
     }
 
-    void LateUpdate()
+    private void FixedUpdate()
     {
-        if(StartFunc == true && rb != null)
+        if (StartFunc == true && rb != null)
         {
-            rb.AddForce(transform.forward * Speed * Time.deltaTime);
+            rb.AddForce(transform.forward * Speed * Time.fixedDeltaTime);
         }
 
-        scalePosition = (gameObject.transform.localScale.x * 3 * Time.deltaTime);
+        scalePosition = (gameObject.transform.localScale.x * 180 * Time.fixedDeltaTime);
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, scalePosition, gameObject.transform.position.z);
+    }
+
+    void LateUpdate()
+    {
+        
     }
 
     private void OnTriggerStay(Collider other)

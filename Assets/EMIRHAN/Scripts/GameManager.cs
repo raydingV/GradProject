@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public bool DashStart = false;
 
     bool GameOver = false;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -50,29 +51,6 @@ public class GameManager : MonoBehaviour
             StartCoroutine(loadNewScene());
         }
 
-    }
-
-    public void DefineTile(GameObject _gameObject)
-    {
-        float dist = Vector3.Distance(_playerManager.transform.position, _gameObject.transform.position);
-        Debug.Log(dist);
-
-        if (Vector3.Distance(_playerManager.transform.position,_gameObject.transform.position) < 5.2f && _playerManager.tileInput == true)
-        {
-            _playerManager.clickedObject = _gameObject;
-            _playerManager.tileInput = false;
-            MoveToTýle();
-        }
-    }
-
-    public void GetPlayerCheckPoint()
-    {
-        _playerManager.PlayerDead();
-    }
-
-    void MoveToTýle()
-    {
-        _playerManager.PlayerTransform();
     }
 
     void GetSkillsData()

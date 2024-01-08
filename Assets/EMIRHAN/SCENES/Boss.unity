@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1560108527}
+  Speed: 50
 --- !u!114 &39269104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2564,7 +2565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462598158}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.03, z: 3.58}
+  m_LocalPosition: {x: -0, y: -0.27, z: 3.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2845,7 +2846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MagicObject: {fileID: 1283802359472484316, guid: 95561cc196d5bbe41a908c07f0c7da75, type: 3}
   CanFire: 1
-  Speed: 40
+  Speed: 2400
   HoldEffect: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   magicAttackTransform: {fileID: 1462598159}
   InAttack: 0
@@ -2953,7 +2954,7 @@ MonoBehaviour:
   - {fileID: 1269060166065924, guid: 27b41fd72fbaf864ea64d1a1711aa321, type: 3}
   deathVFX: {fileID: 4763446269881703624, guid: c28b7ff74fa3eb045b07fedf027e04c6, type: 3}
   deathSFX: {fileID: 8300000, guid: e20f9d9002f078741b2f54ba8b0c8226, type: 3}
-  clickedObject: {fileID: 0}
+  holdObject: {fileID: 0}
   playerHealthSlider: {fileID: 334583520}
   playerHealth: 100
   _gameManager: {fileID: 0}

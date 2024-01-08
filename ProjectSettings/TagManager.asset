@@ -13,6 +13,9 @@ TagManager:
   - Button
   - HoldObject
   - ReleaseObject
+  - GluttonyEnter
+  - GluttonyPuzzleStart
+  - GluttonyBossEnter
   layers:
   - Default
   - TransparentFX

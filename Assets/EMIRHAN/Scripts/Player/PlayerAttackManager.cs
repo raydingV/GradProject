@@ -16,7 +16,7 @@ public class PlayerAttackManager : MonoBehaviour
     [Header("MechanicVariable")]
     [SerializeField] bool CanFire = true;
     float HoldValue;
-    [SerializeField] float Speed;
+    [SerializeField] float Speed = 200f;
 
     [Header("VfxMaterial")]
     public ParticleSystem HoldEffect;
