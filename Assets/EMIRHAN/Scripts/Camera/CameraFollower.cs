@@ -5,10 +5,16 @@ using UnityEngine;
 public class CameraFollower : MonoBehaviour
 {
     [SerializeField] private PlayerManager player;
+    [SerializeField] private float Speed = 30f;
+
+    private void Start()
+    {
+        gameObject.transform.position = player.transform.position;
+    }
 
     private void LateUpdate()
     {
-        if(player.playerDeath == false)
+        if(player != null && player.playerDeath == false)
         {
             FollowPlayer();
         }
@@ -16,6 +22,6 @@ public class CameraFollower : MonoBehaviour
 
     void FollowPlayer()
     {
-        gameObject.transform.position = player.transform.position;
+        gameObject.transform.position = player.transform.position * Speed *Time.fixedDeltaTime;
     }
 }

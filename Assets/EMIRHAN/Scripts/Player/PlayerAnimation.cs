@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
 
     float inputValue;
 
-    void Start()
+    void Awake()
     {
         playerAttackManager = GetComponent<PlayerAttackManager>();
         playerMovementManager = GetComponent<PlayerMovementManager>();

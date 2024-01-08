@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using UnityEditor.SearchService;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -11,16 +14,12 @@ public class PlayerManager : MonoBehaviour
 
     public bool playerDeath = false;
 
-    public bool tileInput = true;
-
     [SerializeField] GameObject DashStartObject;
     GameObject VFXSkull;
 
     [SerializeField] private GameObject[] bloodVFX;
     [SerializeField] private GameObject deathVFX;
     [SerializeField] private AudioClip deathSFX;
-
-    public GameObject clickedObject;
 
     [SerializeField] public GameObject holdObject;
 
@@ -40,13 +39,18 @@ public class PlayerManager : MonoBehaviour
 
     [HideInInspector] public Vector3 DashStartTransform;
 
-    void Start()
+    private void Awake()
     {
         _playerMovementManager = gameObject.GetComponent<PlayerMovementManager>();
         _playerRotation = gameObject.GetComponent<PlayerRotation>();
         _playerAttackManager = gameObject.GetComponent<PlayerAttackManager>();
         _characterController = gameObject.GetComponent<CharacterController>();
         _characterRigidbody = gameObject.GetComponent<Rigidbody>();
+    }
+
+
+    void Start()
+    {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         DashStartTransform = new Vector3(transform.position.x, 4.5f, transform.position.z);
@@ -77,40 +81,6 @@ public class PlayerManager : MonoBehaviour
         Death();
     }
 
-    private void FixedUpdate()
-    {
-        if (clickedObject != null)
-        {
-            PlayerTransform();
-        }
-    }
-
-    public void PlayerDead()
-    {
-        clickedObject = null;
-        StartCoroutine(GetCheckPoint());
-    }
-
-    public void PlayerTransform()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, clickedObject.transform.position, 5f * Time.deltaTime);
-
-
-        if(Vector3.Distance(clickedObject.transform.position, transform.position) < 0.9f)
-        {
-            tileInput = true;
-            clickedObject = null;
-            Debug.Log("TRUE");
-        }    
-    }
-
-    private IEnumerator GetCheckPoint()
-    {
-        transform.position = new Vector3(1.50999999f, 0, -31.6000004f);
-        tileInput = true;
-        yield return new WaitForSeconds(0.01f);
-    }
-
     void PlayerInput()
     {
         if(InputEnable == false)
@@ -139,6 +109,16 @@ public class PlayerManager : MonoBehaviour
         if (other.tag == "Boss" && _gameManager.DownDamage == true)
         {
             playerHealth -= 10;
+        }
+
+        if(other.tag == "GluttonyEnter")
+        {
+            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzle.unity");
+        }
+
+        if (other.tag == "GluttonyBossEnter")
+        {
+            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/Boss.unity");
         }
     }
 

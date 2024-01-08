@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/EMIRHAN/SCENES/Entrance.unity
+    guid: 705ac275107132942855864d40c9f0d0
+  - enabled: 1
+    path: Assets/EMIRHAN/SCENES/GluttonyPuzzle.unity
+    guid: 87f0e2d45a0a5d94c91e270ab6d16da4
+  - enabled: 1
+    path: Assets/EMIRHAN/SCENES/Boss.unity
+    guid: 8ecd59e9ea0f92d4898ae027c7ce7758
   m_configObjects: {}

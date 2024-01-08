@@ -38,7 +38,7 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] bool GravityEnable = false;
     [SerializeField] bool DashEnable = true;
 
-    void Start()
+    void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
         characterController = gameObject.GetComponent<CharacterController>();
