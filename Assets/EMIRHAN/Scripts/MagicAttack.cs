@@ -30,9 +30,12 @@ public class MagicAttack : MonoBehaviour
 
     private void Awake()
     {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
-        
+    }
+
+    private void Start()
+    {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -44,12 +47,12 @@ public class MagicAttack : MonoBehaviour
 
     void LateUpdate()
     {
-        if(StartFunc == true)
+        if(StartFunc == true && rb != null)
         {
-            rb.AddForce(transform.forward * Speed);
+            rb.AddForce(transform.forward * Speed * Time.deltaTime);
         }
 
-        scalePosition = (gameObject.transform.localScale.x * 3);
+        scalePosition = (gameObject.transform.localScale.x * 3 * Time.deltaTime);
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, scalePosition, gameObject.transform.position.z);
     }
 
