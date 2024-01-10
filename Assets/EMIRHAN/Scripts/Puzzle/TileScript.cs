@@ -27,19 +27,18 @@ public class TileScript : MonoBehaviour
     //    }
     //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            puzzleManager.InPuzzle = false;
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Touching(other.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
             puzzleManager.InPuzzle = true;
         }
     }
@@ -51,6 +50,7 @@ public class TileScript : MonoBehaviour
             Debug.Log("You Dýed");
             Debug.Log(PlayerObject.name);
             puzzleManager.GetPlayerCheckPoint();
+            puzzleManager.InPuzzle = false;
             Clicked = false;
         }
 

@@ -7,12 +7,17 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
 {
     [SerializeField] Vector3 CheckPoint;
     [SerializeField] Vector3 FinishPoint;
+    [SerializeField] Transform StartPoint;
+
+    [SerializeField] private GameObject respawnVFX;
 
     PlayerManager playerManager;
 
     public GameObject clickedObject;
 
     public bool tileInput = true;
+
+    bool startTransform = true;
 
     private void Awake()
     {
@@ -21,9 +26,14 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (clickedObject != null)
+        if(StartPoint != null && startTransform == true)
         {
-            PlayerTransform();
+            PlayerTransform(StartPoint);
+        }
+
+        if (clickedObject != null && startTransform == false)
+        {
+            PlayerTransform(clickedObject.transform);
         }
     }
 
@@ -41,9 +51,11 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
 
     private IEnumerator GetCheckPoint()
     {
+        respawnVFX.SetActive(false);
         transform.position = new Vector3(CheckPoint.x, CheckPoint.y, CheckPoint.z);
         tileInput = true;
         yield return new WaitForSeconds(0.01f);
+        respawnVFX.SetActive(true);
     }
     private IEnumerator GetFinishPoint()
     {
@@ -54,27 +66,20 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
         yield return new WaitForSeconds(0.01f);
     }
 
-    public void PlayerTransform()
+    public void PlayerTransform(Transform destination)
     {
-        transform.position = Vector3.MoveTowards(transform.position, clickedObject.transform.position, 5f * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, destination.transform.position, 5f * Time.deltaTime);
 
-        Vector3 moveDirection = (clickedObject.transform.position - transform.position).normalized;
+        Vector3 moveDirection = (destination.transform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
 
-        if (Vector3.Distance(clickedObject.transform.position, transform.position) < 0.9f)
+        if (Vector3.Distance(destination.transform.position, transform.position) < 0.9f)
         {
             tileInput = true;
             clickedObject = null;
+            startTransform = false;
             Debug.Log("TRUE");
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "GluttonyPuzzleStart")
-        {
-            PlayerDead();
         }
     }
 }

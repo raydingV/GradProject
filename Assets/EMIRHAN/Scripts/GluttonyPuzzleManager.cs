@@ -9,8 +9,16 @@ public class GluttonyPuzzleManager : MonoBehaviour
     public bool InPuzzle = false;
 
     [SerializeField] float distanceTile = 5.2f;
+    int lastRandomValue = -1;
 
-    [SerializeField] GameObject PortalVfx;
+    [SerializeField] GameObject PortalVFX;
+    [SerializeField] GameObject FireWorkVFX;
+    [SerializeField] GameObject[] Level;
+
+    private void Start()
+    {
+        getNewLevel();
+    }
 
     public void DefineTile(GameObject _gameObject, bool IsFýrst)
     {
@@ -27,11 +35,37 @@ public class GluttonyPuzzleManager : MonoBehaviour
     public void GetPlayerCheckPoint()
     {
         _playerManager.PlayerDead();
+        getNewLevel();
     }
 
     public void GetPlayerFinishPoint()
     {
         _playerManager.FinishPuzzle();
-        PortalVfx.SetActive(true);
+        PortalVFX.SetActive(true);
+        FireWorkVFX.SetActive(true);
+    }
+
+    void getNewLevel()
+    {
+        for (int i = 0; i < Level.Length; i++)
+        {
+            Level[i].SetActive(false);
+        }
+
+        Level[GetRandomValue(0, Level.Length)].SetActive(true);
+    }
+
+    int GetRandomValue(int Min, int Max)
+    {
+        int randomResult = 0;
+
+        do
+        {
+            randomResult = Random.Range(Min, Max);
+        } while (randomResult == lastRandomValue);
+
+        lastRandomValue = randomResult;
+
+        return randomResult;
     }
 }

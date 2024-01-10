@@ -48,10 +48,11 @@ public class PlayerManager : MonoBehaviour
         _characterRigidbody = gameObject.GetComponent<Rigidbody>();
     }
 
-
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        PlayerInput();
 
         DashStartTransform = new Vector3(transform.position.x, 4.5f, transform.position.z);
 
