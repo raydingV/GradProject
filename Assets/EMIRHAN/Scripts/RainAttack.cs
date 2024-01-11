@@ -16,6 +16,7 @@ public class RainAttack : MonoBehaviour
     [SerializeField] AudioSource audioSource;
 
     public bool needDestroy = false;
+    bool triggered;
 
     private void FixedUpdate()
     {
@@ -35,12 +36,13 @@ public class RainAttack : MonoBehaviour
             needDestroy = true;
         }
 
-        if(other.tag == "Player")
+        if(other.tag == "Player" && triggered == false)
         {
+            triggered = true;
             playerManager = other.gameObject.GetComponent<PlayerManager>();
             playerManager._gameManager.audioSource.PlayOneShot(HitSound);
             GameObject.Instantiate(Explosion, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            playerManager.playerHealth -= 6;
+            playerManager.playerHealth -= 1;
             needDestroy = true;
         }
 

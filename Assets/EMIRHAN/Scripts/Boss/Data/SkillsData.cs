@@ -15,6 +15,7 @@ public class SkillsData : ScriptableObject
     [SerializeField] GameObject AppearShadow;
     [SerializeField] GameObject DashImpact;
     [SerializeField] GameObject DashCenterImpact;
+    [SerializeField] GameObject HealVFX;
 
     [Header("Sounds")]
     [SerializeField] AudioClip[] RainOfAbundanceSound;
@@ -27,14 +28,17 @@ public class SkillsData : ScriptableObject
 
     public IEnumerator RainOfAbundanceSkill(GameObject player)
     {
+        GameObject VFX = Instantiate(HealVFX, _BossManager.transform.position, Quaternion.identity);
         while (_BossManager.InCombat && _BossManager.Health > 0)
         {
             _bossAnimation.boolParameter("RainOfAbundance", true);
             Vector3 rainTransform = new Vector3(player.transform.position.x + Random.Range(-6, 6), 30, player.transform.position.z + Random.Range(-6, 6));
             GameObject.Instantiate(rainObject, rainTransform, Quaternion.Euler(0, 0, 0));
             _BossManager.Health += 0.4f;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
         }
+
+        Destroy(VFX);
         _bossAnimation.boolParameter("RainOfAbundance", false);
     }
 
@@ -123,8 +127,9 @@ public class SkillsData : ScriptableObject
             _gameManager.DashDamage = true;
             _gameManager.DashBoss = true;
             _BossManager.Box.isTrigger = true;
+            _BossManager.Box.size = new Vector3(2, 2, 1.3f);
 
-            if(timer < 0f || _BossManager.Health <= 0)
+            if (timer < 0f || _BossManager.Health <= 0)
             {
                 break;
             }
@@ -135,12 +140,13 @@ public class SkillsData : ScriptableObject
         _gameManager.audioSource.PlayOneShot(HungerDashSound[1]);
 
         _gameManager.DashBoss = false;
-        _BossManager.Box.isTrigger = false;
         DashCenterImpact.transform.localScale = new Vector3(5, 5, 5);
         Vector3 DashCenterTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
         GameObject.Instantiate(DashCenterImpact, DashCenterTransform, Quaternion.Euler(-90,0,0));
 
         yield return new WaitForSeconds(0.4f);
+        _BossManager.Box.size = new Vector3(1.4f, 2, 1.3f);
+        _BossManager.Box.isTrigger = false;
         _gameManager.DashDamage = false;
     }
 }

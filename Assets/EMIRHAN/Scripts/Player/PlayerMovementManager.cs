@@ -30,6 +30,8 @@ public class PlayerMovementManager : MonoBehaviour
     public float dashDistance;
     float dashTime;
     float elapsedTime;
+    [SerializeField] float DashDelaySecond = 1;
+    float DashDelay = 0;
 
     public GameObject DashEffect;
     GameObject DashObject;
@@ -50,7 +52,9 @@ public class PlayerMovementManager : MonoBehaviour
     {
         transformPlayer();
 
-        if(DashEnable == true)
+        DashDelay -= Time.deltaTime;
+
+        if(DashEnable == true && DashDelay <= 0)
         {
             dashPlayer();
         }
@@ -83,6 +87,7 @@ public class PlayerMovementManager : MonoBehaviour
         DashObject = GameObject.Instantiate(DashEffect);
         DashObject.transform.position = gameObject.transform.position;
         InDashing = false;
+        DashDelay = DashDelaySecond;
     }
 
     Vector3 VectorFixInput(Vector3 InputPlayer)

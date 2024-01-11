@@ -14,8 +14,11 @@ public class PlayerManager : MonoBehaviour
 
     public bool playerDeath = false;
 
+    bool triggered;
+
     [SerializeField] GameObject DashStartObject;
     GameObject VFXSkull;
+    [SerializeField] AudioClip hitSound;
 
     [SerializeField] private GameObject[] bloodVFX;
     [SerializeField] private GameObject deathVFX;
@@ -24,7 +27,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public GameObject holdObject;
 
     [SerializeField] Slider playerHealthSlider;
-    public float playerHealth = 100;
+    public float playerHealth = 4;
     float playerLastHealth;
 
     [Header("Components")]
@@ -80,6 +83,11 @@ public class PlayerManager : MonoBehaviour
         }
 
         Death();
+
+        if(_gameManager.DashDamage == false && _gameManager.DownDamage  == false && _gameManager.InHitSequence == false)
+        {
+            triggered = false;
+        }
     }
 
     void PlayerInput()
@@ -102,17 +110,25 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Boss" && _gameManager.DashDamage == true)
+        if(other.tag == "Boss" && _gameManager.DashDamage == true && triggered == false)
         {
-            playerHealth -= 10;
+            playerHealth -= 1;
+            triggered = true;
         }
 
-        if (other.tag == "Boss" && _gameManager.DownDamage == true)
+        if (other.tag == "Boss" && _gameManager.DownDamage == true && triggered == false)
         {
-            playerHealth -= 10;
+            playerHealth -= 1;
+            triggered = true;
         }
 
-        if(other.tag == "GluttonyEnter")
+        if (other.tag == "Boss" && _gameManager.InHitSequence == true && triggered == false)
+        {
+            playerHealth -= 1;
+            triggered = true;
+        }
+
+        if (other.tag == "GluttonyEnter")
         {
             SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzle.unity");
         }
@@ -145,7 +161,8 @@ public class PlayerManager : MonoBehaviour
         if(playerHealth < playerLastHealth)
         {
             GameObject.Instantiate(bloodVFX[0], transform.position, Quaternion.identity);
-            GameObject.Instantiate(bloodVFX[1], transform.position, Quaternion.identity);
+            GameObject.Instantiate(bloodVFX[1], new Vector3(transform.position.x, 3, transform.position.z), Quaternion.identity);
+            _gameManager.audioSource.PlayOneShot(hitSound);
             playerLastHealth = playerHealth;
         }
     }
@@ -163,9 +180,8 @@ public class PlayerManager : MonoBehaviour
 
     private void DisablePlayer()
     {
-        _playerMovementManager.enabled = false;
-        _playerAttackManager.enabled = false;
-        _playerRotation.enabled = false;
+        InputEnable = false;
+        _playerAttackManager.CanFire = false;
 
         gameObject.transform.localScale = new Vector3(0f, 0f, 0f);
     }

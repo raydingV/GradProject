@@ -26,10 +26,22 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public float Health;
     [HideInInspector] public float Damage;
 
+    [Header("VFX Objects")]
+    [SerializeField] private GameObject beforSlashVFX;
+    [SerializeField] private GameObject HitVFX;
+    [SerializeField] private GameObject slashVFX;
+    [SerializeField] private GameObject deathVFX;
+
+    [SerializeField] AudioClip deathExplosion;
+
     [HideInInspector] public bool InCombat = false;
+    private bool Wait = false;
+    bool death;
+
 
     Vector3 locat;
     Vector3 Target;
+    Vector3 TargetHit;
 
     int skillTime;
     int lastRandomValue = 0;
@@ -43,23 +55,39 @@ public class BossManager : MonoBehaviour
         SkillDataTake();
         slider.maxValue = Health;
         StartCoroutine(Skills());
+        StartCoroutine(HitSequence());
     }
 
     void Update()
     {
         slider.value = Health;
 
+        if(Health <= 0 && death == false && InCombat == false)
+        {
+            StartCoroutine(Death());
+        }
+
         if (player != null)
         {
             locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+        }
+
+        if (_gameManager.InHitSequence == true)
+        {
+            agent.ResetPath();
+        }
+
+        if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false)
+        {
+            agent.SetDestination(locat);
         }
     }
 
     private void FixedUpdate()
     {
-        if(InCombat == false && Health > 0)
+        if (player != null && Health > 0 && _gameManager.InHitSequence == false && Wait == false && _gameManager.DashBoss == false)
         {
-            agent.SetDestination(locat);
+            rotationBoss();
         }
 
         if (_gameManager.UpToBoss == true && player != null)
@@ -83,14 +111,16 @@ public class BossManager : MonoBehaviour
         {
             MoveDash();
         }
-        else
+
+        if(InCombat == true)
         {
-            if (player != null && Health > 0)
-            {
-                rotationBoss();
-            }
+            _gameManager.InHitSequence = false;
         }
 
+        if(_gameManager.InHitSequence == true)
+        {
+            RegularHit();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -98,7 +128,6 @@ public class BossManager : MonoBehaviour
         if(other.tag == "Magic")
         {
             Health -= (other.transform.localScale.x * 50);
-            Debug.Log("HÝT!");
         }
     }
 
@@ -108,35 +137,38 @@ public class BossManager : MonoBehaviour
 
         InCombat = true;
         
-
-        switch(GetRandomSkillValue())
+        if(Health > 0)
         {
-            case 1:
-                agent.ResetPath();
-                Debug.Log("Case 1");
-                StartCoroutine(allSkills[0]);
-                yield return new WaitForSeconds(skillTime);
-                InCombat = false;
-                break;
-            case 2:
-                agent.ResetPath();
-                Debug.Log("Case 2");
-                StartCoroutine(allSkills[1]);
-                yield return new WaitForSeconds(skillTime);
-                InCombat = false;
-                break;
-            case 3:
-                agent.ResetPath();
-                Debug.Log("Case 3");
-                StartCoroutine(allSkills[2]);
-                yield return new WaitForSeconds(skillTime);
-                InCombat = false;
-                break;
-        }
+            switch (GetRandomSkillValue())
+            {
+                case 1:
+                    agent.ResetPath();
+                    Debug.Log("Case 1");
+                    StartCoroutine(allSkills[0]);
+                    yield return new WaitForSeconds(skillTime);
+                    InCombat = false;
+                    break;
+                case 2:
+                    agent.ResetPath();
+                    Debug.Log("Case 2");
+                    StartCoroutine(allSkills[1]);
+                    yield return new WaitForSeconds(skillTime);
+                    InCombat = false;
+                    break;
+                case 3:
+                    agent.ResetPath();
+                    Debug.Log("Case 3");
+                    StartCoroutine(allSkills[2]);
+                    yield return new WaitForSeconds(skillTime);
+                    InCombat = false;
+                    break;
+            }
 
-        allSkills.Clear();
-        SkillDataTake();
-        StartCoroutine(Skills());
+            allSkills.Clear();
+            SkillDataTake();
+            StartCoroutine(Skills());
+            StartCoroutine(HitSequence());
+        }
     }
 
     float GetRandomValue()
@@ -145,8 +177,8 @@ public class BossManager : MonoBehaviour
 
         do
         {
-            randomResult = Random.Range(-30f, 30f);
-        } while (randomResult >= -15f && randomResult <= 15f);
+            randomResult = Random.Range(-50f, 50f);
+        } while (randomResult >= -20f && randomResult <= 20f);
 
         return randomResult;
     }
@@ -168,10 +200,11 @@ public class BossManager : MonoBehaviour
 
     void rotationBoss()
     {
-        Vector3 Rotation = new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z);
+        Vector3 directionToPlayer = player.transform.position - transform.position;
 
+        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
-        gameObject.transform.LookAt(Rotation);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
     }
 
     void SkillDataTake()
@@ -221,5 +254,64 @@ public class BossManager : MonoBehaviour
     private void MoveDash()
     {
         transform.Translate(transform.forward * 100f * Time.deltaTime, Space.World);
+    }
+
+    private void RegularHit()
+    {
+        transform.position = Vector3.Lerp(transform.position, TargetHit, 8 * Time.deltaTime);
+
+        float distanceToTarget = Vector3.Distance(transform.position, TargetHit);
+
+        if (distanceToTarget < 4f)
+        {
+            _gameManager.InHitSequence = false;
+            StartCoroutine(waitAfterDash());
+        }
+    }
+
+    private IEnumerator HitSequence()
+    {
+        yield return new WaitForSeconds(Random.Range(1, 4));
+
+        if (Health > 0 && InCombat == false)
+        {
+            GameObject newVFX = Instantiate(beforSlashVFX, transform.position, Quaternion.identity);
+
+            newVFX.transform.parent = gameObject.transform;
+
+            yield return new WaitForSeconds(1);
+
+            Destroy(newVFX);
+
+            TargetHit = player.transform.position + (transform.forward * 10);
+            Box.isTrigger = true;
+
+            if (InCombat == false)
+            {
+                Instantiate(slashVFX, new Vector3(transform.position.x, 9.14f, transform.position.z), Quaternion.identity);
+                Instantiate(HitVFX, transform.position, Quaternion.identity);
+            }
+
+            _gameManager.InHitSequence = true;
+        }
+    }
+
+    private IEnumerator waitAfterDash()
+    {
+        Wait = true;
+        yield return new WaitForSeconds(0.3f);
+        Wait = false;
+        Box.isTrigger = false;
+        StartCoroutine(HitSequence());
+    }
+
+    IEnumerator Death()
+    {
+        death = true;
+        yield return new WaitForSeconds(1);
+        Instantiate(deathVFX, transform.position, Quaternion.identity);
+        _gameManager.audioSource.PlayOneShot(deathExplosion);
+        yield return new WaitForSeconds(1);
+        transform.localScale = new Vector3(0, 0, 0);
     }
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
   AppearShadow: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
   DashImpact: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
   DashCenterImpact: {fileID: 195466, guid: 56c3274d2f9ec214ab584a80b5ce2d6d, type: 3}
+  HealVFX: {fileID: 111332, guid: 95007302fcc43184bbe9fc727bb4daf1, type: 3}
   RainOfAbundanceSound: []
   JumpHighSound:
   - {fileID: 8300000, guid: 96bbf34d7aee725449bb8a5f1a46bfbb, type: 3}
@@ -28,3 +29,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9fb2085538d1bfe41abcb2b5c317517f, type: 3}
   _BossManager: {fileID: 0}
   _gameManager: {fileID: 0}
+  _bossAnimation: {fileID: 0}
