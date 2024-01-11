@@ -14,14 +14,17 @@ public class PlayerAttackManager : MonoBehaviour
     GameObject newMagicObject;
 
     [Header("MechanicVariable")]
-    [SerializeField] bool CanFire = true;
+    public bool CanFire = true;
     float HoldValue;
     [SerializeField] float Speed = 200f;
+    [SerializeField] float FireDelaySecond = 1;
+    float FireDelay = 0;
 
     [Header("VfxMaterial")]
     public ParticleSystem HoldEffect;
     ParticleSystem effectObject;
     [SerializeField] Transform magicAttackTransform;
+
 
     bool oneInstantiate = false;
     public bool InAttack = false;
@@ -31,10 +34,19 @@ public class PlayerAttackManager : MonoBehaviour
         HoldValue = 3f;
     }
 
+    private void Update()
+    {
+        FireDelay -= Time.deltaTime;
+        Debug.Log(FireDelay);
+    }
+
     void LateUpdate()
     {
-        HoldMouse();
-        ReleaseMouse();
+        if(FireDelay < 0)
+        {
+            HoldMouse();
+            ReleaseMouse();
+        }
     }
 
     void HoldMouse()
@@ -77,6 +89,7 @@ public class PlayerAttackManager : MonoBehaviour
                 valuesOfMagic.tag = "Magic";
                 oneInstantiate = false;
                 InAttack = false;
+                FireDelay = FireDelaySecond;
             }
         } 
     }

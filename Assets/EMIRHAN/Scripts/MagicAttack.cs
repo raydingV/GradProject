@@ -67,7 +67,9 @@ public class MagicAttack : MonoBehaviour
         {
             BoomObject = GameObject.Instantiate(BoomEffect);
             BoomObject.transform.position = gameObject.transform.position;
+
             _gameManager.audioSource.PlayOneShot(triggerSound);
+
             scaleSize = (gameObject.transform.localScale.x * 10/2);
             BoomObject.transform.localScale = new Vector3(scaleSize, scaleSize, scaleSize);
 

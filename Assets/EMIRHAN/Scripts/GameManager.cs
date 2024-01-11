@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public bool DownDamage = false;
     public bool DashDamage = false;
     public bool DashStart = false;
+    public bool InHitSequence = false;
+    public bool BossDeath = false;
 
     bool GameOver = false;
 
