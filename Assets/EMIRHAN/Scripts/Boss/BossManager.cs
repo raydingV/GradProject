@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -37,7 +36,6 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public bool InCombat = false;
     private bool Wait = false;
     bool death;
-
 
     Vector3 locat;
     Vector3 Target;
@@ -308,6 +306,7 @@ public class BossManager : MonoBehaviour
     IEnumerator Death()
     {
         death = true;
+        agent.ResetPath();
         yield return new WaitForSeconds(1);
         Instantiate(deathVFX, transform.position, Quaternion.identity);
         _gameManager.audioSource.PlayOneShot(deathExplosion);

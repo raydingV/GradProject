@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.VFX;
 
 public class PlayerAttackManager : MonoBehaviour
 {
@@ -37,7 +33,6 @@ public class PlayerAttackManager : MonoBehaviour
     private void Update()
     {
         FireDelay -= Time.deltaTime;
-        Debug.Log(FireDelay);
     }
 
     void LateUpdate()

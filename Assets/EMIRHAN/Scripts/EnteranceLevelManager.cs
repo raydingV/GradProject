@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnteranceLevelManager : MonoBehaviour
@@ -7,6 +5,8 @@ public class EnteranceLevelManager : MonoBehaviour
     public bool[] puzzleControl = new bool[7];
     int PutObjectValue = 0;
     bool checkOne = false;
+
+    public bool tookGem = false;
 
     public bool puzzleDone = false;
 

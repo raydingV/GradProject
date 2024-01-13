@@ -1,7 +1,4 @@
-using Autodesk.Fbx;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovementManager : MonoBehaviour
@@ -13,21 +10,24 @@ public class PlayerMovementManager : MonoBehaviour
     PlayerManager playerManager;
 
     private bool groundedPlayer = false;
-    public float angleSpeed;
-    public float yPosition = 0;
+    [SerializeField] float angleSpeed;
+    float yPosition;
 
     public Vector3 controlPlayer;
 
     [SerializeField] AudioClip DashSound;
 
-   [Header("Walk")]
-    public float playerSpeed = 2.0f;
-    public float jumpHeight = 1.0f;
-    public float gravityValue = -9.81f;
+    [Header("Walk")]
+    [SerializeField] float playerSpeed = 2.0f;
+    [SerializeField] float jumpHeight = 1.0f;
+    [SerializeField] float gravityValue = -9.81f;
+    [SerializeField] bool slowDownInFire = true;
+    private float playerDefaultSpeed;
+    private float InputValue;
 
     [Header("Dash")]
-    public float dashForce;
-    public float dashDistance;
+    [SerializeField] float dashForce;
+    [SerializeField] float dashDistance;
     float dashTime;
     float elapsedTime;
     [SerializeField] float DashDelaySecond = 1;
@@ -44,13 +44,23 @@ public class PlayerMovementManager : MonoBehaviour
     {
         playerManager = GetComponent<PlayerManager>();
         characterController = gameObject.GetComponent<CharacterController>();
+    }
 
+    private void Start()
+    {
+        yPosition = transform.position.y;
+        playerDefaultSpeed = playerSpeed;
         playerVelocity.y = gameObject.transform.position.y;
     }
 
     void Update()
     {
         transformPlayer();
+
+        InputValue = (Mathf.Abs(controlPlayer.x) + Mathf.Abs(controlPlayer.z));
+
+        rotatePlayer();
+        slowDownSpeed();
 
         DashDelay -= Time.deltaTime;
 
@@ -80,6 +90,7 @@ public class PlayerMovementManager : MonoBehaviour
             InDashing = true;
             characterController.Move(VectorFixInput(playerDirection) * dashForce * Time.deltaTime);
 
+            transform.position = new Vector3(transform.position.x, yPosition, transform.position.z);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -104,11 +115,17 @@ public class PlayerMovementManager : MonoBehaviour
         controlPlayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
         characterController.Move(VectorFixInput(controlPlayer) * Time.deltaTime * playerSpeed);
+    }
 
-        //Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 10 * Time.deltaTime);
+    void rotatePlayer()
+    {
+        if(Input.GetMouseButton(0) == false && InputValue > 0)
+        {
+             Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
+             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation,5 * Time.deltaTime);
 
-        //characterController.Move(playerVelocity * Time.deltaTime);
+             characterController.Move(playerVelocity * Time.deltaTime);
+        }
     }
 
     void jumpPlayer()
@@ -138,6 +155,19 @@ public class PlayerMovementManager : MonoBehaviour
         if (groundedPlayer == false)
         {
             playerVelocity.y += gravityValue * Time.fixedDeltaTime;
+        }
+    }
+
+    void slowDownSpeed()
+    {
+        if (Input.GetMouseButtonDown(0) && slowDownInFire == true) 
+        {
+            playerSpeed = 2;
+        }
+
+        if(Input.GetMouseButtonUp(0) && slowDownInFire == true)
+        {
+            playerSpeed = playerDefaultSpeed;
         }
     }
 

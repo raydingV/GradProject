@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RainAttack : MonoBehaviour
@@ -45,6 +43,5 @@ public class RainAttack : MonoBehaviour
             playerManager.playerHealth -= 1;
             needDestroy = true;
         }
-
     }
 }
