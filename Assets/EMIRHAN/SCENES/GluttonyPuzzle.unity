@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1560108527}
-  Speed: 40
+  Speed: 1
 --- !u!114 &39269104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,15 +1226,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618544, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.8
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618544, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618544, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.14
+      value: -48.65
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618544, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1282,7 +1282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618549, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: orthographic size
-      value: 12
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618549, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_AllowDynamicResolution
@@ -1675,6 +1675,11 @@ MonoBehaviour:
   SkillObjects: {fileID: 11400000, guid: eb32d4f25b0740b429020c9d2c5feb40, type: 2}
   Health: 0
   Damage: 0
+  beforSlashVFX: {fileID: 0}
+  HitVFX: {fileID: 0}
+  slashVFX: {fileID: 0}
+  deathVFX: {fileID: 0}
+  deathExplosion: {fileID: 0}
   InCombat: 0
 --- !u!195 &1378803650
 NavMeshAgent:
@@ -2051,7 +2056,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!143 &1560108524
 CharacterController:
@@ -2083,6 +2088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canFire: 0
 --- !u!114 &1560108526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2096,14 +2102,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleSpeed: 500
-  yPosition: 0
   controlPlayer: {x: 0, y: 0, z: 0}
   DashSound: {fileID: 8300000, guid: 8cd77d8e525a27946b8126846b32757b, type: 3}
   playerSpeed: 12
   jumpHeight: 500
   gravityValue: -9.81
+  slowDownInFire: 0
   dashForce: 50
   dashDistance: 8
+  DashDelaySecond: 1
   DashEffect: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
   InDashing: 0
   GravityEnable: 0
@@ -2123,6 +2130,7 @@ MonoBehaviour:
   InputEnable: 0
   playerDeath: 0
   DashStartObject: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
+  hitSound: {fileID: 0}
   bloodVFX:
   - {fileID: 324611573}
   - {fileID: 1269060166065924, guid: 27b41fd72fbaf864ea64d1a1711aa321, type: 3}
@@ -2234,6 +2242,7 @@ MonoBehaviour:
   MagicObject: {fileID: 0}
   CanFire: 0
   Speed: 0
+  FireDelaySecond: 1
   HoldEffect: {fileID: 0}
   magicAttackTransform: {fileID: 0}
   InAttack: 0
@@ -2295,6 +2304,8 @@ MonoBehaviour:
   DownDamage: 0
   DashDamage: 0
   DashStart: 0
+  InHitSequence: 0
+  BossDeath: 0
 --- !u!4 &1562722362
 Transform:
   m_ObjectHideFlags: 0

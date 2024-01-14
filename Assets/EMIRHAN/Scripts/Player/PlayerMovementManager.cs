@@ -122,7 +122,7 @@ public class PlayerMovementManager : MonoBehaviour
         if(Input.GetMouseButton(0) == false && InputValue > 0)
         {
              Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
-             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation,5 * Time.deltaTime);
+             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 5 * Time.deltaTime);
 
              characterController.Move(playerVelocity * Time.deltaTime);
         }
