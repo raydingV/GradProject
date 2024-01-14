@@ -2435,7 +2435,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618549, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: orthographic size
-      value: 10.3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618549, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -2455,6 +2455,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618551, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_CameraType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4278664457014618551, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
+      propertyPath: m_RenderPostProcessing
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -3090,7 +3094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3159898997324313132, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3274564672142036798, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3142,7 +3146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4556199130882080232, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4556199130888405130, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_Range
@@ -3221,6 +3225,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4673259595871593286, guid: 440154f8200146b46bd4e74e92184247, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4673259595871771246, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -3418,7 +3426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7169602686652417375, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7286078740224699503, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_Lightmapping
@@ -3470,7 +3478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8040371064919153727, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8069652833656386971, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3534,7 +3542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8993746165952482055, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9030999854104112794, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3542,7 +3550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9117569925531579292, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9117569925542530814, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_Range
@@ -3555,6 +3563,10 @@ PrefabInstance:
     - target: {fileID: 9117569925542530814, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_Color.g
       value: 0.7411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117569925542530814, guid: 440154f8200146b46bd4e74e92184247, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9117569925542530814, guid: 440154f8200146b46bd4e74e92184247, type: 3}
       propertyPath: m_Intensity
