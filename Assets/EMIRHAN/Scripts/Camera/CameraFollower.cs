@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollower : MonoBehaviour
 {
     [SerializeField] private PlayerManager player;
-    [SerializeField] private float Speed = 30f;
+    [SerializeField] private float Speed = 1f;
 
     private void Start()
     {
@@ -22,6 +22,7 @@ public class CameraFollower : MonoBehaviour
 
     void FollowPlayer()
     {
-        gameObject.transform.position = player.transform.position * Speed *Time.fixedDeltaTime;
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position ,player.transform.position, Speed * Time.fixedDeltaTime);
     }
+
 }

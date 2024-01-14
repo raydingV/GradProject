@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MagicAttack : MonoBehaviour
@@ -54,11 +52,6 @@ public class MagicAttack : MonoBehaviour
 
         scalePosition = (gameObject.transform.localScale.x * 180 * Time.fixedDeltaTime);
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, scalePosition, gameObject.transform.position.z);
-    }
-
-    void LateUpdate()
-    {
-        
     }
 
     private void OnTriggerStay(Collider other)
