@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class EnteranceLevelManager : MonoBehaviour
@@ -9,6 +11,12 @@ public class EnteranceLevelManager : MonoBehaviour
     public bool tookGem = false;
 
     public bool puzzleDone = false;
+
+    [SerializeField] GameObject RiddleUI;
+
+    public TextMeshProUGUI textRiddle;
+    [SerializeField] float typingSpeed = 0.03f;
+    [SerializeField] bool TypeEffect = false;
 
     [SerializeField] Animator[] animatorController;
     [SerializeField] GameObject[] Rocks;
@@ -83,5 +91,42 @@ public class EnteranceLevelManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void RiddleOnScreen(string riddle)
+    {
+        if(RiddleUI != null)
+        {
+            RiddleUI.SetActive(true);
+        }
+
+        if(TypeEffect == true)
+        {
+            StartCoroutine(TypeEffectText(riddle));
+        }
+        else
+        {
+            textRiddle.text = riddle;
+        }
+    }
+
+    public void RiddleOffScreen()
+    {
+        if (RiddleUI != null)
+        {
+            RiddleUI.SetActive(false);
+        }
+        textRiddle.text = null;
+    }
+
+    IEnumerator TypeEffectText(string RiddleUIText)
+    {
+        foreach (char c in RiddleUIText)
+        {
+            textRiddle.text += c;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+
     }
 }
