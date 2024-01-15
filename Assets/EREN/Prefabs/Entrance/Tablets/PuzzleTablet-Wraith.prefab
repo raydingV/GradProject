@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4172814936864941022}
   - component: {fileID: 2165147690782398228}
   m_Layer: 0
-  m_Name: PuzzleTablet-Envy
+  m_Name: PuzzleTablet-Wraith
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 2.2728, y: 2.2728, z: 2.2728}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1957625540678004157}
+  - {fileID: 7870893006206590339}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,9 +62,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6742023cd728c64ba3a5d1340a1dbda, type: 2}
-  - {fileID: 2100000, guid: 95e8de58f8c9ebb4098ca12913697aaf, type: 2}
-  - {fileID: 2100000, guid: 62f3154e443ccfa4e84ede54cb3e4701, type: 2}
+  - {fileID: 2100000, guid: 7509f486b4bea4e4a875b06bceac333d, type: 2}
+  - {fileID: 2100000, guid: ae3bf268782690e489d6c73679afb456, type: 2}
+  - {fileID: 2100000, guid: e04f406ca34c8d94f8f23940ccbb9ae2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1874591141983079891
+--- !u!1 &4300936238664452729
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1957625540678004157}
-  - component: {fileID: 7783306637347846711}
-  - component: {fileID: 7451967059713872246}
+  - component: {fileID: 7870893006206590339}
+  - component: {fileID: 5244141565449021}
+  - component: {fileID: 7970509064773748566}
   m_Layer: 0
   m_Name: PostProcess
   m_TagString: Untagged
@@ -104,28 +104,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1957625540678004157
+--- !u!4 &7870893006206590339
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874591141983079891}
-  m_LocalRotation: {x: 0.00000003774895, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0022448301, y: 0.013902962, z: 0.0055465708}
+  m_GameObject: {fileID: 4300936238664452729}
+  m_LocalRotation: {x: 0.00000003774895, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1028802614265408635}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7783306637347846711
+--- !u!114 &5244141565449021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874591141983079891}
+  m_GameObject: {fileID: 4300936238664452729}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
@@ -136,13 +136,13 @@ MonoBehaviour:
   blendDistance: 9
   weight: 0.794
   sharedProfile: {fileID: 11400000, guid: ae778efd3b5c243458e3b24f7df396a8, type: 2}
---- !u!65 &7451967059713872246
+--- !u!65 &7970509064773748566
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874591141983079891}
+  m_GameObject: {fileID: 4300936238664452729}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

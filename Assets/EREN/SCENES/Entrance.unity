@@ -204,6 +204,7 @@ MonoBehaviour:
   ObjectTag: 2
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &178583066
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -425,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canFire: 1
 --- !u!114 &271456980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,12 +480,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleSpeed: 500
-  yPosition: 1.71
   controlPlayer: {x: 0, y: 0, z: 0}
   DashSound: {fileID: 8300000, guid: 8cd77d8e525a27946b8126846b32757b, type: 3}
   playerSpeed: 4
   jumpHeight: 500
   gravityValue: -9.81
+  slowDownInFire: 1
   dashForce: 50
   dashDistance: 8
   DashDelaySecond: 1
@@ -742,6 +744,7 @@ MonoBehaviour:
   ObjectTag: 5
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &400925322
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -893,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleControl: 00000000000000
+  tookGem: 0
   puzzleDone: 0
   animatorController:
   - {fileID: 2142736122309157949}
@@ -1005,6 +1009,7 @@ MonoBehaviour:
   ObjectTag: 4
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &662160968
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1248,6 +1253,7 @@ MonoBehaviour:
   ObjectTag: 0
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &691212771
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1438,6 +1444,7 @@ MonoBehaviour:
   ObjectTag: 1
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &812620883
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1583,6 +1590,7 @@ MonoBehaviour:
   ObjectTag: 3
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &891370048
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2459,7 +2467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4278664457014618551, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
       propertyPath: m_RenderPostProcessing
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cc3afec8f11f69428d6a4142e79483c, type: 3}
@@ -2575,6 +2583,7 @@ MonoBehaviour:
   ObjectTag: 6
   player: {fileID: 271456974}
   levelManager: {fileID: 0}
+  took: 0
 --- !u!136 &1446850799
 CapsuleCollider:
   m_ObjectHideFlags: 0
