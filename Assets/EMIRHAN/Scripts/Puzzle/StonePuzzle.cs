@@ -4,7 +4,7 @@ public class StonePuzzle : MonoBehaviour
 {
     [SerializeField] EnteranceLevelManager levelManager;
     [SerializeField] GameObject _flyObject;
-    [SerializeField] HoldDragObject _holdObject;
+    [SerializeField] GemManager _gemObject;
     [SerializeField] int tagHolder;
 
     GameObject placedGemObject;
@@ -26,7 +26,7 @@ public class StonePuzzle : MonoBehaviour
     {
         flyToObject();
 
-        if(placedGemObject != null && _holdObject != null)
+        if(placedGemObject != null && _gemObject != null)
         {
             GemTransform();
         }
@@ -34,7 +34,7 @@ public class StonePuzzle : MonoBehaviour
 
     void GemTransform()
     {
-        if(_holdObject.took == false)
+        if(_gemObject.took == false)
         {
             placedGemObject.transform.position = _flyObject.transform.position;
             placedGemObject.transform.rotation = _flyObject.transform.rotation;
@@ -61,15 +61,15 @@ public class StonePuzzle : MonoBehaviour
     {
         if(other.tag == "HoldObject" && placedGem == false)
         {
-            if(other.gameObject.TryGetComponent(out HoldDragObject gem))
+            if(other.gameObject.TryGetComponent(out GemManager gem))
             {
-                _holdObject = gem;
+                _gemObject = gem;
             }
 
             //rb = other.GetComponent<Rigidbody>();
             //rb.constraints = RigidbodyConstraints.FreezeAll;
 
-            controlTag(_holdObject.ObjectTag);
+            controlTag(_gemObject.ObjectTag);
 
             placedGemObject = other.gameObject;
 
@@ -82,7 +82,7 @@ public class StonePuzzle : MonoBehaviour
         if (other.tag == "Untagged")
         {
             rb = null;
-            _holdObject = null;
+            _gemObject = null;
             levelManager.puzzleControl[tagHolder] = false;
             checkOnce = false;
             placedGem = false;

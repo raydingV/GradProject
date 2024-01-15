@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40ed02f71d16d0438934b5bdc9e597b, type: 3}
+  m_Name: Gem
+  m_EditorClassIdentifier: 
+  Riddles:
+  - Expanding like a pit, ceaselessly wide, Tries to draw everything in, a consuming
+    tide.  With an insatiable appetite, it devours with pride,  What's this sin,
+    that never feels satisfied ?
+  - Clothless sheath, in the watchers' sights,  Untouched secret, where desire alights. 
+    Veiled whispers in clandestine nights, What's this mystery where passion ignites
+    ?
+  - Given time by folks, yet ticks it defies,  Never aligning with the clock's cries. 
+    Halting time, all matters it denies,  What's this sin, that in envy lies ?
+  - Tethered to a shadow, it slithers in kind,  Stealing every light, a covetous
+    mind.  As it grows, a darkness it will bind,  What's this sin, turning brilliance
+    behind ?
+  - Transient guest in passing guise,  Yet, the havoc left is no mere guise. Harbinger
+    of storms that forever rise,  What's this sin, a dormant volcano lies ?
+  - At the summit, a throne stands tall,  Strength in the heart, a skyward river's
+    call.  A flaw in overconfidence, a mystery to unfold, What's the peak where this
+    person's tale is told ?
+  - n hands it rests, yet untouched it lays, A silent companion, in life's forays. 
+    Whispers of desire, counting its sways,  What's this possession, in the shadow
+    it stays ?
