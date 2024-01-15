@@ -1765,8 +1765,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2815,6 +2815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canFire: 1
 --- !u!114 &1560108526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,12 +2829,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleSpeed: 500
-  yPosition: 0
   controlPlayer: {x: 0, y: 0, z: 0}
   DashSound: {fileID: 8300000, guid: 8cd77d8e525a27946b8126846b32757b, type: 3}
   playerSpeed: 12
   jumpHeight: 500
   gravityValue: -9.81
+  slowDownInFire: 1
   dashForce: 50
   dashDistance: 8
   DashDelaySecond: 1
