@@ -1,4 +1,3 @@
-using UnityEditor.TestTools.CodeCoverage;
 using UnityEngine;
 
 public class StonePuzzle : MonoBehaviour
