@@ -41,7 +41,7 @@ public class GemManager : MonoBehaviour
             transform.rotation = player.holdObject.transform.rotation;
             gameObject.tag = "Untagged";
             //rb.constraints = RigidbodyConstraints.FreezeAll;
-            //levelManager.audioSource.PlayOneShot(tookSound);
+            levelManager.audioSource.PlayOneShot(tookSound);
             levelManager.RiddleOnScreen(Riddle);
             gameObject.transform.parent = player.transform;
             levelManager.tookGem = true;
