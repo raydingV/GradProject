@@ -113,9 +113,11 @@ public class SkillsData : ScriptableObject
         _gameManager.DashStart = true;
 
         yield return new WaitForSeconds(2f);
+        _BossManager.Box.size = new Vector3(_BossManager.Box.size.x * 2, _BossManager.Box.size.y, _BossManager.Box.size.z * 2);
 
-        while(true)
+        while (true)
         {
+            _bossAnimation.boolParameter("Dash", true);
             DashImpact.transform.localScale = new Vector3(4, 4, 4);
             Vector3 DashTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);
             GameObject.Instantiate(DashImpact, DashTransform, Quaternion.Euler(0, 0, 0));
@@ -124,7 +126,6 @@ public class SkillsData : ScriptableObject
             _gameManager.DashDamage = true;
             _gameManager.DashBoss = true;
             _BossManager.Box.isTrigger = true;
-            _BossManager.Box.size = new Vector3(2, 2, 1.3f);
 
             if (timer < 0f || _BossManager.Health <= 0)
             {
@@ -135,6 +136,7 @@ public class SkillsData : ScriptableObject
         }
 
         _gameManager.audioSource.PlayOneShot(HungerDashSound[1]);
+        _bossAnimation.boolParameter("Dash", false);
 
         _gameManager.DashBoss = false;
         DashCenterImpact.transform.localScale = new Vector3(5, 5, 5);
@@ -142,7 +144,7 @@ public class SkillsData : ScriptableObject
         GameObject.Instantiate(DashCenterImpact, DashCenterTransform, Quaternion.Euler(-90,0,0));
 
         yield return new WaitForSeconds(0.4f);
-        _BossManager.Box.size = new Vector3(1.4f, 2, 1.3f);
+        _BossManager.Box.size = new Vector3(_BossManager.Box.size.x / 2, _BossManager.Box.size.y, _BossManager.Box.size.z / 2);
         _BossManager.Box.isTrigger = false;
         _gameManager.DashDamage = false;
     }

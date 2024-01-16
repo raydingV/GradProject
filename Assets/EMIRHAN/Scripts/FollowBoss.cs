@@ -12,6 +12,6 @@ public class FollowBoss : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = new Vector3(boss.transform.position.x, 0.1f, boss.transform.position.z);
+        transform.position = new Vector3(boss.transform.position.x, 0.35f, boss.transform.position.z);
     }
 }

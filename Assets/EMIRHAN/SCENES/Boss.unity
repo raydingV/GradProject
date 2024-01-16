@@ -2137,18 +2137,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1560108521}
-        m_TargetAssemblyTypeName: PlayerAttackManager, Assembly-CSharp
-        m_MethodName: ButtonClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1560108532}
         m_TargetAssemblyTypeName: PlayerSkillManagement, Assembly-CSharp
         m_MethodName: FireElement
@@ -2833,6 +2821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canFire: 1
 --- !u!114 &1560108526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2851,6 +2840,7 @@ MonoBehaviour:
   playerSpeed: 12
   jumpHeight: 500
   gravityValue: -9.81
+  slowDownInFire: 1
   dashForce: 50
   dashDistance: 8
   DashDelaySecond: 1

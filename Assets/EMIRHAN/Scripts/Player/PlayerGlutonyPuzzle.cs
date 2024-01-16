@@ -17,7 +17,9 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
 
     public bool tileInput = true;
 
-    bool startTransform = true;
+    [HideInInspector] public bool finishPuzzle = false;
+
+    [HideInInspector] public bool startTransform = true;
 
     private void Awake()
     {
@@ -52,13 +54,14 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
     private IEnumerator GetCheckPoint()
     {
         respawnVFX.SetActive(false);
-        transform.position = new Vector3(CheckPoint.x, CheckPoint.y, CheckPoint.z);
+        transform.position = new Vector3(CheckPoint.x, transform.position.y, CheckPoint.z);
         tileInput = true;
         yield return new WaitForSeconds(0.01f);
         respawnVFX.SetActive(true);
     }
     private IEnumerator GetFinishPoint()
     {
+        finishPuzzle = true;
         clickedObject = null;
         transform.position = new Vector3(FinishPoint.x, FinishPoint.y, FinishPoint.z);
         tileInput = true;
@@ -74,7 +77,7 @@ public class PlayerGlutonyPuzzle : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10 * Time.deltaTime);
 
-        if (Vector3.Distance(destination.transform.position, transform.position) < 0.9f)
+        if (Vector3.Distance(destination.transform.position, transform.position) <= 0f)
         {
             tileInput = true;
             clickedObject = null;

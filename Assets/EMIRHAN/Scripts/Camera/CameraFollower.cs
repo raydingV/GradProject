@@ -7,6 +7,8 @@ public class CameraFollower : MonoBehaviour
     [SerializeField] private PlayerManager player;
     [SerializeField] private float Speed = 1f;
 
+    [SerializeField] bool Latency = true;
+
     private void Start()
     {
         gameObject.transform.position = player.transform.position;
@@ -16,13 +18,24 @@ public class CameraFollower : MonoBehaviour
     {
         if(player != null && player.playerDeath == false)
         {
-            FollowPlayer();
+            if(Latency == true)
+            {
+                FollowPlayerLate();
+            }
+            else
+            {
+                FollowPlayer();
+            }
         }
     }
 
-    void FollowPlayer()
+    void FollowPlayerLate()
     {
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position ,player.transform.position, Speed * Time.fixedDeltaTime);
     }
 
+    void FollowPlayer()
+    {
+        gameObject.transform.position = player.transform.position;
+    }
 }

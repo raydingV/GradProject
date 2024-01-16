@@ -1,3 +1,4 @@
+using UnityEditor.TestTools.CodeCoverage;
 using UnityEngine;
 
 public class StonePuzzle : MonoBehaviour
@@ -11,6 +12,7 @@ public class StonePuzzle : MonoBehaviour
 
     bool checkOnce = false;
     bool placedGem = false;
+    bool callOnce = false;
 
     Rigidbody rb;
 
@@ -57,6 +59,15 @@ public class StonePuzzle : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && callOnce == false)
+        {
+            callOnce = true;
+            levelManager.BossNameOnScreen(gameObject.name);
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "HoldObject" && placedGem == false)
@@ -87,6 +98,12 @@ public class StonePuzzle : MonoBehaviour
             checkOnce = false;
             placedGem = false;
             placedGemObject = null;
+        }
+
+        if (other.tag == "Player")
+        {
+            levelManager.BossNameOffScreen();
+            callOnce = false;
         }
     }
 }

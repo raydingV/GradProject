@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     bool GameOver = false;
 
+    public bool FadeObjects = false;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -34,17 +36,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_bossManager != null)
-        {
-            if (DownDamage == true)
-            {
-                BossHitBox();
-            }
-            else
-            {
-                BossHitBoxRegular();
-            }
-        }
+        //if (_bossManager != null)
+        //{
+        //    if (DownDamage == true)
+        //    {
+        //        BossHitBox();
+        //    }
+        //    else
+        //    {
+        //        BossHitBoxRegular();
+        //    }
+        //}
 
 
         if(playerIsDead() && GameOver == false)
@@ -53,6 +55,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(loadNewScene());
         }
 
+        if(_bossManager != null && _bossManager.Health <= 0 && GameOver == false)
+        {
+            GameOver = true;
+            StartCoroutine(loadGame());
+        }
     }
 
     void GetSkillsData()
@@ -88,7 +95,13 @@ public class GameManager : MonoBehaviour
     IEnumerator loadNewScene()
     {
         yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/Boss.unity");
+        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
+    }
+
+    IEnumerator loadGame()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/EnteranceImplement.unity");
     }
 
 }

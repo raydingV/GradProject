@@ -134,7 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Touchable: 0
-  gameManagerObject: {fileID: 0}
+  FirstTouch: 0
+  FinalTouch: 0
+  puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815375379092590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -263,7 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Touchable: 1
-  gameManagerObject: {fileID: 0}
+  FirstTouch: 0
+  FinalTouch: 0
+  puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815375390703034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -392,7 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Touchable: 1
-  gameManagerObject: {fileID: 0}
+  FirstTouch: 0
+  FinalTouch: 0
+  puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815376470404452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -521,7 +527,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Touchable: 0
-  gameManagerObject: {fileID: 0}
+  FirstTouch: 0
+  FinalTouch: 0
+  puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815376691530437
 BoxCollider:
   m_ObjectHideFlags: 0

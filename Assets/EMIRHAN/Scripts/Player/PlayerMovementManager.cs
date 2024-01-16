@@ -24,6 +24,7 @@ public class PlayerMovementManager : MonoBehaviour
     [SerializeField] bool slowDownInFire = true;
     private float playerDefaultSpeed;
     private float InputValue;
+    private bool bugFýx = false;
 
     [Header("Dash")]
     [SerializeField] float dashForce;
@@ -160,14 +161,16 @@ public class PlayerMovementManager : MonoBehaviour
 
     void slowDownSpeed()
     {
-        if (Input.GetMouseButtonDown(0) && slowDownInFire == true) 
+        if (Input.GetMouseButtonDown(0) && slowDownInFire == true && bugFýx == false) 
         {
-            playerSpeed = 2;
+            playerSpeed = 6;
+            bugFýx = true;
         }
 
-        if(Input.GetMouseButtonUp(0) && slowDownInFire == true)
+        if(Input.GetMouseButtonUp(0))
         {
             playerSpeed = playerDefaultSpeed;
+            bugFýx = false;
         }
     }
 

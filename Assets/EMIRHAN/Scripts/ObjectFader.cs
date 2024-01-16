@@ -8,12 +8,15 @@ public class ObjectFader : MonoBehaviour
     [SerializeField] private float FadeAmount = 0.5f;
     private float firstOpacity;
 
+    GameManager gameManager;
+
     public bool DoFade = false;
 
     Material[] Materials;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Materials = GetComponent<Renderer>().materials;
 
         foreach (Material mat in Materials)
@@ -24,7 +27,16 @@ public class ObjectFader : MonoBehaviour
 
     void Update()
     {
-        if(DoFade == true)
+        //if(DoFade == true)
+        //{
+        //    FadeNow();
+        //}
+        //else
+        //{
+        //    ResetFade();
+        //}
+
+        if (gameManager.FadeObjects == true)
         {
             FadeNow();
         }

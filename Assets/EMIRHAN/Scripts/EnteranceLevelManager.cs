@@ -12,10 +12,16 @@ public class EnteranceLevelManager : MonoBehaviour
 
     public bool puzzleDone = false;
 
+    [HideInInspector] public AudioSource audioSource;
+    [SerializeField] AudioClip fireOnSound;
+
     [SerializeField] GameObject RiddleUI;
+    [SerializeField] GameObject BossNameUI;
 
     public TextMeshProUGUI textRiddle;
-    [SerializeField] float typingSpeed = 0.03f;
+    public TextMeshProUGUI textBossName;
+    [SerializeField] float typingSpeedRiddle = 0.03f;
+    [SerializeField] float typingSpeedBossName = 0.3f;
     [SerializeField] bool TypeEffect = false;
 
     [SerializeField] Animator[] animatorController;
@@ -26,13 +32,15 @@ public class EnteranceLevelManager : MonoBehaviour
     [Header("VFXObjects")]
     [SerializeField] GameObject[] vfxFire;
 
-    //private void Awake()
-    //{
-    //    for (int i = 0; i < vfxFire.Length; i++)
-    //    {
-    //        vfxFire[i].Stop();
-    //    }
-    //}
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        RiddleOffScreen();
+    }
 
     void Update()
     {
@@ -53,6 +61,7 @@ public class EnteranceLevelManager : MonoBehaviour
             vfxFire[i].SetActive(true);
         }
 
+        audioSource.PlayOneShot(fireOnSound);
         puzzleDone = true;
     }
 
@@ -102,7 +111,7 @@ public class EnteranceLevelManager : MonoBehaviour
 
         if(TypeEffect == true)
         {
-            StartCoroutine(TypeEffectText(riddle));
+            StartCoroutine(TypeEffectRiddle(riddle));
         }
         else
         {
@@ -119,14 +128,53 @@ public class EnteranceLevelManager : MonoBehaviour
         textRiddle.text = null;
     }
 
-    IEnumerator TypeEffectText(string RiddleUIText)
+    public void BossNameOnScreen(string bossName)
     {
-        foreach (char c in RiddleUIText)
+        if (BossNameUI != null)
         {
-            textRiddle.text += c;
-            yield return new WaitForSeconds(typingSpeed);
+            BossNameUI.SetActive(true);
         }
 
+        textBossName.text = bossName;
 
+        //if (TypeEffect == true)
+        //{
+        //    StartCoroutine(TypeEffectBossName(bossName));
+        //}
+        //else
+        //{
+        //    textBossName.text = bossName;
+        //}
+    }
+
+    public void BossNameOffScreen()
+    {
+        if (BossNameUI != null)
+        {
+            BossNameUI.SetActive(false);
+        }
+        textBossName.text = null;
+    }
+
+    IEnumerator TypeEffectRiddle(string UIText)
+    {
+        foreach (char c in UIText)
+        {
+            textRiddle.text += c;
+            yield return new WaitForSeconds(typingSpeedRiddle);
+
+            if(textRiddle.text == null)
+            {
+                break;
+            }
+        }
+    }
+    IEnumerator TypeEffectBossName(string UIText)
+    {
+        foreach (char c in UIText)
+        {
+            textBossName.text += c;
+            yield return new WaitForSeconds(typingSpeedBossName);
+        }
     }
 }

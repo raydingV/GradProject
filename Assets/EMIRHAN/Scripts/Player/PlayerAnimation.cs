@@ -8,14 +8,17 @@ public class PlayerAnimation : MonoBehaviour
 
     [SerializeField] PlayerMovementManager playerMovementManager;
     [SerializeField] PlayerAttackManager playerAttackManager;
+    [SerializeField] PlayerGlutonyPuzzle playerGlutonyPuzzle;
 
     float inputValue;
+    float walkPuzzleValue;
 
     void Awake()
     {
         playerAttackManager = GetComponent<PlayerAttackManager>();
         playerMovementManager = GetComponent<PlayerMovementManager>();
         animator = GetComponent<Animator>();    
+        playerGlutonyPuzzle = GetComponent<PlayerGlutonyPuzzle>();
     }
 
     void Update()
@@ -23,6 +26,11 @@ public class PlayerAnimation : MonoBehaviour
         Running();
         Dashing();
         Attacking();
+
+        if(playerGlutonyPuzzle != null && playerGlutonyPuzzle.finishPuzzle == false)
+        {
+            PuzzleRunning();
+        }
     }
 
     void Running()
@@ -39,5 +47,19 @@ public class PlayerAnimation : MonoBehaviour
     void Attacking()
     {
         animator.SetBool("RunFire", playerAttackManager.InAttack);
+    }
+
+    void PuzzleRunning()
+    {
+        if(playerGlutonyPuzzle.clickedObject != null || playerGlutonyPuzzle.startTransform == true)
+        {
+            walkPuzzleValue = 0.2f;
+        }
+        else
+        {
+            walkPuzzleValue = 0;
+        }
+
+        animator.SetFloat("Speed", walkPuzzleValue);
     }
 }

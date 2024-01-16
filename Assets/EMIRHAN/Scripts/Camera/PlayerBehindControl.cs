@@ -6,12 +6,9 @@ public class PlayerBehindControl : MonoBehaviour
 {
     private ObjectFader faderObject;
 
-    private GameObject player;
+    [SerializeField] GameObject player;
 
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    [SerializeField] GameManager gameManager;
 
     void Update()
     {
@@ -24,20 +21,30 @@ public class PlayerBehindControl : MonoBehaviour
             {
                 if (hit.collider != null)
                 {
-                    if (hit.collider.gameObject == player)
+                    if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "Boss")
                     {
-                        if (faderObject != null)
+                        //if (faderObject != null)
+                        //{
+                        //    faderObject.DoFade = false;
+                        //}
+
+                        if(gameManager != null)
                         {
-                            faderObject.DoFade = false;
+                            gameManager.FadeObjects = false;
                         }
                     }
                     else
                     {
-                        faderObject = hit.collider.gameObject.GetComponent<ObjectFader>();
+                        //faderObject = hit.collider.gameObject.GetComponent<ObjectFader>();
 
-                        if (faderObject != null)
+                        //if (faderObject != null)
+                        //{
+                        //    faderObject.DoFade = true;
+                        //}
+
+                        if(gameManager != null)
                         {
-                            faderObject.DoFade = true;
+                            gameManager.FadeObjects = true;
                         }
                     }
                 }

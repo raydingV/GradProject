@@ -124,12 +124,12 @@ public class PlayerManager : MonoBehaviour
 
         if (other.tag == "GluttonyEnter")
         {
-            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzle.unity");
+            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzleImplement.unity");
         }
 
         if (other.tag == "GluttonyBossEnter")
         {
-            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/Boss.unity");
+            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
         }
     }
 

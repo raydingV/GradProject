@@ -7,6 +7,9 @@ public class GemManager : MonoBehaviour
     [SerializeField] PlayerManager player;
     [SerializeField] EnteranceLevelManager levelManager;
 
+    [SerializeField] AudioClip tookSound;
+    [SerializeField] AudioClip putSound;
+
     public bool took = false;
 
     string Riddle;
@@ -35,8 +38,10 @@ public class GemManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && player != null && levelManager.puzzleDone == false && levelManager.tookGem == false)
         {
             transform.position = player.holdObject.transform.position;
+            transform.rotation = player.holdObject.transform.rotation;
             gameObject.tag = "Untagged";
             //rb.constraints = RigidbodyConstraints.FreezeAll;
+            //levelManager.audioSource.PlayOneShot(tookSound);
             levelManager.RiddleOnScreen(Riddle);
             gameObject.transform.parent = player.transform;
             levelManager.tookGem = true;
@@ -51,6 +56,7 @@ public class GemManager : MonoBehaviour
             gameObject.tag = "HoldObject";
             rb.freezeRotation = false;
             //rb.constraints = RigidbodyConstraints.None;
+            levelManager.audioSource.PlayOneShot(putSound);
             levelManager.RiddleOffScreen();
             gameObject.transform.parent = null;
             levelManager.tookGem = false;
@@ -60,9 +66,9 @@ public class GemManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player" && other.gameObject.TryGetComponent(out PlayerManager _player))
         {
-            player = other.GetComponent<PlayerManager>();
+            player = _player;
         }
     }
 

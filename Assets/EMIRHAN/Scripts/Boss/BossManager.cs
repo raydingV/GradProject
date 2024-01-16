@@ -22,7 +22,7 @@ public class BossManager : MonoBehaviour
     [SerializeField] SkillsData SkillObjects;
 
     [Header("Variables")]
-    [HideInInspector] public float Health;
+    [SerializeField] public float Health;
     [HideInInspector] public float Damage;
 
     [Header("VFX Objects")]
@@ -98,9 +98,8 @@ public class BossManager : MonoBehaviour
             MoveDown();
         }
 
-        float speedBoss = Mathf.Abs(agent.velocity.x) + Mathf.Abs(agent.velocity.z);
+        float speedBoss = Mathf.Abs(agent.velocity.x) + Mathf.Abs(agent.velocity.z) + Mathf.Abs(agent.velocity.y);
         _bossAnimation.floatParameter("Speed", speedBoss);
-        _bossAnimation.floatParameter("Health", Health);
     }
 
     private void LateUpdate()
@@ -260,6 +259,8 @@ public class BossManager : MonoBehaviour
 
         float distanceToTarget = Vector3.Distance(transform.position, TargetHit);
 
+        _bossAnimation.boolParameter("Dash", true);
+
         if (distanceToTarget < 4f)
         {
             _gameManager.InHitSequence = false;
@@ -296,6 +297,7 @@ public class BossManager : MonoBehaviour
 
     private IEnumerator waitAfterDash()
     {
+        _bossAnimation.boolParameter("Dash", false);
         Wait = true;
         yield return new WaitForSeconds(0.3f);
         Wait = false;
@@ -306,11 +308,12 @@ public class BossManager : MonoBehaviour
     IEnumerator Death()
     {
         death = true;
+        _bossAnimation.boolParameter("Dead", death);
         agent.ResetPath();
-        yield return new WaitForSeconds(1);
-        Instantiate(deathVFX, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2);
+        Instantiate(deathVFX, new Vector3(transform.position.x, 4, transform.position.z), Quaternion.identity);
         _gameManager.audioSource.PlayOneShot(deathExplosion);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.7f);
         transform.localScale = new Vector3(0, 0, 0);
     }
 }

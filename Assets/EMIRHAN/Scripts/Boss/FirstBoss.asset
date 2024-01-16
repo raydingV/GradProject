@@ -15,8 +15,8 @@ MonoBehaviour:
   BossName: 
   Health: 500
   Damage: 50
-  Speed: 80
-  Acceleration: 80
+  Speed: 60
+  Acceleration: 60
   FireResistance: 0
   IceResistance: 0
   WindResistance: 0
