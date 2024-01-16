@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1560108527}
   Speed: 50
+  Latency: 1
 --- !u!114 &39269104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67880e71f393b184199ffc2ef94327ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &239219743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2840,7 +2843,7 @@ MonoBehaviour:
   playerSpeed: 12
   jumpHeight: 500
   gravityValue: -9.81
-  slowDownInFire: 1
+  slowDownInFire: 0
   dashForce: 50
   dashDistance: 8
   DashDelaySecond: 1
@@ -3023,6 +3026,7 @@ MonoBehaviour:
   DashStart: 0
   InHitSequence: 0
   BossDeath: 0
+  FadeObjects: 0
 --- !u!4 &1562722362
 Transform:
   m_ObjectHideFlags: 0

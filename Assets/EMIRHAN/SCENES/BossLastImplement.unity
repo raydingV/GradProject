@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 662686260}
   Speed: 1
+  Latency: 1
 --- !u!114 &39269104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2269,7 +2270,7 @@ MonoBehaviour:
   playerSpeed: 12
   jumpHeight: 500
   gravityValue: -9.81
-  slowDownInFire: 1
+  slowDownInFire: 0
   dashForce: 50
   dashDistance: 8
   DashDelaySecond: 1
