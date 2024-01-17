@@ -70,6 +70,8 @@ public class GemManager : MonoBehaviour
         {
             player = _player;
         }
+
+        Debug.Log(other.gameObject.name);
     }
 
     private void OnTriggerExit(Collider other)

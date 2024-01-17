@@ -62,6 +62,7 @@ public class BossManager : MonoBehaviour
 
         if(Health <= 0 && death == false && InCombat == false)
         {
+            StopCoroutine(Skills());
             StartCoroutine(Death());
         }
 

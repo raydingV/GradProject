@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -56,12 +57,11 @@ public class PlayerMovementManager : MonoBehaviour
 
     void Update()
     {
-        transformPlayer();
+        transformInput();
+
+        slowDownSpeed();
 
         InputValue = (Mathf.Abs(controlPlayer.x) + Mathf.Abs(controlPlayer.z));
-
-        rotatePlayer();
-        slowDownSpeed();
 
         DashDelay -= Time.deltaTime;
 
@@ -75,6 +75,10 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        transformPlayer();
+
+        rotatePlayer();
+
         if (GravityEnable == true)
         {
             Gravity();
@@ -111,10 +115,13 @@ public class PlayerMovementManager : MonoBehaviour
         return correctedMoveDirection;
     }
 
-    void transformPlayer()
+    void transformInput()
     {
         controlPlayer = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    }
 
+    void transformPlayer()
+    {
         characterController.Move(VectorFixInput(controlPlayer) * Time.deltaTime * playerSpeed);
     }
 
@@ -125,7 +132,7 @@ public class PlayerMovementManager : MonoBehaviour
              Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
              transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 5 * Time.deltaTime);
 
-             characterController.Move(playerVelocity * Time.deltaTime);
+             //characterController.Move(playerVelocity * Time.deltaTime);
         }
     }
 
