@@ -21,7 +21,7 @@ public class GemManager : MonoBehaviour
         levelManager = GameObject.Find("LevelManager").GetComponent<EnteranceLevelManager>();
         rb = GetComponent<Rigidbody>();
         
-        if(_gemData != null )
+        if(_gemData != null)
         {
             Riddle = _gemData.Riddles[ObjectTag];
         }

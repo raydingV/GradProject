@@ -31,7 +31,7 @@ public class CameraFollower : MonoBehaviour
 
     void FollowPlayerLate()
     {
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position ,player.transform.position, Speed * Time.fixedDeltaTime);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position ,player.transform.position, Speed * Time.deltaTime);
     }
 
     void FollowPlayer()

@@ -2293,7 +2293,8 @@ MonoBehaviour:
   MagicObject: {fileID: 1283802359472484316, guid: 95561cc196d5bbe41a908c07f0c7da75, type: 3}
   CanFire: 1
   Speed: 3600
-  FireDelaySecond: 0.2
+  FireDelaySecond: 7
+  FireDelay: 0
   HoldEffect: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   magicAttackTransform: {fileID: 881039793}
   InAttack: 0
@@ -2325,11 +2326,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662686257}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRotating: 0
   canFire: 1
 --- !u!114 &662686265
 MonoBehaviour:
@@ -6206,6 +6208,7 @@ MonoBehaviour:
   CanFire: 1
   Speed: 3600
   FireDelaySecond: 0.2
+  FireDelay: 0
   HoldEffect: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   magicAttackTransform: {fileID: 1462598159}
   InAttack: 0
@@ -6268,6 +6271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRotating: 0
   canFire: 1
 --- !u!114 &1560108526
 MonoBehaviour:
@@ -6462,6 +6466,8 @@ MonoBehaviour:
   _bossManager: {fileID: 2016875891}
   skillData: {fileID: 11400000, guid: eb32d4f25b0740b429020c9d2c5feb40, type: 2}
   audioSource: {fileID: 0}
+  fpsLimit: 0
+  FPS: 60
   UpToBoss: 0
   DownToBoss: 0
   DashBoss: 0

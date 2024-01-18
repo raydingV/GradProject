@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public AudioSource audioSource;
 
+    [SerializeField] bool fpsLimit = false;
+    [SerializeField] int FPS = 60;
+
     [Header("Boss")]
     public bool UpToBoss = false;
     public bool DownToBoss = false;
@@ -32,6 +35,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (fpsLimit)
+        {
+            Application.targetFrameRate = FPS;
+        }
+
         //if (_bossManager != null)
         //{
         //    if (DownDamage == true)
@@ -45,7 +54,7 @@ public class GameManager : MonoBehaviour
         //}
 
 
-        if(playerIsDead() && GameOver == false)
+        if (playerIsDead() && GameOver == false)
         {
             GameOver = true;
             StartCoroutine(loadNewScene());

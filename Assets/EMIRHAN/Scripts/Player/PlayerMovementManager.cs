@@ -9,6 +9,7 @@ public class PlayerMovementManager : MonoBehaviour
     private Vector3 playerVelocity;
 
     PlayerManager playerManager;
+    PlayerRotation playerRotation;
 
     private bool groundedPlayer = false;
     [SerializeField] float angleSpeed;
@@ -45,7 +46,8 @@ public class PlayerMovementManager : MonoBehaviour
     void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
-        characterController = gameObject.GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
+        playerRotation = GetComponent<PlayerRotation>();
     }
 
     private void Start()
@@ -75,9 +77,9 @@ public class PlayerMovementManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transformPlayer();
-
         rotatePlayer();
+
+        transformPlayer();
 
         if (GravityEnable == true)
         {
@@ -127,7 +129,8 @@ public class PlayerMovementManager : MonoBehaviour
 
     void rotatePlayer()
     {
-        if(Input.GetMouseButton(0) == false && InputValue > 0)
+        Debug.Log(playerRotation.isRotating);
+        if (playerRotation.isRotating == false && InputValue >= 0)
         {
              Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
              transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 5 * Time.deltaTime);

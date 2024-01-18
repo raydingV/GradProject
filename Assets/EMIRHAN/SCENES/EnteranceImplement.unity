@@ -1210,6 +1210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRotating: 0
   canFire: 0
 --- !u!114 &271456980
 MonoBehaviour:
@@ -1248,6 +1249,7 @@ MonoBehaviour:
   CanFire: 0
   Speed: 40
   FireDelaySecond: 1
+  FireDelay: 0
   HoldEffect: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   magicAttackTransform: {fileID: 1574910588}
   InAttack: 0
@@ -3927,6 +3929,8 @@ MonoBehaviour:
   _bossManager: {fileID: 0}
   skillData: {fileID: 11400000, guid: eb32d4f25b0740b429020c9d2c5feb40, type: 2}
   audioSource: {fileID: 0}
+  fpsLimit: 0
+  FPS: 60
   UpToBoss: 0
   DownToBoss: 0
   DashBoss: 0
@@ -5563,6 +5567,7 @@ MonoBehaviour:
   CanFire: 0
   Speed: 20
   FireDelaySecond: 1
+  FireDelay: 0
   HoldEffect: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   magicAttackTransform: {fileID: 0}
   InAttack: 0
@@ -5599,6 +5604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d6767151fd9f46b4f265f277f57d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRotating: 0
   canFire: 0
 --- !u!114 &1296696343
 MonoBehaviour:

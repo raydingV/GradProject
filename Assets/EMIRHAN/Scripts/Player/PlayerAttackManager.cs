@@ -13,8 +13,8 @@ public class PlayerAttackManager : MonoBehaviour
     public bool CanFire = true;
     float HoldValue;
     [SerializeField] float Speed = 200f;
-    [SerializeField] float FireDelaySecond = 1;
-    float FireDelay = 0;
+    [SerializeField] float FireDelaySecond = 20;
+    [HideInInspector] public float FireDelay = 0;
 
     [Header("VfxMaterial")]
     public ParticleSystem HoldEffect;
@@ -32,12 +32,12 @@ public class PlayerAttackManager : MonoBehaviour
 
     private void Update()
     {
-        FireDelay -= Time.deltaTime;
+        FireDelay -= 10 * Time.deltaTime;
     }
 
     void LateUpdate()
     {
-        if(FireDelay < 0)
+        if(FireDelay <= 0)
         {
             HoldMouse();
             ReleaseMouse();

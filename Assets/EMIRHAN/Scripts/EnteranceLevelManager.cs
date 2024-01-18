@@ -104,7 +104,9 @@ public class EnteranceLevelManager : MonoBehaviour
 
     public void RiddleOnScreen(string riddle)
     {
-        if(RiddleUI != null)
+        textRiddle.text = riddle.Replace("\\n", "\n");
+
+        if (RiddleUI != null)
         {
             RiddleUI.SetActive(true);
         }
