@@ -37,11 +37,6 @@ public class EnteranceLevelManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Start()
-    {
-        RiddleOffScreen();
-    }
-
     void Update()
     {
         if (PutObjectValue == 7 && checkOne == false && vfxFire != null && animatorController != null && animatorController != null && Collider != null)
@@ -104,7 +99,7 @@ public class EnteranceLevelManager : MonoBehaviour
 
     public void RiddleOnScreen(string riddle)
     {
-        textRiddle.text = riddle.Replace("\\n", "\n");
+        textRiddle.fontSize = 16;
 
         if (RiddleUI != null)
         {
@@ -113,11 +108,11 @@ public class EnteranceLevelManager : MonoBehaviour
 
         if(TypeEffect == true)
         {
-            StartCoroutine(TypeEffectRiddle(riddle));
+            StartCoroutine(TypeEffectRiddle(riddle.Replace("\\n", "\n")));
         }
         else
         {
-            textRiddle.text = riddle;
+            textRiddle.text = riddle.Replace("\\n", "\n");
         }
     }
 

@@ -130,7 +130,7 @@ public class PlayerMovementManager : MonoBehaviour
     void rotatePlayer()
     {
         Debug.Log(playerRotation.isRotating);
-        if (playerRotation.isRotating == false && InputValue >= 0)
+        if (playerRotation.isRotating == false && InputValue > 0)
         {
              Quaternion toRotation = Quaternion.LookRotation(VectorFixInput(controlPlayer), Vector3.up);
              transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 5 * Time.deltaTime);

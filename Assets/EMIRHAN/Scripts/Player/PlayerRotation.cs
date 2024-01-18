@@ -41,7 +41,7 @@ public class PlayerRotation : MonoBehaviour
         {
             InputValue = (Mathf.Abs(_playerMovementManager.controlPlayer.x) + Mathf.Abs(_playerMovementManager.controlPlayer.z));
 
-            if (Quaternion.Angle(transform.rotation, targetRotation) <= 1f && InputValue >= 0 && Input.GetMouseButton(0) == false)
+            if (Quaternion.Angle(transform.rotation, targetRotation) <= 1f && InputValue > 0 && Input.GetMouseButton(0) == false)
             {
                 isRotating = false;
             }
@@ -62,7 +62,7 @@ public class PlayerRotation : MonoBehaviour
             Vector3 lookDirection = new Vector3(pointToLook.x - transform.position.x, 0f, pointToLook.z - transform.position.z);
             targetRotation = Quaternion.LookRotation(lookDirection);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 40f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 80f * Time.deltaTime);
         }
     }
 }
