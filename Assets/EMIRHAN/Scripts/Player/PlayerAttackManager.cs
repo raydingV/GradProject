@@ -77,7 +77,7 @@ public class PlayerAttackManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0) && CanFire == true)
         {
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (!EventSystem.current.IsPointerOverGameObject() && valuesOfMagic != null)
             {
                 valuesOfMagic.StartFunc = true;
                 effectObject.loop = false;
