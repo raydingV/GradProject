@@ -43,6 +43,8 @@ public class GemManager : MonoBehaviour
             //rb.constraints = RigidbodyConstraints.FreezeAll;
             levelManager.audioSource.PlayOneShot(tookSound);
             levelManager.RiddleOnScreen(Riddle);
+            levelManager.GuideReleaseOnScreen();
+            levelManager.GuideGrabOffScreen();
             gameObject.transform.parent = player.transform;
             levelManager.tookGem = true;
             took = true;
@@ -58,6 +60,7 @@ public class GemManager : MonoBehaviour
             //rb.constraints = RigidbodyConstraints.None;
             levelManager.audioSource.PlayOneShot(putSound);
             levelManager.RiddleOffScreen();
+            levelManager.GuideReleaseOffScreen();
             gameObject.transform.parent = null;
             levelManager.tookGem = false;
             took = false;
@@ -71,6 +74,11 @@ public class GemManager : MonoBehaviour
             player = _player;
         }
 
+        if (player != null)
+        {
+            levelManager.GuideGrabOnScreen();
+        }
+        
         Debug.Log(other.gameObject.name);
     }
 
@@ -79,6 +87,7 @@ public class GemManager : MonoBehaviour
         if(other.tag == "Player")
         {
             player = null;
+            levelManager.GuideGrabOffScreen();
         }
     }
 }

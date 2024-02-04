@@ -17,6 +17,8 @@ public class EnteranceLevelManager : MonoBehaviour
 
     [SerializeField] GameObject RiddleUI;
     [SerializeField] GameObject BossNameUI;
+    [SerializeField] GameObject GuideGrab;
+    [SerializeField] GameObject GuideRelease;
 
     public TextMeshProUGUI textRiddle;
     public TextMeshProUGUI textBossName;
@@ -99,7 +101,7 @@ public class EnteranceLevelManager : MonoBehaviour
 
     public void RiddleOnScreen(string riddle)
     {
-        textRiddle.fontSize = 16;
+        textRiddle.fontSize = 15;
 
         if (RiddleUI != null)
         {
@@ -143,7 +145,6 @@ public class EnteranceLevelManager : MonoBehaviour
         //    textBossName.text = bossName;
         //}
     }
-
     public void BossNameOffScreen()
     {
         if (BossNameUI != null)
@@ -151,6 +152,29 @@ public class EnteranceLevelManager : MonoBehaviour
             BossNameUI.SetActive(false);
         }
         textBossName.text = null;
+    }
+    
+    public void GuideGrabOnScreen()
+    {
+        if (tookGem == false)
+        {
+            GuideGrab.SetActive(true);
+        }
+    }
+
+    public void GuideGrabOffScreen()
+    {
+        GuideGrab.SetActive(false);
+    }
+
+    public void GuideReleaseOnScreen()
+    {
+        GuideRelease.SetActive(true);
+    }
+
+    public void GuideReleaseOffScreen()
+    {
+        GuideRelease.SetActive(false);
     }
 
     IEnumerator TypeEffectRiddle(string UIText)

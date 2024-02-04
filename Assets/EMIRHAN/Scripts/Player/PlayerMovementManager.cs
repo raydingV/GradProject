@@ -67,6 +67,15 @@ public class PlayerMovementManager : MonoBehaviour
 
         DashDelay -= Time.deltaTime;
 
+        if (DashDelay <= 0)
+        {
+            playerManager.DashUI.SetActive(true);
+        }
+        else
+        {
+            playerManager.DashUI.SetActive(false);
+        }
+
         if(DashEnable == true && DashDelay <= 0)
         {
             dashPlayer();
