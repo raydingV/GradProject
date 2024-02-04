@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b7422f1e7624bab4696aa435e241d2e4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Gothickella Free
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 24d3daabca3880e4bbba2f51653017f1, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
