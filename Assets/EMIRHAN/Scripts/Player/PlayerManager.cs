@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     GameObject VFXSkull;
     [SerializeField] AudioClip hitSound;
 
+    public GameObject DashUI;
     [SerializeField] private GameObject[] bloodVFX;
     [SerializeField] private GameObject deathVFX;
     [SerializeField] private AudioClip deathSFX;
