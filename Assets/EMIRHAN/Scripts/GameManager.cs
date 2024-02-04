@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         if(_bossManager != null && _bossManager.Health <= 0 && GameOver == false)
         {
             GameOver = true;
-            StartCoroutine(loadGame());
+            //StartCoroutine(loadGame());
         }
     }
 
