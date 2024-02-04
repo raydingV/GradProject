@@ -105,10 +105,16 @@ public class PlayerAttackManager : MonoBehaviour
 
     void InitializeMagic()
     {
-        newMagicObject = GameObject.Instantiate(MagicObject);
+        if (MagicObject != null)
+        {
+            newMagicObject = GameObject.Instantiate(MagicObject);   
+        }
 
-        valuesOfMagic = newMagicObject.GetComponent<MagicAttack>();
-
+        if (newMagicObject != null)
+        {
+            valuesOfMagic = newMagicObject.GetComponent<MagicAttack>();
+        }
+        
         ValueOfMagic();
 
         FollowPlayer();
@@ -118,14 +124,17 @@ public class PlayerAttackManager : MonoBehaviour
 
     void FollowPlayer()
     {
-        newMagicObject.transform.rotation = gameObject.transform.rotation;
+        if (newMagicObject != null)
+        {
+            newMagicObject.transform.rotation = gameObject.transform.rotation;
 
-        newMagicObject.transform.position = new Vector3(magicAttackTransform.position.x, newMagicObject.transform.position.y, magicAttackTransform.transform.position.z);
+            newMagicObject.transform.position = new Vector3(magicAttackTransform.position.x, newMagicObject.transform.position.y, magicAttackTransform.transform.position.z);   
+        }
     }
 
     void BiggerScale()
     {
-        if(newMagicObject.transform.localScale.x <= 1f)
+        if(newMagicObject != null && newMagicObject.transform.localScale.x <= 1f)
         {
             newMagicObject.transform.localScale = new Vector3(newMagicObject.transform.localScale.x + Time.deltaTime / 4, newMagicObject.transform.localScale.y + Time.deltaTime / 4, newMagicObject.transform.localScale.z + Time.deltaTime / 4);
         }

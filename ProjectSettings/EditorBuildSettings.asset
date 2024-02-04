@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/EMIR/SCENES/MainMenu.unity
+    guid: b388c513ef0c7fc4ba66640891af7846
+  - enabled: 1
     path: Assets/EMIRHAN/SCENES/EnteranceImplement.unity
     guid: bafd557104c6e114b9166225bdfa148c
   - enabled: 1
