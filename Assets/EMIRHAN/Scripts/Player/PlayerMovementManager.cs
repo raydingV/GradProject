@@ -65,15 +65,9 @@ public class PlayerMovementManager : MonoBehaviour
 
         InputValue = (Mathf.Abs(controlPlayer.x) + Mathf.Abs(controlPlayer.z));
 
-        DashDelay -= Time.deltaTime;
-
-        if (DashDelay <= 0)
+        if (DashEnable == true)
         {
-            playerManager.DashUI.SetActive(true);
-        }
-        else
-        {
-            playerManager.DashUI.SetActive(false);
+            Delay();
         }
 
         if(DashEnable == true && DashDelay <= 0)
@@ -206,6 +200,20 @@ public class PlayerMovementManager : MonoBehaviour
         if (collision.collider.tag == "Plane")
         {
             groundedPlayer = false;
+        }
+    }
+
+    private void Delay()
+    {
+        DashDelay -= Time.deltaTime;
+
+        if (DashDelay <= 0)
+        {
+            playerManager.DashUI.SetActive(true);
+        }
+        else
+        {
+            playerManager.DashUI.SetActive(false);
         }
     }
 }

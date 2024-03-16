@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Assets/EMIRHAN/Scripts/MagicAttack.cs" charset="windows-1254" />
     <file url="file://$PROJECT_DIR$/Assets/EMIRHAN/Scripts/Player/PlayerMovementManager.cs" charset="windows-1254" />
+    <file url="file://$PROJECT_DIR$/Assets/EMIRHAN/Scripts/Puzzle/Gluttony/GluttonyPuzzleManager.cs" charset="windows-1254" />
   </component>
 </project>
