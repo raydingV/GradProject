@@ -15,10 +15,13 @@ public class LustPuzzleManager : MonoBehaviour
     {
         if (nextLevel == true && fix == false)
         {
+            fix = true;
             RoomValue++;
         }
-        else
+        
+        if(nextLevel == false && fix == false)
         {
+            fix = true;
             RoomValue = 0;
         }
 
@@ -39,12 +42,37 @@ public class LustPuzzleManager : MonoBehaviour
         
         Rooms[_RoomValue].SetActive(true);
     }
-
+    
     private IEnumerator GetCheckPoint()
     {
         player.InputEnable = false;
         player.transform.position = CheckPoint;
         yield return new WaitForSeconds(0.1f);
         player.InputEnable = true;
+        fix = false;
     }
+    
+    // private void GetCheckPoint()
+    // {
+    //     player.InputEnable = false;
+    //     player.transform.position = CheckPoint;
+    //     StartCoroutine(ControlSetPoint());
+    // }
+    //
+    // private IEnumerator ControlSetPoint()
+    // {
+    //     yield return new WaitForSeconds(0.1f);
+    //
+    //     if (player.transform.position == CheckPoint)
+    //     {
+    //         player.InputEnable = true;
+    //         fix = false;
+    //     }
+    //     else
+    //     {
+    //         GetCheckPoint();
+    //     }
+    // }
+
+
 }
