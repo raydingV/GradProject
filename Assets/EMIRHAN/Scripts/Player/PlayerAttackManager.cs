@@ -46,7 +46,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     void HoldMouse()
     {
-        if(Input.GetMouseButton(0) && CanFire == true)
+        if(Input.GetButton("Fire1") && CanFire == true)
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
@@ -75,7 +75,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     void ReleaseMouse()
     {
-        if(Input.GetMouseButtonUp(0) && CanFire == true)
+        if(Input.GetButtonUp("Fire1") && CanFire == true)
         {
             if (!EventSystem.current.IsPointerOverGameObject() && valuesOfMagic != null)
             {

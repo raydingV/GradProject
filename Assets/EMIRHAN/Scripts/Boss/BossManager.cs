@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BossManager : MonoBehaviour
 {
@@ -52,8 +54,8 @@ public class BossManager : MonoBehaviour
         BossDataTake();
         SkillDataTake();
         slider.maxValue = Health;
-        StartCoroutine(Skills());
-        StartCoroutine(HitSequence());
+        // StartCoroutine(Skills());
+        // StartCoroutine(HitSequence());
     }
 
     void Update()
@@ -76,10 +78,10 @@ public class BossManager : MonoBehaviour
             agent.ResetPath();
         }
 
-        if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false)
-        {
-            agent.SetDestination(locat);
-        }
+        // if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false)
+        // {
+        //     agent.SetDestination(locat);
+        // }
     }
 
     private void FixedUpdate()
@@ -129,6 +131,14 @@ public class BossManager : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.collider.CompareTag("FrozenAttack"))
+        {
+            Debug.Log("FrozenBOM!");
+        }
+    }
+
     IEnumerator Skills()
     {
         yield return new WaitForSeconds(Random.Range(6,10));
@@ -165,7 +175,7 @@ public class BossManager : MonoBehaviour
             allSkills.Clear();
             SkillDataTake();
             StartCoroutine(Skills());
-            StartCoroutine(HitSequence());
+            // StartCoroutine(HitSequence());
         }
     }
 

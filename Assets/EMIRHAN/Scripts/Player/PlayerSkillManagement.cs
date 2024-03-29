@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,6 +30,8 @@ public class PlayerSkillManagement : MonoBehaviour
     [Header("SkillUI")] 
     [SerializeField] private GameObject[] skillUIEnable;
     [SerializeField] private GameObject[] skillUIDisable;
+
+    [SerializeField] private Transform transformFire;
 
     void Start()
     {
@@ -89,8 +92,8 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = frozenAttack;
         attackManager.HoldEffect = frozenElementHold;
-        GameObject newObject = GameObject.Instantiate(frozenElement, gameObject.transform);
-        newObject.transform.localScale = new Vector3(60,60,60);
+        GameObject newObject = Instantiate(frozenElement, transformFire.position, transformFire.rotation);
+        // newObject.transform.localScale = new Vector3(60,60,60);
     }
 
     public void WindElement()

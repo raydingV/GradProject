@@ -16,6 +16,7 @@ TagManager:
   - GluttonyEnter
   - GluttonyPuzzleStart
   - GluttonyBossEnter
+  - FrozenAttack
   layers:
   - Default
   - TransparentFX
