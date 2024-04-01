@@ -2718,9 +2718,9 @@ MonoBehaviour:
   fireAttack: {fileID: 1283802359472484316, guid: 95561cc196d5bbe41a908c07f0c7da75, type: 3}
   frozenAttack: {fileID: 1283802359472484316, guid: 27e67acdebc0b0b418c0c0ddb50fb3e2, type: 3}
   windAttack: {fileID: 1283802359472484316, guid: 9493a58b766fa3049a14d6cfae9d3f2c, type: 3}
-  fireElement: {fileID: 134348, guid: 5e774fbce34a50740a9885d20d42e260, type: 3}
+  fireElement: {fileID: 1208781713066404, guid: f82933f6142e69147aa243f840be1336, type: 3}
   frozenElement: {fileID: 1728184095918548, guid: dfc795d6c2fb6dc4d80268f7247a86cc, type: 3}
-  windElement: {fileID: 134990, guid: 5ed767bfc754d4742a2ff4b0e67d9f58, type: 3}
+  windElement: {fileID: 1740513464688192, guid: 8c10f7a69ac270648bfb1e47aef1a6d9, type: 3}
   fireElementHold: {fileID: 2504214343621411456, guid: 3ed0d324122d7b24eaec75c55c74aafc, type: 3}
   frozenElementHold: {fileID: 5112403345868107899, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   windElementHold: {fileID: 2353600328317590899, guid: ceec7516237b4104b94300043ca39784, type: 3}

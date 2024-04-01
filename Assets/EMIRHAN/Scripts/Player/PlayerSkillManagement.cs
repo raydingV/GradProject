@@ -84,8 +84,8 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = fireAttack;
         attackManager.HoldEffect = fireElementHold;
-        GameObject newObject = GameObject.Instantiate(fireElement, gameObject.transform);
-        newObject.transform.localScale = new Vector3(60,60,60);
+        GameObject newObject = Instantiate(fireElement, transformFire.position, transformFire.rotation);
+        //newObject.transform.localScale = new Vector3(60,60,60);
     }
 
     public void FrozenElement()
@@ -100,7 +100,7 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = windAttack;
         attackManager.HoldEffect = windElementHold;
-        GameObject newObject = GameObject.Instantiate(windElement, gameObject.transform);
+        GameObject newObject = Instantiate(windElement, transformFire.position, transformFire.rotation);
         newObject.transform.localScale = new Vector3(60,60,60);
     }
 }
