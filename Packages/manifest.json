@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git",
     "com.unity.burst": "1.8.12",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.0.7",
