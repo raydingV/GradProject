@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
 
     bool triggered;
 
+    public bool canTrigger = true;
+
     [SerializeField] GameObject DashStartObject;
     GameObject VFXSkull;
     [SerializeField] AudioClip hitSound;
@@ -32,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     CharacterController _characterController;
     Rigidbody _characterRigidbody;
     public GameManager _gameManager;
+    private LoadingScreen loadScene;
 
     [HideInInspector] public Vector3 DashStartTransform;
 
@@ -47,6 +50,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        loadScene = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
 
         PlayerInput();
 
@@ -105,19 +109,19 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Boss" && _gameManager.DashDamage == true && triggered == false)
+        if(other.tag == "Boss" && _gameManager.DashDamage == true && triggered == false && canTrigger == true)
         {
             playerHealth -= 1;
             triggered = true;
         }
 
-        if (other.tag == "Boss" && _gameManager.DownDamage == true && triggered == false)
+        if (other.tag == "Boss" && _gameManager.DownDamage == true && triggered == false && canTrigger == true)
         {
             playerHealth -= 1;
             triggered = true;
         }
 
-        if (other.tag == "Boss" && _gameManager.InHitSequence == true && triggered == false)
+        if (other.tag == "Boss" && _gameManager.InHitSequence == true && triggered == false && canTrigger == true)
         {
             playerHealth -= 1;
             triggered = true;
@@ -125,12 +129,14 @@ public class PlayerManager : MonoBehaviour
 
         if (other.tag == "GluttonyEnter")
         {
-            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzleImplement.unity");
+            // SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzleImplement.unity");
+            loadScene.LoadScene(2);
         }
 
         if (other.tag == "GluttonyBossEnter")
         {
-            SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
+            // SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
+            loadScene.LoadScene(3);
         }
     }
 

@@ -38,6 +38,9 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public bool InCombat = false;
     private bool Wait = false;
     bool death;
+    
+    private bool stun;
+    private bool burning;
 
     Vector3 locat;
     Vector3 Target;
@@ -54,8 +57,8 @@ public class BossManager : MonoBehaviour
         BossDataTake();
         SkillDataTake();
         slider.maxValue = Health;
-        // StartCoroutine(Skills());
-        // StartCoroutine(HitSequence());
+        StartCoroutine(Skills());
+        StartCoroutine(HitSequence());
     }
 
     void Update()
@@ -78,15 +81,20 @@ public class BossManager : MonoBehaviour
             agent.ResetPath();
         }
 
-        // if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false)
-        // {
-        //     agent.SetDestination(locat);
-        // }
+        if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false && stun == false)
+        {
+            agent.SetDestination(locat);
+        }
+
+        if (burning == true)
+        {
+            Health -= 10 * Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (player != null && Health > 0 && _gameManager.InHitSequence == false && Wait == false && _gameManager.DashBoss == false)
+        if (player != null && Health > 0 && _gameManager.InHitSequence == false && Wait == false && _gameManager.DashBoss == false && stun == false)
         {
             rotationBoss();
         }
@@ -135,8 +143,36 @@ public class BossManager : MonoBehaviour
     {
         if(other.collider.CompareTag("FrozenAttack"))
         {
-            Debug.Log("FrozenBOM!");
+            other.gameObject.tag = "Untagged";
+            if (InCombat == false && Health > 0 && Wait == false)
+            {
+                StartCoroutine(Stun());
+            }
         }
+        
+        if(other.collider.CompareTag("FireAttack"))
+        {
+            other.gameObject.tag = "Untagged";
+            if (InCombat == false && Health > 0 && Wait == false)
+            {
+                StartCoroutine(Burn());
+            }
+        }
+    }
+
+    private IEnumerator Burn()
+    {
+        burning = true;
+        yield return new WaitForSeconds(5f);
+        burning = false;
+    }
+
+    private IEnumerator Stun()
+    {
+        stun = true;
+        agent.ResetPath();
+        yield return new WaitForSeconds(3f);
+        stun = false;
     }
 
     IEnumerator Skills()
@@ -145,7 +181,7 @@ public class BossManager : MonoBehaviour
 
         InCombat = true;
         
-        if(Health > 0)
+        if(Health > 0 && stun == false)
         {
             switch (GetRandomSkillValue())
             {
@@ -175,7 +211,7 @@ public class BossManager : MonoBehaviour
             allSkills.Clear();
             SkillDataTake();
             StartCoroutine(Skills());
-            // StartCoroutine(HitSequence());
+            StartCoroutine(HitSequence());
         }
     }
 
@@ -281,9 +317,9 @@ public class BossManager : MonoBehaviour
 
     private IEnumerator HitSequence()
     {
-        yield return new WaitForSeconds(Random.Range(1, 4));
+        yield return new WaitForSeconds(Random.Range(3, 6));
 
-        if (Health > 0 && InCombat == false)
+        if (Health > 0 && InCombat == false && stun == false)
         {
             GameObject newVFX = Instantiate(beforSlashVFX, transform.position, Quaternion.identity);
 
@@ -296,7 +332,7 @@ public class BossManager : MonoBehaviour
             TargetHit = player.transform.position + (transform.forward * 10);
             Box.isTrigger = true;
 
-            if (InCombat == false)
+            if (InCombat == false && stun == false)
             {
                 Instantiate(slashVFX, new Vector3(transform.position.x, 9.14f, transform.position.z), Quaternion.identity);
                 Instantiate(HitVFX, transform.position, Quaternion.identity);

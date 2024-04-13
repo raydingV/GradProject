@@ -47,7 +47,13 @@ public class PlayerRotation : MonoBehaviour
         //     }
         // }
 
-        if (Input.GetMouseButton(0) && canFire == true && _playerAttackManager.FireDelay <= 0)
+        if ((Input.GetMouseButton(0) && canFire == true && _playerAttackManager.FireDelay <= 0))
+        {
+            _cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            isRotating = true;
+        }
+
+        if ((Input.inputString == "1" || Input.inputString == "2" || Input.inputString == "3"))
         {
             _cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             isRotating = true;

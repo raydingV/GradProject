@@ -33,14 +33,31 @@ public class PlayerSkillManagement : MonoBehaviour
 
     [SerializeField] private Transform transformFire;
 
-    void Start()
+    void Awake()
     {
         attackManager = GetComponent<PlayerAttackManager>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     private void Update()
     {
         InputKeyElements();
+    }
+
+    private void ElementSpawn(GameObject _newObject)
+    {
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        float hit;
+        
+        if (groundPlane.Raycast(ray, out hit))
+        {
+            Vector3 pointToLook = ray.GetPoint(hit);
+
+            Vector3 lookDirection = new Vector3(pointToLook.x - transform.position.x, 0f, pointToLook.z - transform.position.z);
+            Quaternion look = Quaternion.LookRotation(lookDirection);
+            GameObject newObject = Instantiate(_newObject, gameObject.transform.position, look);
+        }
     }
 
     private void InputKeyElements()
@@ -84,7 +101,8 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = fireAttack;
         attackManager.HoldEffect = fireElementHold;
-        GameObject newObject = Instantiate(fireElement, transformFire.position, transformFire.rotation);
+        // GameObject newObject = Instantiate(fireElement, transformFire.position, transformFire.rotation);
+        ElementSpawn(fireElement);
         //newObject.transform.localScale = new Vector3(60,60,60);
     }
 
@@ -92,7 +110,8 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = frozenAttack;
         attackManager.HoldEffect = frozenElementHold;
-        GameObject newObject = Instantiate(frozenElement, transformFire.position, transformFire.rotation);
+        // GameObject newObject = Instantiate(frozenElement, transformFire.position, transformFire.rotation);
+        ElementSpawn(frozenElement);
         // newObject.transform.localScale = new Vector3(60,60,60);
     }
 
@@ -100,7 +119,17 @@ public class PlayerSkillManagement : MonoBehaviour
     {
         attackManager.MagicObject = windAttack;
         attackManager.HoldEffect = windElementHold;
-        GameObject newObject = Instantiate(windElement, transformFire.position, transformFire.rotation);
-        newObject.transform.localScale = new Vector3(60,60,60);
+        // GameObject newObject = Instantiate(windElement, transformFire.position, transformFire.rotation);
+        // // newObject.transform.localScale = new Vector3(60,60,60);
+        StartCoroutine(windVFX());
+    }
+
+    IEnumerator windVFX()
+    {
+        windElement.SetActive(true);
+        playerManager.canTrigger = false;
+        yield return new WaitForSeconds(5f);
+        windElement.SetActive(false);
+        playerManager.canTrigger = true;
     }
 }
