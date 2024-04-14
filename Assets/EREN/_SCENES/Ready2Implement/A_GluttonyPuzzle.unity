@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09181083, g: 0.093374155, b: 0.1518588, a: 1}
+  m_IndirectSpecularColor: {r: 0.09181083, g: 0.09337396, b: 0.1518588, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2208,6 +2208,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6399959852396164822, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
   m_PrefabInstance: {fileID: 1783340151}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &864081170
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864081169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 083678fab6b6f5445a677cf2475a534c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &867469217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3015,6 +3036,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6304622912321456425, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
   m_PrefabInstance: {fileID: 1783340151}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &896501005
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896501004}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 083678fab6b6f5445a677cf2475a534c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &927765598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,6 +3253,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4183457223411699781, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
   m_PrefabInstance: {fileID: 1783340151}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1053898946
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053898945}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 083678fab6b6f5445a677cf2475a534c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1065128357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,6 +4275,7 @@ MonoBehaviour:
   InHitSequence: 0
   BossDeath: 0
   FadeObjects: 0
+  loadSceneManager: {fileID: 0}
 --- !u!4 &1626187274
 Transform:
   m_ObjectHideFlags: 0
@@ -4747,9 +4811,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4183457223411699781, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5091354092683165741, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
       propertyPath: m_Name
       value: Map2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304622912321456425, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115278433486282556, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44ee9060bc2a38644b6c41edd3deb15e, type: 3}
