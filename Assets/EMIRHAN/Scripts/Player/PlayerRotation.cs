@@ -53,7 +53,7 @@ public class PlayerRotation : MonoBehaviour
             isRotating = true;
         }
 
-        if ((Input.inputString == "1" || Input.inputString == "2" || Input.inputString == "3"))
+        if ((Input.inputString == "1" || Input.inputString == "2"))
         {
             _cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             isRotating = true;

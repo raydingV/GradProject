@@ -40,7 +40,12 @@ public class RainAttack : MonoBehaviour
             playerManager = other.gameObject.GetComponent<PlayerManager>();
             playerManager._gameManager.audioSource.PlayOneShot(HitSound);
             GameObject.Instantiate(Explosion, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            playerManager.playerHealth -= 1;
+
+            if (playerManager != null && playerManager.canTrigger == true)
+            {
+                playerManager.playerHealth -= 1;
+            }
+            
             needDestroy = true;
         }
     }
