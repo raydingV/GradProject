@@ -13,6 +13,7 @@ public class SkillsData : ScriptableObject
     [SerializeField] GameObject DashImpact;
     [SerializeField] GameObject DashCenterImpact;
     [SerializeField] GameObject HealVFX;
+    [SerializeField] GameObject DashVFX;
 
     [Header("Sounds")]
     [SerializeField] AudioClip[] RainOfAbundanceSound;
@@ -107,6 +108,12 @@ public class SkillsData : ScriptableObject
 
      public IEnumerator HungerDashing(GameObject player)
     {
+        GameObject VFX = Instantiate(DashVFX, _BossManager.transform.position, Quaternion.Euler(0,0,0));
+
+        VFX.transform.parent = _BossManager.transform;
+
+        VFX.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        
         float timer = 4f;
         _gameManager.audioSource.PlayOneShot(HungerDashSound[0]);
 
@@ -137,7 +144,9 @@ public class SkillsData : ScriptableObject
 
         _gameManager.audioSource.PlayOneShot(HungerDashSound[1]);
         _bossAnimation.boolParameter("Dash", false);
-
+        
+        Destroy(VFX);
+        
         _gameManager.DashBoss = false;
         DashCenterImpact.transform.localScale = new Vector3(5, 5, 5);
         Vector3 DashCenterTransform = new Vector3(_BossManager.transform.position.x, 1, _BossManager.transform.position.z);

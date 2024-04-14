@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public bool FadeObjects = false;
 
+    [SerializeField] private LoadingScreen loadSceneManager;
+    
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour
         if (playerIsDead() && GameOver == false)
         {
             GameOver = true;
-            StartCoroutine(loadNewScene());
+            StartCoroutine(restartScene());
         }
 
         if(_bossManager != null && _bossManager.Health <= 0 && GameOver == false)
@@ -97,10 +99,10 @@ public class GameManager : MonoBehaviour
         return dead;
     }
 
-    IEnumerator loadNewScene()
+    IEnumerator restartScene()
     {
         yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
+        loadSceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     IEnumerator loadGame()
@@ -109,4 +111,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Assets/EMIRHAN/SCENES/EnteranceImplement.unity");
     }
 
+    public void loadScene(int sceneValue)
+    {
+        if (loadSceneManager != null)
+        {
+            loadSceneManager.LoadScene(sceneValue);   
+        }
+    }
 }

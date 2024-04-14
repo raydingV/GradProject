@@ -1465,6 +1465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputEnable: 0
   playerDeath: 0
+  canTrigger: 1
   DashStartObject: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   hitSound: {fileID: 0}
   DashUI: {fileID: 970158037}
@@ -1548,6 +1549,8 @@ MonoBehaviour:
   skillUIEnable: []
   skillUIDisable: []
   transformFire: {fileID: 0}
+  coolDownText: {fileID: 0}
+  coolDownPanel: {fileID: 0}
 --- !u!114 &527452553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5385,6 +5388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputEnable: 0
   playerDeath: 0
+  canTrigger: 1
   DashStartObject: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   hitSound: {fileID: 0}
   DashUI: {fileID: 0}
@@ -5549,6 +5553,7 @@ MonoBehaviour:
   InHitSequence: 0
   BossDeath: 0
   FadeObjects: 0
+  loadSceneManager: {fileID: 1917498259}
 --- !u!4 &1562722362
 Transform:
   m_ObjectHideFlags: 0
@@ -6673,6 +6678,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7be12a2e318d4d44dbb78153fce4d7b6, type: 3}
+--- !u!114 &1917498259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7995080016562212791, guid: 7be12a2e318d4d44dbb78153fce4d7b6, type: 3}
+  m_PrefabInstance: {fileID: 1917498258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2775826cdedeb4e9665e3711f76d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1926854743
 GameObject:
   m_ObjectHideFlags: 0

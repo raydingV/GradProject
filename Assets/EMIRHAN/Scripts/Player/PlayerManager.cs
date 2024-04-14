@@ -34,7 +34,6 @@ public class PlayerManager : MonoBehaviour
     CharacterController _characterController;
     Rigidbody _characterRigidbody;
     public GameManager _gameManager;
-    private LoadingScreen loadScene;
 
     [HideInInspector] public Vector3 DashStartTransform;
 
@@ -50,7 +49,6 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        loadScene = GameObject.Find("LoadingScreen").GetComponent<LoadingScreen>();
 
         PlayerInput();
 
@@ -130,13 +128,13 @@ public class PlayerManager : MonoBehaviour
         if (other.tag == "GluttonyEnter")
         {
             // SceneManager.LoadScene("Assets/EMIRHAN/SCENES/GluttonyPuzzleImplement.unity");
-            loadScene.LoadScene(2);
+            _gameManager.loadScene(2);
         }
 
         if (other.tag == "GluttonyBossEnter")
         {
             // SceneManager.LoadScene("Assets/EMIRHAN/SCENES/BossLastImplement.unity");
-            loadScene.LoadScene(3);
+            _gameManager.loadScene(3);
         }
     }
 

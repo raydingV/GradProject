@@ -32,6 +32,7 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject HitVFX;
     [SerializeField] private GameObject slashVFX;
     [SerializeField] private GameObject deathVFX;
+    [SerializeField] private GameObject burnVFX;
 
     [SerializeField] AudioClip deathExplosion;
 
@@ -67,6 +68,7 @@ public class BossManager : MonoBehaviour
 
         if(Health <= 0 && death == false && InCombat == false)
         {
+            death = true;
             StopCoroutine(Skills());
             StartCoroutine(Death());
         }
@@ -163,14 +165,17 @@ public class BossManager : MonoBehaviour
     private IEnumerator Burn()
     {
         burning = true;
-        yield return new WaitForSeconds(5f);
+        burnVFX.SetActive(true);
+        yield return new WaitForSeconds(6f);
         burning = false;
+        burnVFX.SetActive(false);
     }
 
     private IEnumerator Stun()
     {
         stun = true;
         agent.ResetPath();
+        yield return new WaitForSeconds(3f);
         yield return new WaitForSeconds(3f);
         stun = false;
         InCombat = false;
@@ -328,14 +333,17 @@ public class BossManager : MonoBehaviour
 
         if (Health > 0 && InCombat == false && stun == false)
         {
-            GameObject newVFX = Instantiate(beforSlashVFX, transform.position, Quaternion.identity);
-
-            newVFX.transform.parent = gameObject.transform;
+            // GameObject newVFX = Instantiate(beforSlashVFX, transform.position, Quaternion.identity);
+            //
+            // newVFX.transform.parent = gameObject.transform;
+            
+            beforSlashVFX.SetActive(true);
 
             yield return new WaitForSeconds(1);
 
-            Destroy(newVFX);
-
+            // Destroy(newVFX);
+            beforSlashVFX.SetActive(false);
+            
             TargetHit = player.transform.position + (transform.forward * 10);
             Box.isTrigger = true;   
 
@@ -364,7 +372,6 @@ public class BossManager : MonoBehaviour
 
     IEnumerator Death()
     {
-        death = true;
         _bossAnimation.boolParameter("Dead", death);
         agent.ResetPath();
         yield return new WaitForSeconds(2);
@@ -372,5 +379,7 @@ public class BossManager : MonoBehaviour
         _gameManager.audioSource.PlayOneShot(deathExplosion);
         yield return new WaitForSeconds(1.7f);
         transform.localScale = new Vector3(0, 0, 0);
+        yield return new WaitForSeconds(3f);
+        _gameManager.loadScene(0);
     }
 }
