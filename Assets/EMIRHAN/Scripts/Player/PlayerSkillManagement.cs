@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerSkillManagement : MonoBehaviour
 {
@@ -33,6 +35,14 @@ public class PlayerSkillManagement : MonoBehaviour
 
     [SerializeField] private Transform transformFire;
 
+    private float SkillCoolDown = 0;
+
+    private int SkillValue = 0;
+
+    private string InputName;
+
+    [SerializeField] private TextMeshProUGUI coolDownText;
+    [SerializeField] private GameObject coolDownPanel;
     void Awake()
     {
         attackManager = GetComponent<PlayerAttackManager>();
@@ -42,6 +52,20 @@ public class PlayerSkillManagement : MonoBehaviour
     private void Update()
     {
         InputKeyElements();
+
+        SkillCoolDown -= Time.deltaTime;
+
+        coolDownText.text = SkillCoolDown.ToString("F2") + "S";
+
+        if (SkillCoolDown > 0)
+        {
+            coolDownPanel.SetActive(true);
+        }
+        else
+        {
+            coolDownPanel.SetActive(false);
+        }
+            
     }
 
     private void ElementSpawn(GameObject _newObject)
@@ -62,20 +86,28 @@ public class PlayerSkillManagement : MonoBehaviour
 
     private void InputKeyElements()
     {
-        switch(Input.inputString)
+        InputName = Input.inputString;
+
+        if (InputName != SkillValue.ToString() && SkillCoolDown <= 0)
         {
-            case "1":
-                FireElement();
-                DisableUI(0);
-                break;
-            case "2":
-                FrozenElement();
-                DisableUI(1);
-                break;
-            case "3":
-                WindElement();
-                DisableUI(2);
-                break;
+            SkillValue = Int16.Parse(InputName);
+            switch(InputName)
+            {
+                case "1":
+                    FireElement();
+                    DisableUI(0);
+                    break;
+                case "2":
+                    FrozenElement();
+                    DisableUI(1);
+                    break;
+                case "3":
+                    WindElement();
+                    DisableUI(2);
+                    break;
+            }
+
+            SkillCoolDown = 6f;
         }
     }
 

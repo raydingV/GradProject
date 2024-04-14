@@ -173,6 +173,7 @@ public class BossManager : MonoBehaviour
         agent.ResetPath();
         yield return new WaitForSeconds(3f);
         stun = false;
+        InCombat = false;
     }
 
     IEnumerator Skills()
@@ -181,31 +182,34 @@ public class BossManager : MonoBehaviour
 
         InCombat = true;
         
-        if(Health > 0 && stun == false)
+        if(Health > 0)
         {
-            switch (GetRandomSkillValue())
+            if (stun == false)
             {
-                case 1:
-                    agent.ResetPath();
-                    Debug.Log("Case 1");
-                    StartCoroutine(allSkills[0]);
-                    yield return new WaitForSeconds(skillTime);
-                    InCombat = false;
-                    break;
-                case 2:
-                    agent.ResetPath();
-                    Debug.Log("Case 2");
-                    StartCoroutine(allSkills[1]);
-                    yield return new WaitForSeconds(skillTime);
-                    InCombat = false;
-                    break;
-                case 3:
-                    agent.ResetPath();
-                    Debug.Log("Case 3");
-                    StartCoroutine(allSkills[2]);
-                    yield return new WaitForSeconds(skillTime);
-                    InCombat = false;
-                    break;
+                switch (GetRandomSkillValue())
+                {
+                    case 1:
+                        agent.ResetPath();
+                        Debug.Log("Case 1");
+                        StartCoroutine(allSkills[0]);
+                        yield return new WaitForSeconds(skillTime);
+                        InCombat = false;
+                        break;
+                    case 2:
+                        agent.ResetPath();
+                        Debug.Log("Case 2");
+                        StartCoroutine(allSkills[1]);
+                        yield return new WaitForSeconds(skillTime);
+                        InCombat = false;
+                        break;
+                    case 3:
+                        agent.ResetPath();
+                        Debug.Log("Case 3");
+                        StartCoroutine(allSkills[2]);
+                        yield return new WaitForSeconds(skillTime);
+                        InCombat = false;
+                        break;
+                }   
             }
 
             allSkills.Clear();
@@ -237,7 +241,7 @@ public class BossManager : MonoBehaviour
         } while (randomResult == lastRandomValue);
 
         lastRandomValue = randomResult;
-
+        
         return randomResult;
 
     }
@@ -302,16 +306,19 @@ public class BossManager : MonoBehaviour
 
     private void RegularHit()
     {
-        transform.position = Vector3.Lerp(transform.position, TargetHit, 8 * Time.deltaTime);
-
-        float distanceToTarget = Vector3.Distance(transform.position, TargetHit);
-
-        _bossAnimation.boolParameter("Dash", true);
-
-        if (distanceToTarget < 4f)
+        if (stun == false)
         {
-            _gameManager.InHitSequence = false;
-            StartCoroutine(waitAfterDash());
+            transform.position = Vector3.Lerp(transform.position, TargetHit, 8 * Time.deltaTime);
+
+            float distanceToTarget = Vector3.Distance(transform.position, TargetHit);
+
+            _bossAnimation.boolParameter("Dash", true);   
+            
+            if (distanceToTarget < 4f || stun == true)
+            {
+                _gameManager.InHitSequence = false;
+                StartCoroutine(waitAfterDash());
+            }
         }
     }
 
@@ -330,7 +337,7 @@ public class BossManager : MonoBehaviour
             Destroy(newVFX);
 
             TargetHit = player.transform.position + (transform.forward * 10);
-            Box.isTrigger = true;
+            Box.isTrigger = true;   
 
             if (InCombat == false && stun == false)
             {
@@ -338,7 +345,10 @@ public class BossManager : MonoBehaviour
                 Instantiate(HitVFX, transform.position, Quaternion.identity);
             }
 
-            _gameManager.InHitSequence = true;
+            if (stun == false)
+            {
+                _gameManager.InHitSequence = true;   
+            }
         }
     }
 
