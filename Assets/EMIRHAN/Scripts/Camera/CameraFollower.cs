@@ -14,7 +14,7 @@ public class CameraFollower : MonoBehaviour
         gameObject.transform.position = player.transform.position;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if(player != null && player.playerDeath == false)
         {

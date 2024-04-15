@@ -15,8 +15,6 @@ public class GluttonyPuzzleManager : MonoBehaviour
     [SerializeField] GameObject FireWorkVFX;
     [SerializeField] GameObject[] Level;
 
-    [SerializeField] Animator DoorAnimator;
-
     private void Start()
     {
         getNewLevel();
@@ -43,7 +41,6 @@ public class GluttonyPuzzleManager : MonoBehaviour
     public void GetPlayerFinishPoint()
     {
         _playerManager.FinishPuzzle();
-        DoorAnimator.SetBool("StartAnim", true);
         PortalVFX.SetActive(true);
         FireWorkVFX.SetActive(true);
     }

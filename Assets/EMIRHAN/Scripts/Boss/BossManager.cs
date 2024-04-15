@@ -54,7 +54,6 @@ public class BossManager : MonoBehaviour
 
     void Start()
     {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         BossDataTake();
         SkillDataTake();
         slider.maxValue = Health;

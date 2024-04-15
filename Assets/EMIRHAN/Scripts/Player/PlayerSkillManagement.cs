@@ -91,6 +91,7 @@ public class PlayerSkillManagement : MonoBehaviour
         if (InputName != SkillValue.ToString() && SkillCoolDown <= 0)
         {
             SkillValue = Int16.Parse(InputName);
+
             switch(InputName)
             {
                 case "1":
