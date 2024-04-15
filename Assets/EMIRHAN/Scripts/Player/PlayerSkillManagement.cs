@@ -135,8 +135,9 @@ public class PlayerSkillManagement : MonoBehaviour
         attackManager.MagicObject = fireAttack;
         attackManager.HoldEffect = fireElementHold;
         // GameObject newObject = Instantiate(fireElement, transformFire.position, transformFire.rotation);
-        ElementSpawn(fireElement);
+        // ElementSpawn(fireElement);
         //newObject.transform.localScale = new Vector3(60,60,60);
+        StartCoroutine(FireVFX());
     }
 
     public void FrozenElement()
@@ -164,5 +165,12 @@ public class PlayerSkillManagement : MonoBehaviour
         yield return new WaitForSeconds(5f);
         windElement.SetActive(false);
         playerManager.canTrigger = true;
+    }
+
+    IEnumerator FireVFX()
+    {
+        fireElement.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        fireElement.SetActive(false);
     }
 }

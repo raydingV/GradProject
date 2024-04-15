@@ -33,6 +33,7 @@ public class BossManager : MonoBehaviour
     [SerializeField] private GameObject slashVFX;
     [SerializeField] private GameObject deathVFX;
     [SerializeField] private GameObject burnVFX;
+    [SerializeField] private GameObject FrozenVFX;
 
     [SerializeField] AudioClip deathExplosion;
 
@@ -153,7 +154,6 @@ public class BossManager : MonoBehaviour
         
         if(other.collider.CompareTag("FireAttack"))
         {
-            other.gameObject.tag = "Untagged";
             if (InCombat == false && Health > 0 && Wait == false)
             {
                 StartCoroutine(Burn());
@@ -174,10 +174,11 @@ public class BossManager : MonoBehaviour
     {
         stun = true;
         agent.ResetPath();
-        yield return new WaitForSeconds(3f);
-        yield return new WaitForSeconds(3f);
+        FrozenVFX.SetActive(true);
+        yield return new WaitForSeconds(5f);
         stun = false;
         InCombat = false;
+        FrozenVFX.SetActive(false);
     }
 
     IEnumerator Skills()
@@ -210,7 +211,7 @@ public class BossManager : MonoBehaviour
                         agent.ResetPath();
                         Debug.Log("Case 3");
                         StartCoroutine(allSkills[2]);
-                        yield return new WaitForSeconds(skillTime);
+                        yield return new WaitForSeconds(3);
                         InCombat = false;
                         break;
                 }   
