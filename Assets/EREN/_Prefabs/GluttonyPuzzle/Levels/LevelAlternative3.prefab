@@ -613,6 +613,10 @@ PrefabInstance:
       propertyPath: FirstTouch
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4836820068064561006, guid: ac15255346e439644aa676f6c4f79ce5, type: 3}
+      propertyPath: FirstTouch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4836820069132998576, guid: ac15255346e439644aa676f6c4f79ce5, type: 3}
       propertyPath: FirstTouch
       value: 1
