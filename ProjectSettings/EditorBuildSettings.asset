@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/EMIRHAN/SCENES/Build/B_GluttonyPuzzle.unity
     guid: 89cecc1735c0fc849a86bdb279b58f2d
   - enabled: 1
-    path: Assets/EMIRHAN/SCENES/BossLastImplement.unity
-    guid: 4f98b9703577fd041a048b7a5fcb2399
+    path: Assets/EMIRHAN/SCENES/Build/B_BossLastImplement.unity
+    guid: 8ed0dbe59c82dfd4ab0e342bc268dd3f
   m_configObjects: {}
