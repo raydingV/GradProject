@@ -10038,7 +10038,7 @@ GameObject:
   - component: {fileID: 6787908690953549386}
   - component: {fileID: 6787908690953549388}
   m_Layer: 0
-  m_Name: PlayerNew
+  m_Name: PlayerBossFight
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
