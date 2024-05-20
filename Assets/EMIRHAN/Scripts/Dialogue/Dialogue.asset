@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1266f56f7d26064c87e7187b8745ca4, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  Dialogues:
+  - 'Gluttony: I didn''t think you''d have the nerve to show your face, brother.
+    You''re just a coward who hides in the shadows, spreading deceit from your dark
+    corner.'
+  - "Greed: That\u2019s an interesting perspective. But I don't expect someone as
+    insatiable as you to understand me anyway."
+  - ' You''re just a pitiful creature, scrambling to satisfy your stomach, your only
+    knowledge is consuming and indulging. You''re far from understanding real power.'
+  - 'Gluttony: Yes, real power... The one you''re trying to steal from us, isn''t
+    it? '
+  - Trusting you was a mistake; I never liked or thought you belonged among us.Pride's
+    overconfidence brought you here; he never saw you as a threat.
+  - But, Greed, it would be foolish not to see that your greed knows no bounds.
+  - 'Greed: Are you still unaware of the bigger picture? All of this is Envy''s doing.'
+  - 'Ah, but no, you think you have it all figured out in that small mind of yours,
+    but wake up, Gluttony, your insatiable appetite, your greed, is just as dangerous
+    as mine. '
+  - 'And that''s what makes you Envy''s greatest enemy. '
+  - 'Gluttony: You rely on yourself and your intellect, and that is your greatest
+    weakness. You, who can''t do anything on your own and rely on the shadows for
+    help, you''re a deceitful, cowardly creature. '
+  - You'll witness your pitiful greed fade away after my power. I'll ignore your
+    pleas for forgiveness just as much as you've turned a deaf ear to our vows, brother.
+  - 'Greed: My ambition is boundless, your hunger is just a temporary pleasure, Gluttony.
+    Today, one god''s door will close, and I assure you, it won''t be mine.'
+  - 'Gluttony: Then come and stop me, Greed! Today will be your last day!'

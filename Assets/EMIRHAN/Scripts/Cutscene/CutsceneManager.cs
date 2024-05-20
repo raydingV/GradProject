@@ -5,10 +5,13 @@ using UnityEngine.Animations;
 
 public class CutsceneManager : MonoBehaviour
 {
+    [SerializeField] private DialogueManager _dialogueManager;
+    
     [SerializeField] private Animator animator;
     
     [SerializeField] private Camera MainCamera;
     [SerializeField] private Camera CutSceneCamera;
+    [SerializeField] private GameObject canvas;
     
     [SerializeField] private float transitionDuration = 1.0f;
     private float transitionTime = 0.0f;
@@ -30,6 +33,17 @@ public class CutsceneManager : MonoBehaviour
         {
             callOne = true;
             MainCamera.gameObject.SetActive(true);
+
+            if (canvas != null)
+            {
+                canvas.SetActive(false);   
+            }
+
+            if (_dialogueManager != null)
+            {
+                _dialogueManager.enabled = true;
+            }
+            
             // isTransitioning = true;
             // transitionTime = 0.0f;
         }
