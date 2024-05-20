@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     private int textValue = 0;
     
     [SerializeField] GameObject DialogueUI;
+    [SerializeField] private GameObject[] UIBars;
 
     public TextMeshProUGUI textDialogue;
     [SerializeField] float typingSpeedRiddle = 0.03f;
@@ -41,6 +43,14 @@ public class DialogueManager : MonoBehaviour
         endOfDialogue();
     }
 
+    void enableUI()
+    {
+        for (int i = 0; i < UIBars.Length; i++)
+        {
+            UIBars[i].SetActive(true);
+        }
+    }
+
     void endOfDialogue()
     {
         if (textValue > _data.Dialogues.Length && callOne == false)
@@ -48,6 +58,7 @@ public class DialogueManager : MonoBehaviour
             callOne = true;
             bossEnable();
             DialogueOffScreen();
+            enableUI();
             
             if (_playerManager != null)
             {
@@ -105,7 +116,7 @@ public class DialogueManager : MonoBehaviour
         
         textDialogue.text = null;
         
-        textDialogue.fontSize = 12;
+        textDialogue.fontSize = 11;
 
         if (DialogueUI != null)
         {

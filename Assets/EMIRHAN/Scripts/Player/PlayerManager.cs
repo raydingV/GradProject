@@ -28,11 +28,12 @@ public class PlayerManager : MonoBehaviour
     float playerLastHealth;
 
     [Header("Components")]
-    PlayerMovementManager _playerMovementManager;
-    PlayerRotation _playerRotation;
-    PlayerAttackManager _playerAttackManager;
-    CharacterController _characterController;
-    Rigidbody _characterRigidbody;
+    private PlayerMovementManager _playerMovementManager;
+    private PlayerRotation _playerRotation;
+    private PlayerAttackManager _playerAttackManager;
+    private PlayerSkillManagement _playerSkillManagement;
+    private CharacterController _characterController;
+    private Rigidbody _characterRigidbody;
     public GameManager _gameManager;
 
     [HideInInspector] public Vector3 DashStartTransform;
@@ -42,6 +43,7 @@ public class PlayerManager : MonoBehaviour
         _playerMovementManager = gameObject.GetComponent<PlayerMovementManager>();
         _playerRotation = gameObject.GetComponent<PlayerRotation>();
         _playerAttackManager = gameObject.GetComponent<PlayerAttackManager>();
+        _playerSkillManagement = gameObject.GetComponent<PlayerSkillManagement>();
         _characterController = gameObject.GetComponent<CharacterController>();
         _characterRigidbody = gameObject.GetComponent<Rigidbody>();
     }
@@ -93,6 +95,7 @@ public class PlayerManager : MonoBehaviour
             _playerMovementManager.enabled = false;
             _playerRotation.enabled = false;
             _playerAttackManager.enabled = false;
+            _playerSkillManagement.enabled = false;
             _characterRigidbody.useGravity = true;
         }
         else
@@ -101,6 +104,7 @@ public class PlayerManager : MonoBehaviour
             _playerMovementManager.enabled = true;
             _playerRotation.enabled = true;
             _playerAttackManager.enabled = true;
+            _playerSkillManagement.enabled = true;
             _characterRigidbody.useGravity = false;
         }
     }

@@ -17,7 +17,9 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
+      rotation in copied configuration does not match rotation in animation file:\n\t'CC_Base_NeckTwist02'
+      : rotation error = 1.908060 deg\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

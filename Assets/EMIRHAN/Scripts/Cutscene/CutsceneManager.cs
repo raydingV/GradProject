@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,10 @@ public class CutsceneManager : MonoBehaviour
     [SerializeField] private Camera MainCamera;
     [SerializeField] private Camera CutSceneCamera;
     [SerializeField] private GameObject canvas;
-    
+    [SerializeField] private GameObject boss;
+
+    [SerializeField] private PlayerManager _playerManager;
+
     [SerializeField] private float transitionDuration = 1.0f;
     private float transitionTime = 0.0f;
     
@@ -20,6 +24,14 @@ public class CutsceneManager : MonoBehaviour
     private bool isTransitioning = false;
 
     private bool callOne = false;
+
+    private void Start()
+    {
+        if (_playerManager != null)
+        {
+            _playerManager.InputEnable = false;
+        }
+    }
 
     void Update()
     { 
@@ -34,6 +46,11 @@ public class CutsceneManager : MonoBehaviour
             callOne = true;
             MainCamera.gameObject.SetActive(true);
 
+            if (boss != null)
+            {
+                boss.SetActive(true);   
+            }
+
             if (canvas != null)
             {
                 canvas.SetActive(false);   
@@ -42,6 +59,13 @@ public class CutsceneManager : MonoBehaviour
             if (_dialogueManager != null)
             {
                 _dialogueManager.enabled = true;
+            }
+            else
+            {
+                if (_playerManager != null)
+                {
+                    _playerManager.InputEnable = true;
+                }
             }
             
             // isTransitioning = true;

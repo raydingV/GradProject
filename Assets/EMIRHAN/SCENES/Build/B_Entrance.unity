@@ -12718,9 +12718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5e831bf2751754ab4b25f726f4c14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueManager: {fileID: 0}
   animator: {fileID: 372350504}
   MainCamera: {fileID: 1338809593}
   CutSceneCamera: {fileID: 703744570}
+  canvas: {fileID: 0}
+  boss: {fileID: 0}
+  _playerManager: {fileID: 1296696338}
   transitionDuration: 1
 --- !u!1 &376485654
 GameObject:

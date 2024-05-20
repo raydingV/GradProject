@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09181083, g: 0.093374155, b: 0.1518588, a: 1}
+  m_IndirectSpecularColor: {r: 0.09181083, g: 0.09337396, b: 0.1518588, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8018,6 +8018,7 @@ MonoBehaviour:
   holdObject: {fileID: 1896594992}
   playerHealthSlider: {fileID: 0}
   playerHealth: 100
+  _playerGlutonyPuzzle: {fileID: 244464919}
   _gameManager: {fileID: 1626187273}
   DashStartTransform: {x: 0, y: 0, z: 0}
 --- !u!114 &244464921
@@ -41778,9 +41779,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5e831bf2751754ab4b25f726f4c14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueManager: {fileID: 0}
   animator: {fileID: 1208337790}
   MainCamera: {fileID: 1854686092}
   CutSceneCamera: {fileID: 1208337789}
+  canvas: {fileID: 0}
+  boss: {fileID: 0}
+  _playerManager: {fileID: 0}
   transitionDuration: 1
 --- !u!1 &1209236488
 GameObject:
