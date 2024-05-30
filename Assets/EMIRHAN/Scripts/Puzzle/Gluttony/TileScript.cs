@@ -14,12 +14,22 @@ public class TileScript : MonoBehaviour
     [SerializeField] private GameObject puzzleManagerObject;
     private GluttonyPuzzleManager puzzleManager;
 
+    private float timer = 0.1f;
     void Start()
     {
         puzzleManagerObject = GameObject.Find("PuzzleManager");
         puzzleManager = puzzleManagerObject.GetComponent<GluttonyPuzzleManager>();
     }
 
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            setHighlight(false);
+        }
+    }
 
     //private void OnCollisionStay(Collision collision)
     //{
@@ -28,12 +38,23 @@ public class TileScript : MonoBehaviour
     //        Touching(collision.collider.gameObject);
     //    }
     //}
+    
+    private void OnTriggerExit(Collider other)
+    {
+        setHighlight(false);
+    }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Touching(other.gameObject);
+        }
+        
+        if (other.CompareTag("Highlight"))
+        {
+            setHighlight(true);
+            timer = 0.1f;
         }
     }
 
@@ -42,19 +63,6 @@ public class TileScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             puzzleManager.InPuzzle = true;
-        }
-        
-        if (!other.CompareTag("Player") && other.CompareTag("Highlight"))
-        {
-            setHighlight(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Highlight"))
-        {
-            setHighlight(false);
         }
     }
 

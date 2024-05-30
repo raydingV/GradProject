@@ -28,10 +28,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6264883110985434455}
   - {fileID: 6264883112353690152}
-  - {fileID: 6264883110973975683}
   - {fileID: 6264883112065275273}
+  - {fileID: 6264883110973975683}
+  - {fileID: 6264883110985434455}
   m_Father: {fileID: 40283509628366334}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 231815375379092590}
   - component: {fileID: 3188471822291796618}
   m_Layer: 0
-  m_Name: Tile (2)
+  m_Name: Tile3
   m_TagString: PuzzleTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   Touchable: 0
   FirstTouch: 0
   FinalTouch: 0
+  _highLight: {fileID: 4572462994145353088}
   puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815375379092590
 BoxCollider:
@@ -181,7 +182,7 @@ GameObject:
   - component: {fileID: 231815375390703034}
   - component: {fileID: 3188471822313630558}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: Tile4
   m_TagString: PuzzleTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,7 +201,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1358345064160053445}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6264883110985434448
 MeshFilter:
@@ -267,6 +268,7 @@ MonoBehaviour:
   Touchable: 1
   FirstTouch: 0
   FinalTouch: 0
+  _highLight: {fileID: 3254567220427437125}
   puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815375390703034
 BoxCollider:
@@ -312,7 +314,7 @@ GameObject:
   - component: {fileID: 231815376470404452}
   - component: {fileID: 3188471823382068096}
   m_Layer: 0
-  m_Name: Tile (3)
+  m_Name: Tile2
   m_TagString: PuzzleTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +333,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1358345064160053445}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6264883112065275278
 MeshFilter:
@@ -398,6 +400,7 @@ MonoBehaviour:
   Touchable: 1
   FirstTouch: 0
   FinalTouch: 0
+  _highLight: {fileID: 6184993015336712556}
   puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815376470404452
 BoxCollider:
@@ -443,7 +446,7 @@ GameObject:
   - component: {fileID: 231815376691530437}
   - component: {fileID: 3188471823697599521}
   m_Layer: 0
-  m_Name: Tile (1)
+  m_Name: Tile
   m_TagString: PuzzleTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +465,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1358345064160053445}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6264883112353690159
 MeshFilter:
@@ -529,6 +532,7 @@ MonoBehaviour:
   Touchable: 0
   FirstTouch: 0
   FinalTouch: 0
+  _highLight: {fileID: 616086466313606367}
   puzzleManagerObject: {fileID: 0}
 --- !u!65 &231815376691530437
 BoxCollider:
@@ -648,13 +652,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1134205295921753480, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
       propertyPath: m_Name
-      value: Tile (2)
+      value: Tile3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_Name
+      value: Highlight3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
 --- !u!4 &951731966879070369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 357562390645585714, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+  m_PrefabInstance: {fileID: 703522755018870675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4572462994145353088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
   m_PrefabInstance: {fileID: 703522755018870675}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1989825007980635734
@@ -710,13 +727,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1134205295921753480, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
       propertyPath: m_Name
-      value: Tile (3)
+      value: Tile4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_Name
+      value: Highlight4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
 --- !u!4 &2263927791251083620 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 357562390645585714, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+  m_PrefabInstance: {fileID: 1989825007980635734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3254567220427437125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
   m_PrefabInstance: {fileID: 1989825007980635734}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4484190539656627916
@@ -774,8 +804,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_Name
+      value: Highlight1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+--- !u!1 &616086466313606367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+  m_PrefabInstance: {fileID: 4484190539656627916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4237142399251296766 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 357562390645585714, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
@@ -834,10 +877,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1134205295921753480, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
       propertyPath: m_Name
-      value: Tile (1)
+      value: Tile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_Name
+      value: Highlight2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+--- !u!1 &6184993015336712556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3942845303692644883, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}
+  m_PrefabInstance: {fileID: 7161372708385614719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7463625188697463885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 357562390645585714, guid: e8c61b33b789c0e498b1a45bde575b3c, type: 3}

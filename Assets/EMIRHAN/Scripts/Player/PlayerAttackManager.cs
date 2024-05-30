@@ -81,7 +81,7 @@ public class PlayerAttackManager : MonoBehaviour
             {
                 valuesOfMagic.StartFunc = true;
                 effectObject.loop = false;
-                valuesOfMagic.tag = "Magic";
+                // valuesOfMagic.tag = "Magic";
                 oneInstantiate = false;
                 InAttack = false;
                 FireDelay = FireDelaySecond;

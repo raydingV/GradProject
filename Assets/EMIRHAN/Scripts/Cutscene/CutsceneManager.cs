@@ -31,6 +31,18 @@ public class CutsceneManager : MonoBehaviour
         {
             _playerManager.InputEnable = false;
         }
+        
+        if (_dialogueManager != null)
+        {
+            _dialogueManager.enabled = true;
+        }
+        else
+        {
+            if (_playerManager != null)
+            {
+                _playerManager.InputEnable = true;
+            }
+        }
     }
 
     void Update()
@@ -56,18 +68,6 @@ public class CutsceneManager : MonoBehaviour
                 canvas.SetActive(false);   
             }
 
-            if (_dialogueManager != null)
-            {
-                _dialogueManager.enabled = true;
-            }
-            else
-            {
-                if (_playerManager != null)
-                {
-                    _playerManager.InputEnable = true;
-                }
-            }
-            
             // isTransitioning = true;
             // transitionTime = 0.0f;
         }

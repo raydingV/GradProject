@@ -19,6 +19,8 @@ TagManager:
   - FrozenAttack
   - FireAttack
   - Highlight
+  - Wind
+  - Frozen
   layers:
   - Default
   - TransparentFX

@@ -2187,7 +2187,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d59a9451346b0104aa15f3af78c06685, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.221
+  m_Volume: 0.095
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3865,7 +3865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4118970330137676, guid: 69cf2c144dd5cb4489617e8ace8dd984, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0038333335
+      value: 0.0209
       objectReference: {fileID: 0}
     - target: {fileID: 4118970330137676, guid: 69cf2c144dd5cb4489617e8ace8dd984, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6278,7 +6278,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 35984dc24fb6e1f44a5603c9e53ae3a8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b3aacf9fb949c2d45a986c15fe184ab8, type: 2}
   m_sharedMaterial: {fileID: -7950774501785774058, guid: 35984dc24fb6e1f44a5603c9e53ae3a8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6286,7 +6286,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278913891
-  m_fontColor: {r: 0.38679248, g: 0.041963343, b: 0.041963343, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6303,8 +6303,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 13
@@ -6342,7 +6342,7 @@ MonoBehaviour:
   m_margin: {x: 147.52238, y: 539.18353, z: 148.139, w: 14.593292}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1519456431
@@ -35883,7 +35883,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &8332741235031950469
 MonoBehaviour:

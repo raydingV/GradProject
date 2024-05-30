@@ -53,17 +53,13 @@ public class DialogueManager : MonoBehaviour
 
     void endOfDialogue()
     {
-        if (textValue > _data.Dialogues.Length && callOne == false)
+        if (textValue + 1 > _data.Dialogues.Length && callOne == false)
         {
             callOne = true;
             bossEnable();
             DialogueOffScreen();
-            enableUI();
-            
-            if (_playerManager != null)
-            {
-                _playerManager.InputEnable = true;   
-            }
+
+            StartCoroutine(bossCutScene());
         }
     }
 
@@ -79,27 +75,27 @@ public class DialogueManager : MonoBehaviour
 
     void nextDialogue()
     {
-        if (Input.anyKeyDown)
-        {
-            if (_data.Dialogues.Length >= textValue && typing == false)
-            {
-                textValue++;
-                Debug.Log(textValue);
-            }
-            
-            if (_data.Dialogues.Length > textValue && typing == false)
-            {
-                DialogueOnScreen(getText());
-            }
-
-            // if (typing == true)
-            // {
-            //     StopCoroutine(TypeEffectRiddle(getText()));
-            //     // textDialogue.text = null;
-            //     // textDialogue.text = getText().Replace("\\n", "\n");
-            //     typing = false;
-            // }
-        }
+        // if (Input.anyKeyDown)
+        // {
+        //     if (_data.Dialogues.Length >= textValue && typing == false)
+        //     {
+        //         textValue++;
+        //         Debug.Log(textValue);
+        //     }
+        //     
+        //     if (_data.Dialogues.Length > textValue && typing == false)
+        //     {
+        //         DialogueOnScreen(getText());
+        //     }
+        //
+        //     // if (typing == true)
+        //     // {
+        //     //     StopCoroutine(TypeEffectRiddle(getText()));
+        //     //     // textDialogue.text = null;
+        //     //     // textDialogue.text = getText().Replace("\\n", "\n");
+        //     //     typing = false;
+        //     // }
+        // }
     }
 
     void bossEnable()
@@ -116,7 +112,7 @@ public class DialogueManager : MonoBehaviour
         
         textDialogue.text = null;
         
-        textDialogue.fontSize = 11;
+        textDialogue.fontSize = 9;
 
         if (DialogueUI != null)
         {
@@ -156,5 +152,29 @@ public class DialogueManager : MonoBehaviour
         }
 
         typing = false;
+
+        yield return new WaitForSeconds(1f);
+        
+        if (_data.Dialogues.Length >= textValue && typing == false)
+        {
+            textValue++;
+            Debug.Log(textValue);
+        }
+            
+        if (_data.Dialogues.Length > textValue && typing == false)
+        {
+            DialogueOnScreen(getText());
+        }
+    }
+    
+    IEnumerator bossCutScene()
+    {
+        yield return new WaitForSeconds(8f);
+        enableUI();
+            
+        if (_playerManager != null)
+        {
+            _playerManager.InputEnable = true;   
+        }
     }
 }

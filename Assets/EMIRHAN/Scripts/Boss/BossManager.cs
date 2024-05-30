@@ -157,6 +157,16 @@ public class BossManager : MonoBehaviour
     {
         if(other.tag == "Magic")
         {
+            Health -= (other.transform.localScale.x * 80);
+        }
+        
+        if(other.tag == "Wind")
+        {
+            Health -= (other.transform.localScale.x * 30);
+        }
+        
+        if(other.tag == "Frozen")
+        {
             Health -= (other.transform.localScale.x * 50);
         }
     }

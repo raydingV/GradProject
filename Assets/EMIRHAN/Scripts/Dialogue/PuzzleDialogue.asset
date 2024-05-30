@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1266f56f7d26064c87e7187b8745ca4, type: 3}
-  m_Name: Dialogue
+  m_Name: PuzzleDialogue
   m_EditorClassIdentifier: 
   Dialogues:
-  - 'They brought you here; never saw you as a threat. But, Greed, it would be foolish
-    not to see that your greed knows no bounds. '
-  - "You will witness your pitiful greed fade away after my power. I will ignore
-    your pleas for forgiveness\_brother!"
+  - 'I did not think you would have the nerve to show your face, brother. You are
+    just a coward who hides in the shadows. '
