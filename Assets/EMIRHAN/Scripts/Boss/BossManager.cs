@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -40,9 +41,13 @@ public class BossManager : MonoBehaviour
     [HideInInspector] public bool InCombat = false;
     private bool Wait = false;
     bool death;
+
+    private bool skill1 = false;
     
     private bool stun;
     private bool burning;
+
+    private bool waitHit = false;
 
     Vector3 locat;
     Vector3 Target;
@@ -60,11 +65,21 @@ public class BossManager : MonoBehaviour
         slider.maxValue = Health;
         StartCoroutine(Skills());
         StartCoroutine(HitSequence());
+
+        locat = player.transform.position;
     }
 
     void Update()
     {
         slider.value = Health;
+
+        agent.speed = BossData.Speed;
+        agent.acceleration = BossData.Acceleration;
+
+        if (_gameManager.UpToBoss == false && _gameManager.DownToBoss == false)
+        {
+            transform.position = new Vector3(transform.position.x, -0.75f, transform.position.z);
+        }
 
         if(Health <= 0 && death == false && InCombat == false)
         {
@@ -75,7 +90,7 @@ public class BossManager : MonoBehaviour
 
         if (player != null)
         {
-            locat = new Vector3(player.transform.position.x + GetRandomValue(), 0, player.transform.position.z + GetRandomValue());
+            locat = new Vector3(player.transform.position.x + GetRandomValue(), -0.78f, player.transform.position.z + GetRandomValue());
         }
 
         if (_gameManager.InHitSequence == true)
@@ -83,7 +98,7 @@ public class BossManager : MonoBehaviour
             agent.ResetPath();
         }
 
-        if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false && stun == false)
+        if (InCombat == false && Health > 0 && _gameManager.InHitSequence == false && Wait == false && stun == false && waitHit == false)
         {
             agent.SetDestination(locat);
         }
@@ -96,7 +111,12 @@ public class BossManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player != null && Health > 0 && _gameManager.InHitSequence == false && Wait == false && _gameManager.DashBoss == false && stun == false)
+        if (player != null && Health > 0 && _gameManager.InHitSequence == false  && Wait == false && _gameManager.DashBoss == false && InCombat == true && stun == false && skill1 == false)
+        {
+            rotationBoss();
+        }
+
+        if (waitHit == true)
         {
             rotationBoss();
         }
@@ -196,6 +216,7 @@ public class BossManager : MonoBehaviour
                     case 1:
                         agent.ResetPath();
                         Debug.Log("Case 1");
+                        skill1 = true;
                         StartCoroutine(allSkills[0]);
                         yield return new WaitForSeconds(skillTime);
                         InCombat = false;
@@ -217,6 +238,7 @@ public class BossManager : MonoBehaviour
                 }   
             }
 
+            skill1 = false;
             allSkills.Clear();
             SkillDataTake();
             StartCoroutine(Skills());
@@ -336,9 +358,10 @@ public class BossManager : MonoBehaviour
             // GameObject newVFX = Instantiate(beforSlashVFX, transform.position, Quaternion.identity);
             //
             // newVFX.transform.parent = gameObject.transform;
-            
-            beforSlashVFX.SetActive(true);
 
+            waitHit = true;
+            beforSlashVFX.SetActive(true);
+            agent.ResetPath();
             yield return new WaitForSeconds(1);
 
             // Destroy(newVFX);
@@ -367,6 +390,7 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         Wait = false;
         Box.isTrigger = false;
+        waitHit = false;
         StartCoroutine(HitSequence());
     }
 

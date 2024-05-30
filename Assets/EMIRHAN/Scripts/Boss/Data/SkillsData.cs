@@ -54,7 +54,6 @@ public class SkillsData : ScriptableObject
 
         while (true)
         {
-           
             if (_BossManager.gameObject.transform.position.y <= 500)
             {
                 _BossManager.agent.enabled = false;
@@ -108,7 +107,7 @@ public class SkillsData : ScriptableObject
 
      public IEnumerator HungerDashing(GameObject player)
     {
-        GameObject VFX = Instantiate(DashVFX, _BossManager.transform.position, Quaternion.Euler(0,0,0));
+        GameObject VFX = Instantiate(DashVFX, new Vector3(_BossManager.transform.position.x, 0.0263f, _BossManager.transform.position.z), Quaternion.Euler(0,0,0));
 
         VFX.transform.parent = _BossManager.transform;
 

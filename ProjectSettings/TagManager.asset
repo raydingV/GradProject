@@ -18,6 +18,7 @@ TagManager:
   - GluttonyBossEnter
   - FrozenAttack
   - FireAttack
+  - Highlight
   layers:
   - Default
   - TransparentFX

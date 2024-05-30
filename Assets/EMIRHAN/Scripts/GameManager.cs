@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     IEnumerator restartScene()
     {
         yield return new WaitForSeconds(4);
-        loadSceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/Build/B_BossLastImplementN.unity");
     }
 
     IEnumerator loadGame()

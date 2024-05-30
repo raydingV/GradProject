@@ -13,8 +13,6 @@ public class StonePuzzle : MonoBehaviour
     bool placedGem = false;
     bool callOnce = false;
 
-    Rigidbody rb;
-
     Vector3 startTransform;
 
     void Start()
@@ -91,7 +89,6 @@ public class StonePuzzle : MonoBehaviour
     {
         if (other.tag == "Untagged")
         {
-            rb = null;
             _gemObject = null;
             levelManager.puzzleControl[tagHolder] = false;
             checkOnce = false;

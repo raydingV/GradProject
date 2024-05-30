@@ -65,7 +65,6 @@ public class PlayerSkillManagement : MonoBehaviour
         {
             coolDownPanel.SetActive(false);
         }
-            
     }
 
     private void ElementSpawn(GameObject _newObject)
@@ -127,7 +126,6 @@ public class PlayerSkillManagement : MonoBehaviour
                 skillUIDisable[i].SetActive(false);
             }
         }
-
     }
 
     public void FireElement()

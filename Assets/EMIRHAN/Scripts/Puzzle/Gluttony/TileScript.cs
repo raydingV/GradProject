@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class TileScript : MonoBehaviour
     [SerializeField] private bool Touchable = true;
     [SerializeField] private bool FirstTouch = false;
     [SerializeField] private bool FinalTouch = false;
+    [SerializeField] private GameObject _highLight;
     private bool Clicked = false;
 
     [SerializeField] private GameObject puzzleManagerObject;
@@ -41,13 +43,26 @@ public class TileScript : MonoBehaviour
         {
             puzzleManager.InPuzzle = true;
         }
+        
+        if (!other.CompareTag("Player") && other.CompareTag("Highlight"))
+        {
+            setHighlight(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Highlight"))
+        {
+            setHighlight(false);
+        }
     }
 
     void Touching(GameObject PlayerObject)
     {
         if(Touchable == false && Clicked == true && puzzleManager._playerManager.tileInput == true)
         {
-            Debug.Log("You Dýed");
+            Debug.Log("You Dï¿½ed");
             Debug.Log(PlayerObject.name);
             puzzleManager.GetPlayerCheckPoint();
             puzzleManager.InPuzzle = false;
@@ -58,6 +73,14 @@ public class TileScript : MonoBehaviour
         {
             puzzleManager.GetPlayerFinishPoint();
             Clicked = false;
+        }
+    }
+
+    void setHighlight(bool light)
+    {
+        if (_highLight.gameObject != null)
+        {
+            _highLight.gameObject.SetActive(light);
         }
     }
 
