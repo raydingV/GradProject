@@ -56,15 +56,16 @@ public class GameManager : MonoBehaviour
         //}
 
 
-        if (playerIsDead() && GameOver == false)
+        if (_playerManager.playerDeath == true && GameOver == false)
         {
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAA");
             GameOver = true;
             StartCoroutine(restartScene());
         }
 
         if(_bossManager != null && _bossManager.Health <= 0 && GameOver == false)
         {
-            GameOver = true;
+            //GameOver = true;
             //StartCoroutine(loadGame());
         }
     }
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
     IEnumerator restartScene()
     {
         yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("Assets/EMIRHAN/SCENES/Build/B_BossLastImplementN.unity");
+        loadScene(4);
     }
 
     IEnumerator loadGame()
