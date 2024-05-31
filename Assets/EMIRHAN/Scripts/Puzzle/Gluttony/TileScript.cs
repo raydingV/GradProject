@@ -10,7 +10,8 @@ public class TileScript : MonoBehaviour
     [SerializeField] private bool FinalTouch = false;
     [SerializeField] private GameObject _highLight;
     private bool Clicked = false;
-
+    public bool onPlayer = false;
+    
     [SerializeField] private GameObject puzzleManagerObject;
     private GluttonyPuzzleManager puzzleManager;
 
@@ -53,8 +54,11 @@ public class TileScript : MonoBehaviour
         
         if (other.CompareTag("Highlight"))
         {
-            setHighlight(true);
-            timer = 0.1f;
+            if (onPlayer == false)
+            {
+                setHighlight(true);
+                timer = 0.1f;   
+            }
         }
     }
 
@@ -95,6 +99,13 @@ public class TileScript : MonoBehaviour
     private void OnMouseDown()
     {
         Clicked = true;
+        onPlayer = true;
+
+        if (puzzleManager.definedTile != null)
+        {
+            puzzleManager.definedTile.onPlayer = false;
+        }
+        
         puzzleManager.DefineTile(gameObject, FirstTouch);
         Debug.Log(gameObject.name);
     }

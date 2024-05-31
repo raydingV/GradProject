@@ -15,6 +15,8 @@ public class GluttonyPuzzleManager : MonoBehaviour
     [SerializeField] GameObject FireWorkVFX;
     [SerializeField] GameObject[] Level;
 
+    public TileScript definedTile;
+
     private void Start()
     {
         getNewLevel();
@@ -22,6 +24,7 @@ public class GluttonyPuzzleManager : MonoBehaviour
 
     public void DefineTile(GameObject _gameObject, bool IsFýrst)
     {
+        definedTile = _gameObject.GetComponent<TileScript>();
         float dist = Vector3.Distance(_playerManager.transform.position, _gameObject.transform.position);
         Debug.Log(dist);
 
